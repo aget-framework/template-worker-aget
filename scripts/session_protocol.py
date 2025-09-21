@@ -49,7 +49,7 @@ def wake():
     patterns_found = []
     for pattern in pattern_dirs:
         pattern_path = cwd / 'patterns' / pattern
-        if pattern_path.exists() and any(pattern_path.glob('*.py')):
+        if pattern_path.exists():
             patterns_found.append(pattern)
 
     print(f"📦 Patterns available: {', '.join(patterns_found)}")
