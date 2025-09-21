@@ -37,7 +37,8 @@ Agent: [Commits changes, saves session notes]
 
 ```
 your-project/
-├── CLAUDE.md                    # Commands your agent understands
+├── AGENT.md                     # Commands your agent understands
+├── CLAUDE.md                    # Symlink to AGENT.md (backward compatibility)
 ├── scripts/
 │   ├── session_protocol.py      # Wake/wind-down/sign-off
 │   └── housekeeping_protocol.py # Cleaning and diagnostics
@@ -67,7 +68,7 @@ python installer/install.py . --template advanced
 ## Customization
 
 ### Change Triggers
-Edit `CLAUDE.md` to add your own commands:
+Edit `AGENT.md` to add your own commands:
 ```markdown
 ### Deploy to Production
 When user says "deploy", execute:
