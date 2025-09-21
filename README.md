@@ -10,10 +10,10 @@ A collection of battle-tested patterns and templates that enable natural languag
 
 ```bash
 # Method 1: Install in existing project
-curl -sSL https://raw.githubusercontent.com/[username]/cli-agent-template/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/gmelli/cli-agent-template/main/install.sh | bash
 
 # Method 2: Clone and customize
-git clone https://github.com/[username]/cli-agent-template
+git clone https://github.com/gmelli/cli-agent-template
 cd your-project
 python ../cli-agent-template/installer/install.py . --template standard
 ```
