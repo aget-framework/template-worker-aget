@@ -56,12 +56,20 @@ class TemplateInstaller:
         """Install minimal template - just session management"""
         print("\nInstalling minimal template...")
 
-        # Copy CLAUDE.md template
+        # Copy AGENT.md template (universal agent configuration)
+        agent_source = self.source / 'templates/minimal/AGENT.md'
+        # Fall back to CLAUDE.md if AGENT.md doesn't exist yet
+        if not agent_source.exists():
+            agent_source = self.source / 'templates/minimal/CLAUDE.md'
+
         self.copy_file(
-            self.source / 'templates/minimal/CLAUDE.md',
-            self.target / 'CLAUDE.md',
+            agent_source,
+            self.target / 'AGENT.md',
             customize=True
         )
+
+        # Create CLAUDE.md symlink for backward compatibility
+        self.create_symlink('AGENT.md', 'CLAUDE.md')
 
         # Create scripts directory
         self.create_dir(self.target / 'scripts')
@@ -99,10 +107,15 @@ class TemplateInstaller:
             merge=True
         )
 
-        # Update CLAUDE.md with additional commands
+        # Update AGENT.md with additional commands
+        agent_source = self.source / 'templates/standard/AGENT.md'
+        # Fall back to CLAUDE.md if AGENT.md doesn't exist yet
+        if not agent_source.exists():
+            agent_source = self.source / 'templates/standard/CLAUDE.md'
+
         self.copy_file(
-            self.source / 'templates/standard/CLAUDE.md',
-            self.target / 'CLAUDE.md',
+            agent_source,
+            self.target / 'AGENT.md',
             customize=True
         )
 
@@ -178,6 +191,27 @@ class TemplateInstaller:
             print(f"  {action} directory: {path.relative_to(self.target.parent)}")
             if not self.dry_run:
                 path.mkdir(parents=True, exist_ok=True)
+
+    def create_symlink(self, source_name, link_name):
+        """Create symlink for backward compatibility"""
+        link_path = self.target / link_name
+        action = "Would create" if self.dry_run else "Creating"
+        print(f"  {action} symlink: {link_name} -> {source_name}")
+
+        if not self.dry_run:
+            # Remove existing file/link if it exists
+            if link_path.exists() or link_path.is_symlink():
+                link_path.unlink()
+
+            # Create symlink
+            try:
+                link_path.symlink_to(source_name)
+            except OSError:
+                # If symlinks aren't supported, create a copy instead
+                print(f"    Note: Symlinks not supported, creating copy instead")
+                source_path = self.target / source_name
+                if source_path.exists():
+                    shutil.copy2(source_path, link_path)
 
     def customize_file(self, file_path):
         """Customize template variables in file"""

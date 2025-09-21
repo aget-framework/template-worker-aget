@@ -32,7 +32,7 @@ class DocumentationChecker:
         print("=" * 50)
 
         # Check for required docs
-        required = ['README.md', 'CLAUDE.md', 'LICENSE']
+        required = ['README.md', 'AGENT.md', 'LICENSE']
         for doc in required:
             if not Path(doc).exists():
                 self.issues.append(f"Missing: {doc}")
@@ -186,7 +186,7 @@ class SanityChecker:
             print(f"  ✗ Git not working")
 
         # Check critical files
-        critical = ['CLAUDE.md', 'README.md']
+        critical = ['AGENT.md', 'README.md']
         for file in critical:
             if Path(file).exists():
                 print(f"  ✓ {file} present")
