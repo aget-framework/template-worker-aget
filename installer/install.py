@@ -255,7 +255,7 @@ class TemplateInstaller:
 
         config = {
             'template': {
-                'source': 'github.com/gmelli/cli-agent-template',
+                'source': 'github.com/gmelli/aget-cli-agent-template',
                 'version': '1.0.0',
                 'template': self.template,
                 'installed': self.installed
