@@ -10,21 +10,21 @@ This project uses CLI Agent Template (Standard) for comprehensive development wo
 
 ## Session Management Commands
 
-### Wake Up
-When user says "wake up", immediately execute:
+### Start Session (Wake Up)
+When user says "hey" or "wake up", immediately execute:
 - Read AGENTS.md (this file)
 - Run: `python3 scripts/session_protocol.py wake`
 - Report project status with git, tests, and documentation info
 - End with "Ready for tasks."
 
-### Wind Down
-When user says "wind down", execute:
+### Save Work (Wind Down)
+When user says "save work" or "wind down", execute:
 - Run: `python3 scripts/session_protocol.py wind-down`
 - Commit changes, save session state, run tests
 - Report "Session preserved."
 
-### Sign Off
-When user says "sign off", execute:
+### End Session (Sign Off)
+When user says "all done", "sync up", or "sign off", execute:
 - Run: `python3 scripts/session_protocol.py sign-off`
 - Quick commit and push to remote
 - Report "Signed off."
@@ -32,25 +32,25 @@ When user says "sign off", execute:
 ## Housekeeping Commands
 
 ### Documentation Check
-When user says "documentation check", execute:
+When user says "check docs" or "documentation check", execute:
 - Run: `python3 scripts/housekeeping_protocol.py documentation-check`
 - Analyze documentation quality (line counts, staleness, missing files)
 - Report grade (A-F) and specific issues
 
-### Housekeeping
-When user says "housekeeping", execute:
+### Light Cleanup (Housekeeping)
+When user says "tidy up" or "housekeeping", execute:
 - Run: `python3 scripts/housekeeping_protocol.py housekeeping --dry-run`
 - Clean temporary files, caches, Python artifacts
 - Show what would be removed, then ask for confirmation
 
-### Spring Clean
-When user says "spring clean", execute:
+### Deep Clean
+When user says "deep clean" or "spring clean", execute:
 - Run: `python3 scripts/housekeeping_protocol.py spring-clean --dry-run`
 - Deep cleanup: archive old files, remove duplicates, organize
 - Always dry-run first, require explicit confirmation for actual execution
 
-### Sanity Check
-When user says "sanity check", execute:
+### Health Check
+When user says "health check" or "sanity check", execute:
 - Run: `python3 scripts/housekeeping_protocol.py sanity-check`
 - Emergency diagnostics: Python version, git status, dependencies
 - Report system status: OK/DEGRADED/CRITICAL
