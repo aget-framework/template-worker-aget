@@ -152,6 +152,10 @@ Agent: Running emergency diagnostics...
 - [Troubleshooting](docs/TROUBLESHOOTING.md) - Common issues and solutions
 - [Framework Concept](https://www.gabormelli.com/RKB/CLI_Agent_Template_Framework) - Academic reference
 
+## Upgrading
+
+Already using the template? See [UPGRADING.md](UPGRADING.md) for how to apply template enhancements to your existing projects. The guide provides a five-phased approach that preserves your customizations while getting new features.
+
 ## Contributing
 
 This repository implements [dogfooding practices](https://www.gabormelli.com/RKB/CLI_Agent_Template_Framework) - it uses its own patterns for self-maintenance. To contribute:
