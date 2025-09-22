@@ -1,0 +1,17 @@
+./AGENTS.md
+./ARCHITECTURE.md
+./CLAUDE.md
+./CONTRIBUTING.md
+./CURSOR_TEST_PROTOCOL.md
+./docs/FILE_OWNERSHIP.md
+./docs/PATTERNS_EXPLAINED.md
+./docs/QUICK_START.md
+./docs/TROUBLESHOOTING.md
+./patterns/documentation/README.md
+./patterns/housekeeping/README.md
+./patterns/recovery/README.md
+./patterns/session/README.md
+./SESSION_NOTES/2025-09-21/session_1724.md
+./templates/minimal/AGENTS.md
+./templates/standard/AGENTS.md
+./UPGRADING.md
