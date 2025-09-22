@@ -30,7 +30,7 @@ class TestTemplateInstaller:
             success = installer.install()
 
             assert success
-            assert (target / 'AGENT.md').exists()
+            assert (target / 'AGENTS.md').exists()
             assert (target / 'scripts' / 'session_protocol.py').exists()
             assert (target / 'Makefile').exists()
 
@@ -44,7 +44,7 @@ class TestTemplateInstaller:
             success = installer.install()
 
             assert success
-            assert (target / 'AGENT.md').exists()
+            assert (target / 'AGENTS.md').exists()
             assert (target / 'scripts' / 'session_protocol.py').exists()
             assert (target / 'scripts' / 'housekeeping_protocol.py').exists()
             assert (target / 'Makefile').exists()
@@ -60,7 +60,7 @@ class TestTemplateInstaller:
 
             assert success
             # Should include everything from standard
-            assert (target / 'AGENT.md').exists()
+            assert (target / 'AGENTS.md').exists()
             assert (target / 'scripts' / 'session_protocol.py').exists()
             assert (target / 'scripts' / 'housekeeping_protocol.py').exists()
 
@@ -75,7 +75,7 @@ class TestTemplateInstaller:
 
             assert success
             # Files should NOT be created in dry run
-            assert not (target / 'AGENT.md').exists()
+            assert not (target / 'AGENTS.md').exists()
             assert not (target / 'scripts').exists()
 
     def test_invalid_template(self):
@@ -126,8 +126,8 @@ class TestTemplateInstaller:
             installer = TemplateInstaller(target)
             installer.install()
 
-            # Read AGENT.md and check customization
-            agent_content = (target / 'AGENT.md').read_text()
+            # Read AGENTS.md and check customization
+            agent_content = (target / 'AGENTS.md').read_text()
             assert 'Python' in agent_content or 'test_project' in agent_content
 
     def test_customize_node_project(self):
@@ -142,8 +142,8 @@ class TestTemplateInstaller:
             installer = TemplateInstaller(target)
             installer.install()
 
-            # Read AGENT.md and check customization
-            agent_content = (target / 'AGENT.md').read_text()
+            # Read AGENTS.md and check customization
+            agent_content = (target / 'AGENTS.md').read_text()
             assert 'JavaScript' in agent_content or 'Node' in agent_content or 'test_project' in agent_content
 
     def test_merge_makefile(self):
