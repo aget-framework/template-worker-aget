@@ -1,7 +1,8 @@
 # {{PROJECT_NAME}} - Universal Agent Configuration
 
 ## Agent Compatibility
-This configuration works with Claude Code, Cursor, Aider, Windsurf, and other CLI coding agents.
+This configuration follows the AGENTS.md open-source standard for universal agent configuration.
+Works with Claude Code, Cursor, Aider, Windsurf, and other CLI coding agents.
 **Note**: CLAUDE.md is a symlink to this file for backward compatibility.
 
 ## Project Context
@@ -11,7 +12,7 @@ This project uses CLI Agent Template (Standard) for comprehensive development wo
 
 ### Wake Up
 When user says "wake up", immediately execute:
-- Read AGENT.md (this file)
+- Read AGENTS.md (this file)
 - Run: `python3 scripts/session_protocol.py wake`
 - Report project status with git, tests, and documentation info
 - End with "Ready for tasks."
