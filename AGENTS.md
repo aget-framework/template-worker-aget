@@ -12,7 +12,7 @@ This repository provides templates and patterns for making codebases CLI agent-r
 
 ### Wake Up Protocol
 When user says "wake up", immediately execute:
-- Read AGENT.md (to memorize all trigger phrases and configurations)
+- Read AGENTS.md (to memorize all trigger phrases and configurations)
 - Run: `python3 scripts/session_protocol.py wake`
 - This will show working directory, pattern status, and git status
 - Reports findings using "## Status Report" header

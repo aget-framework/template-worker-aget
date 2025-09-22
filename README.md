@@ -89,7 +89,7 @@ curl -sSL https://raw.githubusercontent.com/gabormelli/cli-agent-template/main/i
 
 ```
 your-project/
-├── AGENT.md                  # Universal agent configuration (AGENT.md specification)
+├── AGENTS.md                 # Universal agent configuration (AGENTS.md specification)
 ├── CLAUDE.md                 # Symlink to AGENT.md (backward compatibility)
 ├── scripts/
 │   ├── session_protocol.py   # Wake up, wind down, sign off
@@ -104,7 +104,7 @@ your-project/
 
 ## How It Works
 
-1. **Agent reads AGENT.md** - Discovers available conversational command patterns
+1. **Agent reads AGENTS.md** - Discovers available conversational command patterns
 2. **Pattern discovery** - Agent automatically identifies workflow patterns from configuration
 3. **Natural language triggers** - You say "wake up", agent executes the corresponding pattern
 4. **Safe-by-default** - Dry-run previews, rollback support, confirmation prompts
