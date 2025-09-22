@@ -1,21 +1,21 @@
 # CLI Agent Template
 
-Transform any codebase into a CLI coding agent-ready collaborative environment.
+A reference implementation of the [CLI Agent Template Framework](https://www.gabormelli.com/RKB/CLI_Agent_Template_Framework) - transform any codebase into a CLI coding agent-ready collaborative environment through conversational command patterns.
 
 ## What This Is
 
-Reusable patterns and templates that enable natural language workflows for CLI coding agents like Claude Code, Cursor, Aider, and Windsurf.
+This repository provides a [workflow automation framework](https://www.gabormelli.com/RKB/CLI_Agent_Template_Framework) with reusable patterns and templates that enable natural language workflows for CLI coding agents like Claude Code, Cursor, Aider, and Windsurf. It implements conversational command patterns that allow AI coding assistants to execute development workflows through natural language interfaces.
 
 ## Quick Start
 
 ```bash
-# Method 1: Install in existing project
-curl -sSL https://raw.githubusercontent.com/gmelli/cli-agent-template/main/install.sh | bash
+# Method 1: Install in existing project (now with self-verifying installer)
+curl -sSL https://raw.githubusercontent.com/gabormelli/cli-agent-template/main/install.sh | bash
 
 # Method 2: Clone and customize
-git clone https://github.com/gmelli/cli-agent-template
+git clone https://github.com/gabormelli/cli-agent-template
 cd your-project
-python ../cli-agent-template/installer/install.py . --template standard
+python3 ../cli-agent-template/installer/install.py . --template standard
 ```
 
 ## Why Universal Standards?
@@ -55,25 +55,25 @@ After installation, your CLI agent can understand commands like:
 
 ## Templates
 
-### Minimal
+### Minimal (5 patterns)
 Basic setup with session management only. Perfect for small projects.
 
 ```bash
-python installer/install.py . --template minimal
+curl -sSL https://raw.githubusercontent.com/gabormelli/cli-agent-template/main/install.sh | bash -s . minimal
 ```
 
-### Standard (Recommended)
+### Standard (15+ patterns) - Recommended
 Full conversational interface with housekeeping and documentation checks.
 
 ```bash
-python installer/install.py . --template standard
+curl -sSL https://raw.githubusercontent.com/gabormelli/cli-agent-template/main/install.sh | bash
 ```
 
-### Advanced
+### Advanced (25+ patterns)
 Everything including CI/CD integration, advanced testing, and compliance checks.
 
 ```bash
-python installer/install.py . --template advanced
+curl -sSL https://raw.githubusercontent.com/gabormelli/cli-agent-template/main/install.sh | bash -s . advanced
 ```
 
 ## Supported CLI Agents
@@ -89,22 +89,26 @@ python installer/install.py . --template advanced
 
 ```
 your-project/
-├── AGENTS.md                 # Universal agent configuration (industry standard)
-├── CLAUDE.md                 # Symlink to AGENTS.md (backward compatibility)
-├── Makefile                  # Common tasks as make targets
+├── AGENT.md                  # Universal agent configuration (AGENT.md specification)
+├── CLAUDE.md                 # Symlink to AGENT.md (backward compatibility)
 ├── scripts/
 │   ├── session_protocol.py   # Wake up, wind down, sign off
 │   ├── housekeeping_protocol.py  # Cleaning and organization
-│   └── sanity_check.py      # Emergency diagnostics
-└── .cli-agent.yaml          # Template configuration
+│   └── recovery_protocol.py  # Emergency diagnostics
+├── patterns/                 # Reusable workflow patterns
+│   ├── session/             # Session management patterns
+│   ├── housekeeping/        # Maintenance patterns
+│   └── documentation/       # Documentation patterns
+└── .session_state.json      # Session persistence
 ```
 
 ## How It Works
 
-1. **Agent reads AGENTS.md** - Understands available commands and project context
-2. **Natural language triggers** - You say "wake up", agent runs the protocol
-3. **Progressive automation** - Safe operations first, destructive only with confirmation
-4. **Context preservation** - Session state maintained across conversations
+1. **Agent reads AGENT.md** - Discovers available conversational command patterns
+2. **Pattern discovery** - Agent automatically identifies workflow patterns from configuration
+3. **Natural language triggers** - You say "wake up", agent executes the corresponding pattern
+4. **Safe-by-default** - Dry-run previews, rollback support, confirmation prompts
+5. **Session persistence** - Context preservation across agent restarts
 
 ## Examples
 
@@ -140,9 +144,17 @@ Agent: Running emergency diagnostics...
        System Status: OK
 ```
 
+## Documentation
+
+- [Quick Start Guide](docs/QUICK_START.md) - Get running in 30 seconds
+- [Understanding Patterns](docs/PATTERNS_EXPLAINED.md) - Learn how patterns work
+- [Why This Matters](docs/WHY_THIS_MATTERS.md) - The value proposition
+- [Troubleshooting](docs/TROUBLESHOOTING.md) - Common issues and solutions
+- [Framework Concept](https://www.gabormelli.com/RKB/CLI_Agent_Template_Framework) - Academic reference
+
 ## Contributing
 
-This repository dogfoods its own patterns. To contribute:
+This repository implements [dogfooding practices](https://www.gabormelli.com/RKB/CLI_Agent_Template_Framework) - it uses its own patterns for self-maintenance. To contribute:
 
 1. Fork and clone
 2. Say "wake up" to your CLI agent

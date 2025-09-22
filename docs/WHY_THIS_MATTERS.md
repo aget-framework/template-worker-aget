@@ -57,11 +57,13 @@ Session notes track:
 
 ## ROI for Developers
 
-### Time Saved Per Day
-- **5 minutes** - No context switching
-- **10 minutes** - Automated housekeeping
-- **15 minutes** - Consistent workflows
-- **Total: 30 minutes/day = 2.5 hours/week**
+### Measurable Time Savings*
+- **Context restoration** - Instant project status vs manual review
+- **Automated housekeeping** - One command vs multiple manual cleanups
+- **Consistent workflows** - Standardized commands across all projects
+- **Session continuity** - Pick up exactly where you left off
+
+*Actual savings vary by project size and complexity. These patterns eliminate repetitive manual tasks.
 
 ### Quality Improvements
 - Documentation stays current (automatic checks)
@@ -79,7 +81,11 @@ Session notes track:
 ## Getting Started Takes 1 Minute
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/gmelli/cli-agent-template/main/install.sh | bash
+# Install with defaults (standard template)
+curl -sSL https://raw.githubusercontent.com/yourusername/cli-agent-template/main/install.sh | bash
+
+# Or choose your template level:
+curl -sSL https://raw.githubusercontent.com/yourusername/cli-agent-template/main/install.sh | bash -s . minimal
 ```
 
 Then just say "wake up" to your CLI agent. That's it.
