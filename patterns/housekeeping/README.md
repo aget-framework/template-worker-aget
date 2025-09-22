@@ -97,7 +97,7 @@ Protected files and directories:
 ## Configuration
 
 ### Custom Cleanup Rules
-Add to `scripts/housekeeping_protocol.py`:
+Add to `scripts/aget_housekeeping_protocol.py`:
 ```python
 CUSTOM_PATTERNS = [
     "*.tmp",
@@ -133,5 +133,5 @@ Track cleanup effectiveness:
 ```yaml
 # .github/workflows/housekeeping.yml
 - name: Housekeeping Check
-  run: python scripts/housekeeping_protocol.py housekeeping --check-only
+  run: python scripts/aget_housekeeping_protocol.py housekeeping --check-only
 ```

@@ -42,7 +42,7 @@ The CLI Agent Template is a modular system for making any codebase agent-ready. 
 
 ### 2. Protocol Layer
 
-#### Session Protocol (`scripts/aget_session_protocol.py`)
+#### Session Protocol (`scripts/session_protocol.py`)
 **Purpose**: Manage development sessions with state persistence
 
 **Key Features**:
@@ -68,7 +68,7 @@ The CLI Agent Template is a modular system for making any codebase agent-ready. 
 }
 ```
 
-#### Housekeeping Protocol (`scripts/aget_housekeeping_protocol.py`)
+#### Housekeeping Protocol (`scripts/housekeeping_protocol.py`)
 **Purpose**: Maintain codebase cleanliness
 
 **Commands**:
@@ -149,7 +149,7 @@ User: "wake up"
   ↓
 Agent reads AGENT.md
   ↓
-Executes: python3 scripts/aget_session_protocol.py wake
+Executes: python3 scripts/session_protocol.py wake
   ↓
 SessionState.start_session()
   ↓

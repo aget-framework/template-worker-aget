@@ -76,7 +76,7 @@ SESSION_NOTES/
 
 ## Customization
 
-Edit `scripts/aget_session_protocol.py` to:
+Edit `scripts/session_protocol.py` to:
 - Add custom status checks
 - Modify commit message format
 - Change session note template

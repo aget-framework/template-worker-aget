@@ -69,7 +69,7 @@ After installation, verify everything is working:
 ls -la AGENTS.md scripts/
 
 # Test the session protocol
-python3 scripts/aget_session_protocol.py status
+python3 scripts/session_protocol.py status
 
 # Expected output:
 # ✅ Session state initialized

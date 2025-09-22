@@ -17,7 +17,7 @@
 ### Test 1.2: Simple Command
 - [ ] Type: "wake up"
 - [ ] Does Cursor recognize the command?
-- [ ] Does it execute `python3 scripts/aget_session_protocol.py wake`?
+- [ ] Does it execute `python3 scripts/session_protocol.py wake`?
 - **Result**: _________
 
 ## Phase 2: Protocol Tests
@@ -58,7 +58,7 @@ Try these variations and note which work:
 
 ### Test 3.2: Direct Command Fallback
 If natural language fails, try:
-- [ ] "Execute: python3 scripts/aget_session_protocol.py wake"
+- [ ] "Execute: python3 scripts/session_protocol.py wake"
 - [ ] "Run the wake protocol"
 - [ ] Copy-paste the exact command
 
