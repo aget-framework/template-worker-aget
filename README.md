@@ -18,6 +18,20 @@ cd your-project
 python ../cli-agent-template/installer/install.py . --template standard
 ```
 
+## Why Universal Standards?
+
+### The Configuration Fragmentation Problem
+
+The current landscape of AI coding assistants has created a significant maintenance burden for development teams. Each tool requires its own configuration format:
+
+- **Claude Code**: Reads `CLAUDE.md` for agent-specific instructions
+- **Cursor**: Requires `.cursorrules` for behavior configuration
+- **Windsurf**: Uses `.windsurfrules` for custom patterns
+- **Aider**: Expects `.aider.conf.yml` for settings
+- **GitHub Copilot**: Uses `.github/copilot-instructions.md`
+
+This fragmentation forces teams to maintain multiple configuration files with largely duplicated content. A typical multi-tool setup requires developers to synchronize changes across 3-5 different configuration formats, increasing the risk of inconsistencies and configuration drift.
+
 ## What You Get
 
 After installation, your CLI agent can understand commands like:
