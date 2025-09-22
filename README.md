@@ -22,8 +22,10 @@ AGET implements a [workflow automation framework](https://www.aget-framework.com
 ## Quick Start (30 Seconds)
 
 ```bash
-# Install AGET in your project
-curl -sSL https://raw.githubusercontent.com/aget-framework/aget-cli-agent-template/main/install.sh | bash
+# Clone and install AGET in your project
+git clone https://github.com/aget-framework/aget-cli-agent-template.git
+cd aget-cli-agent-template
+python3 installer/install.py /path/to/your/project
 
 # Tell your AI: "hey"
 # AI responds with project status and is ready to work
@@ -31,7 +33,7 @@ curl -sSL https://raw.githubusercontent.com/aget-framework/aget-cli-agent-templa
 # That's it! Your project is now AI-agent ready
 ```
 
-For manual installation or customization, see [docs/INSTALLATION.md](docs/INSTALLATION.md)
+For more installation options and customization, see [docs/QUICK_START.md](docs/QUICK_START.md)
 
 ## Why Universal Standards?
 
