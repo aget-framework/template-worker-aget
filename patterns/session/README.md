@@ -49,6 +49,52 @@ You: sign off
 Agent: [Quick commit and push]
 ```
 
+## When to Use Each Protocol
+
+### Wind Down vs Sign Off Decision Guide
+
+#### Use `wind down` ONLY when:
+- **Taking a short break** (lunch, meeting, will continue soon)
+- **Experimental/risky changes** (not ready for team visibility)
+- **Incomplete work** (tests failing, feature half-done)
+- **Feature branch work** (working privately, not ready to share)
+- **No internet connection** (can't push but want to save)
+
+#### Use `wind down` THEN `sign off` when:
+- **End of work day** (done for today, work is stable)
+- **Completed milestone** (feature done, tests passing)
+- **Before extended break** (weekend, vacation, holidays)
+- **Switching machines** (need to pull work elsewhere)
+- **Important checkpoint** (just fixed difficult bug, don't want to lose it)
+
+#### Use `sign off` ONLY when:
+- **Tiny changes** (typo fix, one-line change)
+- **Already committed manually** (just need to push)
+- **Emergency departure** (need to leave immediately)
+
+### Common Scenarios
+
+| Scenario | Command(s) | Why |
+|----------|-----------|-----|
+| "Going to lunch" | `wind down` | Will continue after, local save sufficient |
+| "Done for the day" | `wind down` → `sign off` | Full backup to remote |
+| "Fixed a typo" | `sign off` | Quick push, no need for full process |
+| "Risky refactor attempt" | `wind down` | Keep experimental work local |
+| "Power outage warning!" | `sign off` | Emergency backup to remote |
+| "Weekend starting" | `wind down` → `sign off` | Extended break, need remote backup |
+| "Switching to laptop" | `wind down` → `sign off` | Need to pull from other machine |
+
+### Key Differences
+
+| Aspect | wind down | sign off |
+|--------|-----------|----------|
+| **Commits** | Yes, with detailed message | Yes, with timestamp |
+| **Tests** | Runs full test suite | No tests |
+| **Session notes** | Creates detailed notes | Minimal notes |
+| **Push to remote** | No | Yes |
+| **Time taken** | ~30 seconds | ~5 seconds |
+| **Use case** | Checkpoint work | Backup work |
+
 ## State Management
 
 Session state is persisted in `.session_state.json`:

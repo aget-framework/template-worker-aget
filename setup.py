@@ -1,5 +1,5 @@
 """
-CLI Agent Template - Setup configuration
+AGET (CLI Agent Template) - Setup configuration
 """
 from setuptools import setup, find_packages
 import os
@@ -11,17 +11,17 @@ def read_long_description():
         return f.read()
 
 setup(
-    name='cli-agent-template',
+    name='aget-cli-agent-template',
     version='1.0.0',
     author='Gabor Melli',
     author_email='',
-    description='Transform any codebase into a CLI coding agent-ready collaborative environment',
+    description='AGET: The universal standard for making any codebase instantly CLI agent-ready',
     long_description=read_long_description(),
     long_description_content_type='text/markdown',
-    url='https://github.com/gabormelli/cli-agent-template',
+    url='https://github.com/gabormelli/aget-cli-agent-template',
     project_urls={
-        'Bug Reports': 'https://github.com/gabormelli/cli-agent-template/issues',
-        'Source': 'https://github.com/gabormelli/cli-agent-template',
+        'Bug Reports': 'https://github.com/gabormelli/aget-cli-agent-template/issues',
+        'Source': 'https://github.com/gabormelli/aget-cli-agent-template',
     },
     packages=find_packages(exclude=['tests', 'tests.*', 'examples', 'examples.*']),
     python_requires='>=3.8',
@@ -42,7 +42,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'cli-agent=installer.install:main',
+            'aget=installer.install:main',
         ],
     },
     classifiers=[
