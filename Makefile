@@ -11,31 +11,31 @@ help: ## Show this help
 	@echo "Usage: make <command>"
 
 wake: ## Wake up - Initialize session
-	@python3 scripts/session_protocol.py wake
+	@python3 scripts/aget_session_protocol.py wake
 
 wind-down: ## Wind down - Save session state
-	@python3 scripts/session_protocol.py wind-down
+	@python3 scripts/aget_session_protocol.py wind-down
 
 sign-off: ## Sign off - Quick commit and push
-	@python3 scripts/session_protocol.py sign-off
+	@python3 scripts/aget_session_protocol.py sign-off
 
 housekeeping: ## Light cleanup (dry-run by default)
-	@python3 scripts/housekeeping_protocol.py housekeeping --dry-run
+	@python3 scripts/aget_housekeeping_protocol.py housekeeping --dry-run
 
 housekeeping-run: ## Light cleanup (actual execution)
-	@python3 scripts/housekeeping_protocol.py housekeeping --no-dry-run
+	@python3 scripts/aget_housekeeping_protocol.py housekeeping --no-dry-run
 
 spring-clean: ## Deep cleanup (dry-run by default)
-	@python3 scripts/housekeeping_protocol.py spring-clean --dry-run
+	@python3 scripts/aget_housekeeping_protocol.py spring-clean --dry-run
 
 spring-clean-run: ## Deep cleanup (actual execution)
-	@python3 scripts/housekeeping_protocol.py spring-clean --no-dry-run
+	@python3 scripts/aget_housekeeping_protocol.py spring-clean --no-dry-run
 
 sanity-check: ## Emergency diagnostics
-	@python3 scripts/housekeeping_protocol.py sanity-check
+	@python3 scripts/aget_housekeeping_protocol.py sanity-check
 
 documentation-check: ## Check documentation quality
-	@python3 scripts/housekeeping_protocol.py documentation-check
+	@python3 scripts/aget_housekeeping_protocol.py documentation-check
 
 test: ## Run all tests
 	@if [ -d "tests" ] && [ "$$(ls -A tests/*.py 2>/dev/null)" ]; then \

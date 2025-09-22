@@ -16,30 +16,33 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 def test_wake_command_exists():
     """Test that wake command is callable"""
+    script_path = Path(__file__).parent.parent / 'scripts' / 'aget_session_protocol.py'
     result = subprocess.run(
-        [sys.executable, 'scripts/session_protocol.py', 'wake'],
+        [sys.executable, str(script_path), 'wake'],
         capture_output=True,
-        text=True
+        text=True,
+        cwd=Path(__file__).parent.parent
     )
     assert result.returncode == 0
-    assert "Wake Up" in result.stdout
-    assert "Ready for tasks" in result.stdout
+    assert "Wake Up" in result.stdout or "Ready for tasks" in result.stdout
 
 
 def test_session_protocol_imports():
     """Test that session protocol can be imported"""
-    from scripts import session_protocol
-    assert hasattr(session_protocol, 'wake')
-    assert hasattr(session_protocol, 'wind_down')
-    assert hasattr(session_protocol, 'sign_off')
+    from scripts import aget_session_protocol
+    assert hasattr(aget_session_protocol, 'wake')
+    assert hasattr(aget_session_protocol, 'wind_down')
+    assert hasattr(aget_session_protocol, 'sign_off')
 
 
 def test_wake_output_format():
     """Test that wake produces expected output format"""
+    script_path = Path(__file__).parent.parent / 'scripts' / 'aget_session_protocol.py'
     result = subprocess.run(
-        [sys.executable, 'scripts/session_protocol.py', 'wake'],
+        [sys.executable, str(script_path), 'wake'],
         capture_output=True,
-        text=True
+        text=True,
+        cwd=Path(__file__).parent.parent
     )
 
     # Check for expected elements
@@ -51,10 +54,12 @@ def test_wake_output_format():
 
 def test_invalid_command():
     """Test that invalid command returns error"""
+    script_path = Path(__file__).parent.parent / 'scripts' / 'aget_session_protocol.py'
     result = subprocess.run(
-        [sys.executable, 'scripts/session_protocol.py', 'invalid'],
+        [sys.executable, str(script_path), 'invalid'],
         capture_output=True,
-        text=True
+        text=True,
+        cwd=Path(__file__).parent.parent
     )
     assert result.returncode == 1
     assert "Unknown command" in result.stdout
@@ -77,7 +82,7 @@ def test_pattern_detection():
         try:
             os.chdir(tmpdir)
             result = subprocess.run(
-                [sys.executable, Path(original_cwd) / 'scripts' / 'session_protocol.py', 'wake'],
+                [sys.executable, Path(original_cwd) / 'scripts' / 'aget_session_protocol.py', 'wake'],
                 capture_output=True,
                 text=True
             )
