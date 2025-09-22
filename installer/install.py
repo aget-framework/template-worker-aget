@@ -56,20 +56,20 @@ class TemplateInstaller:
         """Install minimal template - just session management"""
         print("\nInstalling minimal template...")
 
-        # Copy AGENT.md template (universal agent configuration)
-        agent_source = self.source / 'templates/minimal/AGENT.md'
-        # Fall back to CLAUDE.md if AGENT.md doesn't exist yet
+        # Copy AGENTS.md template (universal agent configuration)
+        agent_source = self.source / 'templates/minimal/AGENTS.md'
+        # Fall back to CLAUDE.md if AGENTS.md doesn't exist yet
         if not agent_source.exists():
             agent_source = self.source / 'templates/minimal/CLAUDE.md'
 
         self.copy_file(
             agent_source,
-            self.target / 'AGENT.md',
+            self.target / 'AGENTS.md',
             customize=True
         )
 
         # Create CLAUDE.md symlink for backward compatibility
-        self.create_symlink('AGENT.md', 'CLAUDE.md')
+        self.create_symlink('AGENTS.md', 'CLAUDE.md')
 
         # Create scripts directory
         self.create_dir(self.target / 'scripts')
@@ -107,15 +107,15 @@ class TemplateInstaller:
             merge=True
         )
 
-        # Update AGENT.md with additional commands
-        agent_source = self.source / 'templates/standard/AGENT.md'
-        # Fall back to CLAUDE.md if AGENT.md doesn't exist yet
+        # Update AGENTS.md with additional commands
+        agent_source = self.source / 'templates/standard/AGENTS.md'
+        # Fall back to CLAUDE.md if AGENTS.md doesn't exist yet
         if not agent_source.exists():
             agent_source = self.source / 'templates/standard/CLAUDE.md'
 
         self.copy_file(
             agent_source,
-            self.target / 'AGENT.md',
+            self.target / 'AGENTS.md',
             customize=True
         )
 

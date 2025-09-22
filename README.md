@@ -89,8 +89,8 @@ python installer/install.py . --template advanced
 
 ```
 your-project/
-├── AGENT.md                  # Universal agent configuration
-├── CLAUDE.md                 # Symlink to AGENT.md (backward compatibility)
+├── AGENTS.md                 # Universal agent configuration (industry standard)
+├── CLAUDE.md                 # Symlink to AGENTS.md (backward compatibility)
 ├── Makefile                  # Common tasks as make targets
 ├── scripts/
 │   ├── session_protocol.py   # Wake up, wind down, sign off
@@ -101,7 +101,7 @@ your-project/
 
 ## How It Works
 
-1. **Agent reads AGENT.md** - Understands available commands and project context
+1. **Agent reads AGENTS.md** - Understands available commands and project context
 2. **Natural language triggers** - You say "wake up", agent runs the protocol
 3. **Progressive automation** - Safe operations first, destructive only with confirmation
 4. **Context preservation** - Session state maintained across conversations
