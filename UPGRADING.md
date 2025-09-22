@@ -2,6 +2,48 @@
 
 This guide explains how to update repositories that use the CLI Agent Template after the template itself has been enhanced.
 
+## Migrating to AGET Architecture
+
+The CLI Agent Template has transitioned to the AGET (Agent Template) naming convention for clearer architecture.
+
+### What Changed
+- All protocol scripts now use `aget_` prefix
+- `session_protocol.py` → `aget_session_protocol.py`
+- `housekeeping_protocol.py` → `aget_housekeeping_protocol.py`
+
+### Migration Steps
+
+1. **Update script references in your AGENTS.md or CLAUDE.md**:
+   ```bash
+   # Old
+   python3 scripts/session_protocol.py wake
+
+   # New
+   python3 scripts/aget_session_protocol.py wake
+   ```
+
+2. **Update Makefile targets** (if customized):
+   ```makefile
+   # Old
+   WAKE_CMD := python3 scripts/session_protocol.py wake
+
+   # New
+   WAKE_CMD := python3 scripts/aget_session_protocol.py wake
+   ```
+
+3. **Create compatibility symlinks** (optional for transition period):
+   ```bash
+   cd scripts
+   ln -s aget_session_protocol.py session_protocol.py
+   ln -s aget_housekeeping_protocol.py housekeeping_protocol.py
+   ```
+
+### Benefits of AGET Architecture
+- Clearer separation between template and user files
+- Prevents naming conflicts with user scripts
+- Easier updates without breaking user customizations
+- Consistent naming convention across all template files
+
 ## The Challenge
 
 Once you've used this as a template, your repository has its own copy of the files. Updates to the template don't automatically flow to your project. However, CLI agents can intelligently merge updates rather than blindly overwriting your customizations.
@@ -16,8 +58,8 @@ First, understand what has changed between your version and the latest template:
 
 ```bash
 # Compare versions and see what's different
-diff scripts/session_protocol.py ~/github/cli-agent-template/scripts/session_protocol.py
-diff scripts/housekeeping_protocol.py ~/github/cli-agent-template/scripts/housekeeping_protocol.py
+diff scripts/aget_session_protocol.py ~/github/cli-agent-template/scripts/aget_session_protocol.py
+diff scripts/aget_housekeeping_protocol.py ~/github/cli-agent-template/scripts/aget_housekeeping_protocol.py
 
 # Check for new scripts in the template
 ls ~/github/cli-agent-template/scripts/ | grep -v "$(ls scripts/)"
@@ -35,9 +77,9 @@ Update the protocol scripts (these are usually safe as they're self-contained):
 cp scripts/session_protocol.py scripts/session_protocol.py.bak
 cp scripts/housekeeping_protocol.py scripts/housekeeping_protocol.py.bak
 
-# Update protocol scripts
-cp ~/github/cli-agent-template/scripts/session_protocol.py scripts/
-cp ~/github/cli-agent-template/scripts/housekeeping_protocol.py scripts/
+# Update protocol scripts (with AGET naming)
+cp ~/github/cli-agent-template/scripts/aget_session_protocol.py scripts/
+cp ~/github/cli-agent-template/scripts/aget_housekeeping_protocol.py scripts/
 
 # Test they still work with your configuration
 python3 scripts/session_protocol.py status
