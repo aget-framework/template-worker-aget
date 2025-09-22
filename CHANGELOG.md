@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `PATTERNS_EXPLAINED.md` guide explaining pattern architecture
 - `CONTRIBUTING.md` with development guidelines
 - Pattern categories: session, housekeeping, documentation, recovery
-- Reference to academic [CLI Agent Template Framework](https://www.gabormelli.com/RKB/CLI_Agent_Template_Framework) concept
+- Reference to academic [CLI Agent Template Framework](https://www.gmelli.com/RKB/CLI_Agent_Template_Framework) concept
 
 ### Changed
 - Updated all documentation to use consistent AGENTS.md naming

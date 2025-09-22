@@ -3,7 +3,7 @@
 # Transform any codebase into a CLI coding agent-ready collaborative environment
 #
 # Usage:
-#   curl -sSL https://raw.githubusercontent.com/gabormelli/aget-cli-agent-template/main/install.sh | bash
+#   curl -sSL https://raw.githubusercontent.com/gmelli/aget-cli-agent-template/main/install.sh | bash
 #   ./install.sh [OPTIONS] [INSTALL_DIR] [TEMPLATE]
 #
 # Version: 2.0.0
@@ -40,7 +40,7 @@ readonly SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # GitHub configuration (environment variables can override)
-readonly GITHUB_USER="${GITHUB_USER:-gabormelli}"
+readonly GITHUB_USER="${GITHUB_USER:-gmelli}"
 readonly REPO_NAME="${REPO_NAME:-aget-cli-agent-template}"
 readonly BRANCH="${BRANCH:-main}"
 

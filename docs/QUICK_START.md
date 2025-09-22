@@ -23,7 +23,7 @@ Before you begin, ensure you have:
 Run the installer without any arguments for a guided experience:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/gabormelli/aget-cli-agent-template/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/gmelli/aget-cli-agent-template/main/install.sh | bash
 ```
 
 The interactive installer will:
@@ -38,10 +38,10 @@ For experienced users who want the standard template immediately:
 
 ```bash
 # Install in current directory
-curl -sSL https://raw.githubusercontent.com/gabormelli/aget-cli-agent-template/main/install.sh | bash -s . standard
+curl -sSL https://raw.githubusercontent.com/gmelli/aget-cli-agent-template/main/install.sh | bash -s . standard
 
 # Or install in a specific directory
-curl -sSL https://raw.githubusercontent.com/gabormelli/aget-cli-agent-template/main/install.sh | bash -s ~/myproject standard
+curl -sSL https://raw.githubusercontent.com/gmelli/aget-cli-agent-template/main/install.sh | bash -s ~/myproject standard
 ```
 
 ### Option 3: Clone and Customize
@@ -50,7 +50,7 @@ For developers who want to modify the templates:
 
 ```bash
 # Clone the repository
-git clone https://github.com/gabormelli/aget-cli-agent-template
+git clone https://github.com/gmelli/aget-cli-agent-template
 cd aget-cli-agent-template
 
 # Run interactive installer
