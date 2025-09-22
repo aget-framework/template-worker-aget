@@ -4,7 +4,10 @@
 
 ```bash
 # In your project directory
-curl -sSL https://raw.githubusercontent.com/aget-framework/cli-agent-template/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/yourusername/cli-agent-template/main/install.sh | bash
+
+# Or with custom repo:
+GITHUB_USER=yourusername REPO_NAME=your-repo curl -sSL https://raw.githubusercontent.com/yourusername/cli-agent-template/main/install.sh | bash
 ```
 
 ## First Commands to Try
@@ -42,7 +45,7 @@ your-project/
 ├── scripts/
 │   ├── session_protocol.py      # Wake/wind-down/sign-off
 │   └── housekeeping_protocol.py # Cleaning and diagnostics
-└── Makefile                     # Shortcuts (make wake, make test)
+└── .session_state.json          # Tracks session history (auto-created)
 ```
 
 ## Template Levels
@@ -50,20 +53,42 @@ your-project/
 ### Minimal (Beginners)
 Just session management - perfect for small projects
 ```bash
-python installer/install.py . --template minimal
+# Using curl installer:
+curl -sSL https://raw.githubusercontent.com/yourusername/cli-agent-template/main/install.sh | bash -s . minimal
+
+# Or direct Python:
+python3 /path/to/cli-agent-template/installer/install.py . --template minimal
 ```
 
 ### Standard (Recommended)
 Full housekeeping suite - ideal for most projects
 ```bash
-python installer/install.py . --template standard
+# Using curl installer (default):
+curl -sSL https://raw.githubusercontent.com/yourusername/cli-agent-template/main/install.sh | bash
+
+# Or direct Python:
+python3 /path/to/cli-agent-template/installer/install.py . --template standard
 ```
 
 ### Advanced (Power Users)
 Everything including CI/CD - for production projects
 ```bash
-python installer/install.py . --template advanced
+# Using curl installer:
+curl -sSL https://raw.githubusercontent.com/yourusername/cli-agent-template/main/install.sh | bash -s . advanced
+
+# Or direct Python:
+python3 /path/to/cli-agent-template/installer/install.py . --template advanced
 ```
+
+## Understanding Patterns
+
+**Patterns are reusable command workflows** that make your CLI agent immediately productive. Think of them as "skills" your agent learns. For example:
+
+- **Session patterns**: `wake up`, `wind down`, `sign off`
+- **Housekeeping patterns**: `housekeeping`, `spring clean`, `sanity check`
+- **Documentation patterns**: `documentation check`, `update docs`
+
+Learn more: [PATTERNS_EXPLAINED.md](PATTERNS_EXPLAINED.md)
 
 ## Customization
 

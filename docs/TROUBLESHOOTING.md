@@ -14,7 +14,9 @@ mkdir -p /path/to/project
 cd /path/to/project
 
 # Then run installer
-python /path/to/cli-agent-template/installer/install.py .
+curl -sSL https://raw.githubusercontent.com/yourusername/cli-agent-template/main/install.sh | bash
+# Or with Python directly:
+python3 /path/to/cli-agent-template/installer/install.py .
 ```
 
 #### "Permission denied" during installation
@@ -57,10 +59,7 @@ pip3 install pyyaml
    python3 scripts/session_protocol.py wake
    ```
 
-3. Use Makefile fallback:
-   ```bash
-   make wake
-   ```
+3. Note: Makefile support coming in future release
 
 #### Session state not persisting
 **Problem**: Session count resets, history lost
@@ -82,7 +81,7 @@ cat .session_state.json
 
 2. Manually create if missing:
    ```bash
-   echo '{"session_count": 0, "total_commits": 0}' > .session_state.json
+   echo '{"session_count": 0, "total_commits": 0, "last_session_time": null, "last_session_end": null, "project_created": "'$(date -Iseconds)'"}' > .session_state.json
    ```
 
 #### Git push fails during sign-off
@@ -169,7 +168,7 @@ echo "# Project Name" > README.md
 Run tests from repository root:
 ```bash
 cd /path/to/cli-agent-template
-python -m pytest tests/
+python3 -m pytest tests/
 ```
 
 #### pytest not found
@@ -190,7 +189,11 @@ pip3 install pytest
 **Solution**:
 Re-run installer with correct template:
 ```bash
-python installer/install.py . --template standard
+# Using curl installer:
+curl -sSL https://raw.githubusercontent.com/yourusername/cli-agent-template/main/install.sh | bash -s . standard
+
+# Or with Python:
+python3 /path/to/cli-agent-template/installer/install.py . --template standard
 ```
 
 Files will be updated/added as needed.
@@ -272,7 +275,7 @@ python3 scripts/session_protocol.py status
 #### Test the installation
 ```bash
 # From cli-agent-template directory
-python -m pytest tests/ -v
+python3 -m pytest tests/ -v
 ```
 
 #### Verify file structure
@@ -285,10 +288,11 @@ find . -type f -name "*.py" | head -20
 ### Getting Help
 
 1. **Check logs**: Session notes often contain clues
-2. **Run tests**: `pytest tests/` can reveal issues
+2. **Run tests**: `python3 -m pytest tests/` can reveal issues
 3. **Use dry-run**: Always test with `--dry-run` first
 4. **Read the source**: Scripts are documented and readable
-5. **Open an issue**: https://github.com/yourusername/cli-agent-template/issues
+5. **Learn about patterns**: See [PATTERNS_EXPLAINED.md](PATTERNS_EXPLAINED.md)
+6. **Open an issue**: https://github.com/yourusername/cli-agent-template/issues
 
 ### Emergency Recovery
 
@@ -306,7 +310,9 @@ If everything is broken:
 
 3. **Reinstall**:
    ```bash
-   python /path/to/cli-agent-template/installer/install.py . --template standard
+   curl -sSL https://raw.githubusercontent.com/yourusername/cli-agent-template/main/install.sh | bash
+   # Or with Python:
+   python3 /path/to/cli-agent-template/installer/install.py . --template standard
    ```
 
 4. **Restore your work**:
