@@ -4,7 +4,7 @@ Transform any codebase into a CLI coding agent-ready collaborative environment.
 
 ## What This Is
 
-A collection of battle-tested patterns and templates that enable natural language workflows for CLI coding agents like Claude Code, Cursor, Aider, and Windsurf.
+Reusable patterns and templates that enable natural language workflows for CLI coding agents like Claude Code, Cursor, Aider, and Windsurf.
 
 ## Quick Start
 
