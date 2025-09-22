@@ -30,3 +30,4 @@ archive/
 # Testing
 test_output/
 *.test.md
+.aider*
