@@ -12,7 +12,7 @@ def read_long_description():
 
 setup(
     name='cli-agent-template',
-    version='0.1.0',
+    version='1.0.0',
     author='Gabor Melli',
     author_email='',
     description='Transform any codebase into a CLI coding agent-ready collaborative environment',
