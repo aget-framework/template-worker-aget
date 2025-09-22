@@ -38,3 +38,4 @@ test_output/
 .windsurf*
 .session_state.json
 .session_config.json
+.archive/

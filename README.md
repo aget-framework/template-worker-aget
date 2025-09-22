@@ -1,22 +1,37 @@
-# CLI Agent Template
+# AGET: CLI Agent Template
+
+**Agent Template (AGET)** - The universal standard for making any codebase instantly CLI agent-ready. Works with Claude Code, Cursor, Aider, Windsurf, and all major AI coding assistants.
 
 A reference implementation of the [CLI Agent Template Framework](https://www.aget-framework.com/RKB/CLI_Agent_Template_Framework) - transform any codebase into a CLI coding agent-ready collaborative environment through conversational command patterns.
 
-## What This Is
+## Who This Is For
 
-This repository provides a [workflow automation framework](https://www.aget-framework.com/RKB/CLI_Agent_Template_Framework) with reusable patterns and templates that enable natural language workflows for CLI coding agents like Claude Code, Cursor, Aider, and Windsurf. It implements conversational command patterns that allow AI coding assistants to execute development workflows through natural language interfaces.
+- **Developers** using AI coding assistants (Claude Code, Cursor, Aider, Windsurf)
+- **Teams** wanting consistent AI workflows across projects
+- **Open source maintainers** making projects more contributor-friendly
+- **Solo developers** tired of repeating setup instructions to AI
 
-## Quick Start
+## What This Provides
+
+AGET implements a [workflow automation framework](https://www.aget-framework.com/RKB/CLI_Agent_Template_Framework) with:
+- **Session management**: `hey` → work → `wind down` → `sign off`
+- **Universal compatibility**: One config works for ALL AI agents
+- **Self-documenting patterns**: AI agents understand your workflow instantly
+- **Zero lock-in**: Just Python scripts, no proprietary tools
+
+## Quick Start (30 Seconds)
 
 ```bash
-# Method 1: Install in existing project (now with self-verifying installer)
-curl -sSL https://raw.githubusercontent.com/aget-framework/cli-agent-template/main/install.sh | bash
+# Install AGET in your project
+curl -sSL https://raw.githubusercontent.com/aget-framework/aget-cli-agent-template/main/install.sh | bash
 
-# Method 2: Clone and customize
-git clone https://github.com/aget-framework/cli-agent-template
-cd your-project
-python3 ../cli-agent-template/installer/install.py . --template standard
+# Tell your AI: "hey"
+# AI responds with project status and is ready to work
+
+# That's it! Your project is now AI-agent ready
 ```
+
+For manual installation or customization, see [docs/INSTALLATION.md](docs/INSTALLATION.md)
 
 ## Why Universal Standards?
 
@@ -59,21 +74,21 @@ After installation, your CLI agent can understand commands like:
 Basic setup with session management only. Perfect for small projects.
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/aget-framework/cli-agent-template/main/install.sh | bash -s . minimal
+curl -sSL https://raw.githubusercontent.com/aget-framework/aget-cli-agent-template/main/install.sh | bash -s . minimal
 ```
 
 ### Standard (15+ patterns) - Recommended
 Full conversational interface with housekeeping and documentation checks.
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/aget-framework/cli-agent-template/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/aget-framework/aget-cli-agent-template/main/install.sh | bash
 ```
 
 ### Advanced (25+ patterns)
 Everything including CI/CD integration, advanced testing, and compliance checks.
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/aget-framework/cli-agent-template/main/install.sh | bash -s . advanced
+curl -sSL https://raw.githubusercontent.com/aget-framework/aget-cli-agent-template/main/install.sh | bash -s . advanced
 ```
 
 ## Supported CLI Agents

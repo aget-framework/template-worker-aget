@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# CLI Agent Template Installer
+# AGET (CLI Agent Template) Installer
 # Transform any codebase into a CLI coding agent-ready collaborative environment
 #
 # Usage:
-#   curl -sSL https://raw.githubusercontent.com/aget-framework/cli-agent-template/main/install.sh | bash
+#   curl -sSL https://raw.githubusercontent.com/aget-framework/aget-cli-agent-template/main/install.sh | bash
 #   ./install.sh [OPTIONS] [INSTALL_DIR] [TEMPLATE]
 #
 # Version: 2.0.0
@@ -41,7 +41,7 @@ readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # GitHub configuration (environment variables can override)
 readonly GITHUB_USER="${GITHUB_USER:-aget-framework}"
-readonly REPO_NAME="${REPO_NAME:-cli-agent-template}"
+readonly REPO_NAME="${REPO_NAME:-aget-cli-agent-template}"
 readonly BRANCH="${BRANCH:-main}"
 
 # Installation defaults
@@ -631,7 +631,7 @@ ${BOLD}ARGUMENTS:${NC}
 
 ${BOLD}ENVIRONMENT VARIABLES:${NC}
     GITHUB_USER             GitHub username/org (default: aget-framework)
-    REPO_NAME              Repository name (default: cli-agent-template)
+    REPO_NAME              Repository name (default: aget-cli-agent-template)
     BRANCH                 Branch to install from (default: main)
     INSTALL_DIR            Override installation directory
     TEMPLATE               Override template type

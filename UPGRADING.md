@@ -78,8 +78,8 @@ cp scripts/session_protocol.py scripts/session_protocol.py.bak
 cp scripts/housekeeping_protocol.py scripts/housekeeping_protocol.py.bak
 
 # Update protocol scripts (with AGET naming)
-cp ~/github/cli-agent-template/scripts/aget_session_protocol.py scripts/
-cp ~/github/cli-agent-template/scripts/aget_housekeeping_protocol.py scripts/
+cp ~/github/aget-cli-agent-template/scripts/aget_session_protocol.py scripts/
+cp ~/github/aget-cli-agent-template/scripts/aget_housekeeping_protocol.py scripts/
 
 # Test they still work with your configuration
 python3 scripts/session_protocol.py status
