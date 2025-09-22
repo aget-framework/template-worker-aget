@@ -14,7 +14,7 @@ Thank you for your interest in contributing! This project uses its own patterns 
 
 ```bash
 # Clone your fork
-git clone https://github.com/yourusername/cli-agent-template
+git clone https://github.com/YOUR_USERNAME/cli-agent-template
 cd cli-agent-template
 
 # Install the patterns in the project itself (dogfooding)

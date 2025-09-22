@@ -1,135 +1,302 @@
 # Quick Start Guide
 
-## 30-Second Setup
+**Get your CLI coding agent up and running in under 5 minutes** 🚀
+
+This guide will help you install and use the CLI Agent Template to transform your codebase into a conversational development environment. By the end, you'll have AI agents that understand commands like "wake up", "housekeeping", and "wind down".
+
+## Prerequisites
+
+Before you begin, ensure you have:
+
+- **Python 3.8 or higher** - Check with: `python3 --version`
+- **Git** (recommended) - Check with: `git --version`
+- **A CLI coding agent** - Claude Code, Cursor, Aider, or similar
+- **5 minutes** - That's all you need!
+- **macOS or Linux** - Windows support via WSL
+
+> 💡 **New to CLI agents?** These are AI assistants that can read your code and execute commands. Popular options include [Claude Code](https://claude.ai/code), [Cursor](https://cursor.sh), and [Aider](https://aider.chat).
+
+## Installation
+
+### Option 1: Interactive Install (Recommended for First-Time Users)
+
+Run the installer without any arguments for a guided experience:
 
 ```bash
-# In your project directory
-curl -sSL https://raw.githubusercontent.com/yourusername/cli-agent-template/main/install.sh | bash
-
-# Or with custom repo:
-GITHUB_USER=yourusername REPO_NAME=your-repo curl -sSL https://raw.githubusercontent.com/yourusername/cli-agent-template/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/aget-framework/cli-agent-template/main/install.sh | bash
 ```
 
-## First Commands to Try
+The interactive installer will:
+- ✅ Check prerequisites automatically
+- ✅ Let you choose your installation directory
+- ✅ Help you select the right template
+- ✅ Confirm before making changes
 
-### 1. Start Your Session
-```
-You: wake up
-Agent: [Shows project status, ready for work]
-```
+### Option 2: Quick Install (One Command)
 
-### 2. Check Project Health
-```
-You: sanity check
-Agent: [Runs diagnostics, reports any issues]
-```
+For experienced users who want the standard template immediately:
 
-### 3. Clean Up
-```
-You: housekeeping
-Agent: [Shows what would be cleaned, asks confirmation]
+```bash
+# Install in current directory
+curl -sSL https://raw.githubusercontent.com/aget-framework/cli-agent-template/main/install.sh | bash -s . standard
+
+# Or install in a specific directory
+curl -sSL https://raw.githubusercontent.com/aget-framework/cli-agent-template/main/install.sh | bash -s ~/myproject standard
 ```
 
-### 4. End Your Session
-```
-You: wind down
-Agent: [Commits changes, saves session notes]
+### Option 3: Clone and Customize
+
+For developers who want to modify the templates:
+
+```bash
+# Clone the repository
+git clone https://github.com/aget-framework/cli-agent-template
+cd cli-agent-template
+
+# Run interactive installer
+./install.sh
+
+# Or specify options
+./install.sh --prefix ~/myproject --template standard
 ```
 
-## What Gets Installed
+### Verify Installation
+
+After installation, verify everything is working:
+
+```bash
+# Check that files were installed
+ls -la AGENTS.md scripts/
+
+# Test the session protocol
+python3 scripts/session_protocol.py status
+
+# Expected output:
+# ✅ Session state initialized
+# Ready for commands
+```
+
+## Your First Session (5-Minute Tutorial)
+
+Let's walk through a complete workflow with your newly empowered CLI agent:
+
+### Step 1: Open Your CLI Agent
+
+Launch your preferred CLI coding assistant (Claude Code, Cursor, etc.) in the project directory where you installed the templates.
+
+### Step 2: Wake Up the Agent
+
+Tell your agent:
+```
+wake up
+```
+
+**What happens:** The agent reads AGENTS.md, checks your project status, shows recent changes, and prepares for work.
+
+**Expected output:**
+```
+## Status Report
+📅 Last session: 2 hours ago
+📍 Working directory: /Users/you/myproject
+🔄 Git status: 3 uncommitted changes
+✅ Ready for tasks.
+```
+
+### Step 3: Check Project Health
+
+Tell your agent:
+```
+sanity check
+```
+
+**What happens:** Runs diagnostics to ensure Python, Git, and dependencies are properly configured.
+
+**Expected output:**
+```
+Running emergency diagnostics...
+✅ Python 3.11.0
+✅ Git repository OK
+✅ Critical files present
+System Status: OK
+```
+
+### Step 4: Clean Up
+
+Tell your agent:
+```
+housekeeping
+```
+
+**What happens:** Identifies and optionally removes temporary files, caches, and other clutter.
+
+**Expected output:**
+```
+Found items to clean:
+  • 42 __pycache__ files (2.1 MB)
+  • 5 .DS_Store files
+  • 3 old log files
+
+Clean these files? [y/N]:
+```
+
+### Step 5: End Your Session
+
+Tell your agent:
+```
+wind down
+```
+
+**What happens:** Commits changes, creates session notes, and preserves your work context.
+
+**Expected output:**
+```
+Creating session notes...
+Committing changes...
+Session preserved.
+```
+
+## Understanding What Was Installed
+
+After installation, your project has these new files:
 
 ```
 your-project/
-├── AGENT.md                     # Commands your agent understands
-├── CLAUDE.md                    # Symlink to AGENT.md (backward compatibility)
+├── AGENTS.md                     # Universal agent configuration
+├── CLAUDE.md                     # Symlink for backward compatibility
 ├── scripts/
-│   ├── session_protocol.py      # Wake/wind-down/sign-off
-│   └── housekeeping_protocol.py # Cleaning and diagnostics
-└── .session_state.json          # Tracks session history (auto-created)
+│   ├── session_protocol.py       # Session management (wake/wind/sign-off)
+│   ├── housekeeping_protocol.py  # Cleaning and diagnostics
+│   └── recovery_protocol.py      # Emergency recovery tools
+├── .cli_agent_manifest           # Installation tracking
+└── .session_state.json          # Session persistence (auto-created)
 ```
 
-## Template Levels
+### Key Files Explained
 
-### Minimal (Beginners)
-Just session management - perfect for small projects
+- **AGENTS.md**: The "brain" - tells agents what commands are available
+- **scripts/**: Python scripts that execute the actual commands
+- **.session_state.json**: Tracks session history and context
+
+## Choose Your Template
+
+### 🟢 Minimal (5 patterns)
+**Best for:** Small projects, learning the system
 ```bash
-# Using curl installer:
-curl -sSL https://raw.githubusercontent.com/yourusername/cli-agent-template/main/install.sh | bash -s . minimal
-
-# Or direct Python:
-python3 /path/to/cli-agent-template/installer/install.py . --template minimal
+./install.sh --template minimal
 ```
+**Includes:** Basic session management only
 
-### Standard (Recommended)
-Full housekeeping suite - ideal for most projects
+### 🟡 Standard (15+ patterns) - RECOMMENDED
+**Best for:** Most development projects
 ```bash
-# Using curl installer (default):
-curl -sSL https://raw.githubusercontent.com/yourusername/cli-agent-template/main/install.sh | bash
-
-# Or direct Python:
-python3 /path/to/cli-agent-template/installer/install.py . --template standard
+./install.sh --template standard
 ```
+**Includes:** Session + housekeeping + documentation tools
 
-### Advanced (Power Users)
-Everything including CI/CD - for production projects
+### 🔴 Advanced (25+ patterns)
+**Best for:** Production projects with CI/CD needs
 ```bash
-# Using curl installer:
-curl -sSL https://raw.githubusercontent.com/yourusername/cli-agent-template/main/install.sh | bash -s . advanced
-
-# Or direct Python:
-python3 /path/to/cli-agent-template/installer/install.py . --template advanced
+./install.sh --template advanced
 ```
+**Includes:** Everything + deployment + testing automation
 
-## Understanding Patterns
+## Common Commands Reference
 
-**Patterns are reusable command workflows** that make your CLI agent immediately productive. Think of them as "skills" your agent learns. For example:
+Once installed, your CLI agent understands these conversational commands:
 
-- **Session patterns**: `wake up`, `wind down`, `sign off`
-- **Housekeeping patterns**: `housekeeping`, `spring clean`, `sanity check`
-- **Documentation patterns**: `documentation check`, `update docs`
+| Command | What it does |
+|---------|-------------|
+| `wake up` | Initialize session, show project status |
+| `wind down` | Save work, commit changes, create notes |
+| `sign off` | Quick commit and push |
+| `housekeeping` | Clean temporary files and caches |
+| `spring clean` | Deep cleanup with archiving |
+| `sanity check` | Run system diagnostics |
+| `documentation check` | Analyze documentation quality |
 
-Learn more: [PATTERNS_EXPLAINED.md](PATTERNS_EXPLAINED.md)
+## Troubleshooting
 
-## Customization
+### Installation Issues
 
-### Change Triggers
-Edit `AGENT.md` to add your own commands:
-```markdown
-### Deploy to Production
-When user says "deploy", execute:
-- Run: `./scripts/deploy.sh`
-```
+<details>
+<summary>❌ "Python 3 is not installed"</summary>
 
-### Add Patterns
-Drop new scripts in `scripts/` directory:
-```python
-# scripts/my_custom_protocol.py
-def my_command():
-    print("Running custom command...")
-```
+Install Python 3.8 or higher:
+- **macOS**: `brew install python3`
+- **Ubuntu/Debian**: `sudo apt-get install python3`
+- **Other**: Visit [python.org](https://python.org)
+</details>
 
-## Common Issues
+<details>
+<summary>❌ "Permission denied"</summary>
 
-### "Command not found"
-Make sure Python 3.8+ is installed:
+The installer needs write access to the target directory:
 ```bash
-python3 --version
-```
+# Check permissions
+ls -la /path/to/target
 
-### "Permission denied"
-Make scripts executable:
-```bash
-chmod +x scripts/*.py
+# Fix if needed
+chmod 755 /path/to/target
 ```
+</details>
 
-### "Git not configured"
-Templates work without git, but it's recommended:
+<details>
+<summary>❌ "Command not found: curl"</summary>
+
+Install curl or use wget:
 ```bash
-git init
+# Using wget instead
+wget -qO- https://raw.githubusercontent.com/aget-framework/cli-agent-template/main/install.sh | bash
+
+# Or install curl
+# macOS: brew install curl
+# Linux: sudo apt-get install curl
 ```
+</details>
+
+### Runtime Issues
+
+<details>
+<summary>⚠️ Agent doesn't understand commands</summary>
+
+Make sure your agent reads the AGENTS.md file:
+1. The file must be in the project root
+2. Tell the agent explicitly: "Read AGENTS.md"
+3. Then try the command again
+</details>
+
+<details>
+<summary>⚠️ "No module named 'yaml'" error</summary>
+
+Install Python dependencies:
+```bash
+pip3 install pyyaml gitpython
+```
+</details>
 
 ## Next Steps
 
-1. Read [WHY_THIS_MATTERS.md](WHY_THIS_MATTERS.md) for deeper understanding
-2. Check [examples/](../examples/) for real-world usage
-3. Join discussions on [GitHub Issues](https://github.com/aget-framework/cli-agent-template/issues)
+Now that you're up and running:
+
+1. **Learn more about patterns** → [PATTERNS_EXPLAINED.md](PATTERNS_EXPLAINED.md)
+2. **Understand the why** → [WHY_THIS_MATTERS.md](WHY_THIS_MATTERS.md)
+3. **See real examples** → [examples/](../examples/)
+4. **Customize for your needs** → [CONTRIBUTING.md](../CONTRIBUTING.md)
+5. **Get help** → [GitHub Issues](https://github.com/aget-framework/cli-agent-template/issues)
+
+## Quick Tips
+
+- 🎯 **Start small**: Use the minimal template first, upgrade later
+- 🔄 **Regular sessions**: Use "wake up" and "wind down" to maintain context
+- 📝 **Document as you go**: The patterns help maintain good documentation
+- 🧹 **Clean regularly**: Run "housekeeping" weekly to keep projects tidy
+- 🚀 **Experiment**: Try creating your own patterns in the scripts/ directory
+
+---
+
+**Need help?** Open an issue on [GitHub](https://github.com/aget-framework/cli-agent-template/issues) or check our [comprehensive docs](../README.md).
+
+**Ready to contribute?** We welcome improvements! See [CONTRIBUTING.md](../CONTRIBUTING.md).
+
+---
+*Making CLI coding agents better collaborators, one pattern at a time.* ✨
