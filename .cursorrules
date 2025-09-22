@@ -1,0 +1,39 @@
+# Cursor Rules - CLI Agent Template
+
+## Important: Read AGENT.md
+This repository uses universal agent configuration.
+**ALWAYS** read and follow instructions in AGENT.md (symlinked as CLAUDE.md).
+
+## Session Management Protocols
+When user says these trigger phrases, execute the corresponding commands:
+
+### "wake up"
+- Read AGENT.md first
+- Run: `python3 scripts/session_protocol.py wake`
+- Report status with "## Status Report" header
+
+### "wind down"
+- Run: `python3 scripts/session_protocol.py wind-down`
+- Report "Session preserved."
+
+### "sign off"
+- Run: `python3 scripts/session_protocol.py sign-off`
+- Report "Signed off."
+
+### "housekeeping"
+- Run: `python3 scripts/housekeeping_protocol.py housekeeping --dry-run`
+
+### "sanity check"
+- Run: `python3 scripts/housekeeping_protocol.py sanity-check`
+
+### "documentation check"
+- Run: `python3 scripts/housekeeping_protocol.py documentation-check`
+
+## Testing Notes
+If Cursor/Codex doesn't recognize commands, try:
+1. Explicit: "Please run the wake up protocol"
+2. Direct: "Execute: python3 scripts/session_protocol.py wake"
+
+## Python-First Approach
+All protocols are Python-based for reliability and testability.
+Requires Python 3.8+ in environment.
