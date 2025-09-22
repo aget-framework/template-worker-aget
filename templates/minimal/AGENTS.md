@@ -13,19 +13,19 @@ This project uses CLI Agent Template for conversational development workflows.
 ### Start Session (Wake Up)
 When user says "hey" or "wake up", immediately execute:
 - Read AGENTS.md (this file)
-- Run: `python3 scripts/session_protocol.py wake`
+- Run: `python3 scripts/aget_session_protocol.py wake`
 - Report project status
 - End with "Ready for tasks."
 
 ### Save Work (Wind Down)
 When user says "save work" or "wind down", execute:
-- Run: `python3 scripts/session_protocol.py wind-down`
+- Run: `python3 scripts/aget_session_protocol.py wind-down`
 - Commit changes and save session state
 - Report "Session preserved."
 
 ### End Session (Sign Off)
 When user says "all done", "sync up", or "sign off", execute:
-- Run: `python3 scripts/session_protocol.py sign-off`
+- Run: `python3 scripts/aget_session_protocol.py sign-off`
 - Quick commit and push
 - Report "Signed off."
 
