@@ -14,7 +14,7 @@ import os
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from scripts.session_protocol import SessionState, organize_session_notes
+from scripts.aget_session_protocol import SessionState, organize_session_notes
 
 
 class TestSessionState:
@@ -189,10 +189,10 @@ class TestOrganizeSessionNotes:
 
 def test_imports():
     """Test that all required imports work"""
-    from scripts import session_protocol
-    assert hasattr(session_protocol, 'wake')
-    assert hasattr(session_protocol, 'wind_down')
-    assert hasattr(session_protocol, 'sign_off')
-    assert hasattr(session_protocol, 'status')
-    assert hasattr(session_protocol, 'SessionState')
-    assert hasattr(session_protocol, 'organize_session_notes')
+    from scripts import aget_session_protocol
+    assert hasattr(aget_session_protocol, 'wake')
+    assert hasattr(aget_session_protocol, 'wind_down')
+    assert hasattr(aget_session_protocol, 'sign_off')
+    assert hasattr(aget_session_protocol, 'status')
+    assert hasattr(aget_session_protocol, 'SessionState')
+    assert hasattr(aget_session_protocol, 'organize_session_notes')
