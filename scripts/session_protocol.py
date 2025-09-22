@@ -8,6 +8,7 @@ import os
 import sys
 import json
 import subprocess
+import time
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -276,12 +277,38 @@ def wind_down():
     print(f"{GREEN}✅ Session preserved.{RESET}")
 
 
-def sign_off():
-    """Sign off protocol - Quick commit and push"""
+def sign_off(force_push=False, status_only=False):
+    """Sign off protocol - Quick commit and push
+
+    Args:
+        force_push: If True, attempt push even if dry-run fails
+        status_only: If True, only show status without making changes
+    """
     state = SessionState()
+
+    # Phase 3: Load configuration
+    config_file = Path('.session_config.json')
+    config = {}
+    if config_file.exists():
+        try:
+            with open(config_file, 'r') as f:
+                config = json.load(f)
+        except:
+            pass
 
     print(f"{BOLD}{BLUE}## Sign Off - {datetime.now():%Y-%m-%d %H:%M}{RESET}")
     print(f"⏱ Session duration: {state.get_session_duration()}")
+
+    # Phase 3: Status check mode
+    if status_only:
+        git_status = run_command("git status --short")
+        unpushed = run_command("git log @{u}..HEAD --oneline 2>/dev/null")
+        print(f"📊 Status:")
+        print(f"  • Uncommitted: {len(git_status.splitlines()) if git_status else 0} files")
+        print(f"  • Unpushed: {len(unpushed.splitlines()) if unpushed else 0} commits")
+        if config.get('default_branch'):
+            print(f"  • Default branch: {config['default_branch']}")
+        return
 
     # Quick commit
     git_status = run_command("git status --short")
@@ -301,23 +328,53 @@ def sign_off():
     if remote and 'origin' in remote:
         print("📤 Pushing to remote...")
 
-        # Try to detect default branch
-        default_branch = run_command("git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@'")
-        if not default_branch:
-            # Try common defaults
-            for branch in ['main', 'master']:
-                if run_command(f"git show-ref --verify --quiet refs/heads/{branch}"):
-                    default_branch = branch
-                    break
+        # Phase 1 Fix: Use current branch instead of guessing
+        current_branch = run_command("git branch --show-current")
+        if current_branch:
+            current_branch = current_branch.strip()
 
-        if default_branch:
-            result = run_command(f"git push origin {default_branch} 2>&1")
-            if result and 'error' not in result.lower():
-                print(f"{GREEN}✓ Pushed to origin/{default_branch}{RESET}")
-            else:
-                print(f"{YELLOW}⚠ Push failed or skipped{RESET}")
+            # Phase 2: Add dry-run check first
+            dry_run = run_command(f"git push --dry-run origin {current_branch} 2>&1")
+            if dry_run and 'rejected' in dry_run.lower() and not force_push:
+                print(f"{YELLOW}⚠ Push would be rejected. Pull first or use --force-push{RESET}")
+                print(f"  Details: {dry_run.split('error:')[1] if 'error:' in dry_run else dry_run[:100]}")
+                return
+
+            # Attempt actual push with retry logic
+            max_retries = config.get('max_retries', 3)
+            for attempt in range(max_retries):
+                result = run_command(f"git push origin {current_branch} 2>&1")
+
+                # Check for success
+                if result and 'error' not in result.lower() and 'rejected' not in result.lower():
+                    # Verify push succeeded
+                    verify = run_command(f"git log origin/{current_branch}..{current_branch} --oneline")
+                    if not verify:  # No commits ahead means push succeeded
+                        print(f"{GREEN}✓ Pushed to origin/{current_branch}{RESET}")
+
+                        # Phase 3: Save successful branch to config
+                        if not config.get('default_branch'):
+                            config['default_branch'] = current_branch
+                            try:
+                                with open(config_file, 'w') as f:
+                                    json.dump(config, f, indent=2)
+                            except:
+                                pass
+
+                        # Auto-setup origin/HEAD if missing
+                        if not run_command("git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null"):
+                            run_command(f"git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/{current_branch}")
+                        break
+
+                # Handle specific errors
+                if result and 'connection' in result.lower() and attempt < max_retries - 1:
+                    print(f"{YELLOW}⚠ Network error, retrying ({attempt + 1}/{max_retries})...{RESET}")
+                    time.sleep(2 ** attempt)  # Exponential backoff
+                else:
+                    print(f"{YELLOW}⚠ Push failed: {result if result else 'Unknown error'}{RESET}")
+                    break
         else:
-            print(f"{YELLOW}⚠ Could not determine default branch{RESET}")
+            print(f"{YELLOW}⚠ Could not determine current branch{RESET}")
     else:
         print("ℹ No remote configured")
 
@@ -349,17 +406,21 @@ def status():
 def main():
     """Main entry point"""
     if len(sys.argv) < 2:
-        print(f"Usage: {sys.argv[0]} [wake|wind-down|sign-off|status]")
+        print(f"Usage: {sys.argv[0]} [wake|wind-down|sign-off|status] [options]")
+        print(f"       sign-off options: --force-push, --status")
         sys.exit(1)
 
     command = sys.argv[1]
+    args = sys.argv[2:]
 
     if command == 'wake':
         wake()
     elif command == 'wind-down':
         wind_down()
     elif command == 'sign-off':
-        sign_off()
+        force_push = '--force-push' in args
+        status_only = '--status' in args
+        sign_off(force_push=force_push, status_only=status_only)
     elif command == 'status':
         status()
     else:
