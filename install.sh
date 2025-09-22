@@ -3,7 +3,7 @@
 # Transform any codebase into a CLI coding agent-ready collaborative environment
 #
 # Usage:
-#   curl -sSL https://raw.githubusercontent.com/aget-framework/aget-cli-agent-template/main/install.sh | bash
+#   curl -sSL https://raw.githubusercontent.com/aget-framework/aget/main/install.sh | bash
 #   ./install.sh [OPTIONS] [INSTALL_DIR] [TEMPLATE]
 #
 # Version: 2.0.0

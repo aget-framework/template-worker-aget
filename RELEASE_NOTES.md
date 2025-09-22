@@ -28,7 +28,7 @@
 
 ```bash
 # One-line installation
-curl -sSL https://raw.githubusercontent.com/aget-framework/aget-cli-agent-template/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/aget-framework/aget/main/install.sh | bash
 
 # Tell your AI assistant
 "hey"  # Initializes session and shows project status
