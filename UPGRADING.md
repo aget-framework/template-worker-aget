@@ -58,14 +58,14 @@ First, understand what has changed between your version and the latest template:
 
 ```bash
 # Compare versions and see what's different
-diff scripts/aget_session_protocol.py ~/github/cli-agent-template/scripts/aget_session_protocol.py
-diff scripts/aget_housekeeping_protocol.py ~/github/cli-agent-template/scripts/aget_housekeeping_protocol.py
+diff scripts/aget_session_protocol.py ~/github/aget-cli-agent-template/scripts/aget_session_protocol.py
+diff scripts/aget_housekeeping_protocol.py ~/github/aget-cli-agent-template/scripts/aget_housekeeping_protocol.py
 
 # Check for new scripts in the template
-ls ~/github/cli-agent-template/scripts/ | grep -v "$(ls scripts/)"
+ls ~/github/aget-cli-agent-template/scripts/ | grep -v "$(ls scripts/)"
 
 # Check template version
-cd ~/github/cli-agent-template && git log --oneline -5
+cd ~/github/aget-cli-agent-template && git log --oneline -5
 ```
 
 ### Phase 2: Update Core Scripts Only
@@ -92,8 +92,8 @@ Your AGENTS.md (or CLAUDE.md) likely contains project-specific content. Don't ov
 
 ```bash
 # Extract just the protocol sections from template
-grep -A 20 "Session Management Protocols" ~/github/cli-agent-template/AGENTS.md > /tmp/new_protocols.txt
-grep -A 20 "Housekeeping Protocols" ~/github/cli-agent-template/AGENTS.md >> /tmp/new_protocols.txt
+grep -A 20 "Session Management Protocols" ~/github/aget-cli-agent-template/AGENTS.md > /tmp/new_protocols.txt
+grep -A 20 "Housekeeping Protocols" ~/github/aget-cli-agent-template/AGENTS.md >> /tmp/new_protocols.txt
 
 # Review the new protocols
 cat /tmp/new_protocols.txt
@@ -111,13 +111,13 @@ Check for new features and add only what you need:
 
 ```bash
 # See what's new in the template
-ls ~/github/cli-agent-template/scripts/
-ls ~/github/cli-agent-template/patterns/
+ls ~/github/aget-cli-agent-template/scripts/
+ls ~/github/aget-cli-agent-template/patterns/
 
 # Selectively copy new features you want
 # Examples:
-cp ~/github/cli-agent-template/scripts/validate_patterns.py scripts/  # if you need pattern validation
-cp ~/github/cli-agent-template/installer/update.py installer/  # if you want the updater
+cp ~/github/aget-cli-agent-template/scripts/validate_patterns.py scripts/  # if you need pattern validation
+cp ~/github/aget-cli-agent-template/installer/update.py installer/  # if you want the updater
 ```
 
 ### Phase 5: Validate & Document
@@ -133,7 +133,7 @@ python3 scripts/session_protocol.py wake
 # (Add your own tests here)
 
 # Document what template version you're aligned with
-echo "Template version: $(cd ~/github/cli-agent-template && git rev-parse --short HEAD)" > .template_version
+echo "Template version: $(cd ~/github/aget-cli-agent-template && git rev-parse --short HEAD)" > .template_version
 echo "Updated: $(date)" >> .template_version
 
 # Commit the updates
@@ -155,7 +155,7 @@ If you just need to update trigger phrases (e.g., recent change from "wake up" t
 
 To add a new protocol from the template:
 
-1. Copy the specific protocol script from `~/github/cli-agent-template/scripts/`
+1. Copy the specific protocol script from `~/github/aget-cli-agent-template/scripts/`
 2. Add its documentation section to your AGENTS.md
 3. Test it works in your environment
 
@@ -183,7 +183,7 @@ To make future updates easier:
 Add the template as a remote and cherry-pick updates:
 
 ```bash
-git remote add template https://github.com/aget-framework/cli-agent-template.git
+git remote add template https://github.com/aget-framework/aget-cli-agent-template.git
 git fetch template
 git log template/main --oneline  # See what's new
 git cherry-pick <commit-hash>  # Selectively apply updates
@@ -194,7 +194,7 @@ git cherry-pick <commit-hash>  # Selectively apply updates
 Use the template as a git submodule (more complex but cleaner updates):
 
 ```bash
-git submodule add https://github.com/aget-framework/cli-agent-template.git .cli-agent
+git submodule add https://github.com/aget-framework/aget-cli-agent-template.git .cli-agent
 ln -s .cli-agent/scripts/session_protocol.py scripts/
 ```
 

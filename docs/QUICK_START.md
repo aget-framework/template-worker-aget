@@ -23,7 +23,7 @@ Before you begin, ensure you have:
 Run the installer without any arguments for a guided experience:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/aget-framework/cli-agent-template/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/aget-framework/aget-cli-agent-template/main/install.sh | bash
 ```
 
 The interactive installer will:
@@ -38,10 +38,10 @@ For experienced users who want the standard template immediately:
 
 ```bash
 # Install in current directory
-curl -sSL https://raw.githubusercontent.com/aget-framework/cli-agent-template/main/install.sh | bash -s . standard
+curl -sSL https://raw.githubusercontent.com/aget-framework/aget-cli-agent-template/main/install.sh | bash -s . standard
 
 # Or install in a specific directory
-curl -sSL https://raw.githubusercontent.com/aget-framework/cli-agent-template/main/install.sh | bash -s ~/myproject standard
+curl -sSL https://raw.githubusercontent.com/aget-framework/aget-cli-agent-template/main/install.sh | bash -s ~/myproject standard
 ```
 
 ### Option 3: Clone and Customize
@@ -50,8 +50,8 @@ For developers who want to modify the templates:
 
 ```bash
 # Clone the repository
-git clone https://github.com/aget-framework/cli-agent-template
-cd cli-agent-template
+git clone https://github.com/aget-framework/aget-cli-agent-template
+cd aget-cli-agent-template
 
 # Run interactive installer
 ./install.sh
@@ -246,7 +246,7 @@ chmod 755 /path/to/target
 Install curl or use wget:
 ```bash
 # Using wget instead
-wget -qO- https://raw.githubusercontent.com/aget-framework/cli-agent-template/main/install.sh | bash
+wget -qO- https://raw.githubusercontent.com/aget-framework/aget-cli-agent-template/main/install.sh | bash
 
 # Or install curl
 # macOS: brew install curl
@@ -282,7 +282,7 @@ Now that you're up and running:
 2. **Understand the why** → [WHY_THIS_MATTERS.md](WHY_THIS_MATTERS.md)
 3. **See real examples** → [examples/](../examples/)
 4. **Customize for your needs** → [CONTRIBUTING.md](../CONTRIBUTING.md)
-5. **Get help** → [GitHub Issues](https://github.com/aget-framework/cli-agent-template/issues)
+5. **Get help** → [GitHub Issues](https://github.com/aget-framework/aget-cli-agent-template/issues)
 
 ## Quick Tips
 
@@ -294,7 +294,7 @@ Now that you're up and running:
 
 ---
 
-**Need help?** Open an issue on [GitHub](https://github.com/aget-framework/cli-agent-template/issues) or check our [comprehensive docs](../README.md).
+**Need help?** Open an issue on [GitHub](https://github.com/aget-framework/aget-cli-agent-template/issues) or check our [comprehensive docs](../README.md).
 
 **Ready to contribute?** We welcome improvements! See [CONTRIBUTING.md](../CONTRIBUTING.md).
 

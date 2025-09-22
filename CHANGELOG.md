@@ -89,12 +89,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Support
 
-For issues and feature requests, please use [GitHub Issues](https://github.com/aget-framework/cli-agent-template/issues).
+For issues and feature requests, please use [GitHub Issues](https://github.com/aget-framework/aget-cli-agent-template/issues).
 
 For documentation, see [docs/](docs/) directory.
 
 ---
 
-[Unreleased]: https://github.com/aget-framework/cli-agent-template/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/aget-framework/cli-agent-template/releases/tag/v1.0.0
-[0.9.0]: https://github.com/aget-framework/cli-agent-template/releases/tag/v0.9.0
+[Unreleased]: https://github.com/aget-framework/aget-cli-agent-template/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/aget-framework/aget-cli-agent-template/releases/tag/v1.0.0
+[0.9.0]: https://github.com/aget-framework/aget-cli-agent-template/releases/tag/v0.9.0
