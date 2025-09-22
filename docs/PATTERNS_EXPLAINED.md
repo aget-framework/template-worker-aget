@@ -41,8 +41,8 @@ patterns/
 ### 1. Trigger Recognition
 Your AGENT.md file defines trigger phrases:
 ```markdown
-### Wake Up Protocol
-When user says "wake up", execute:
+### Start Session (Wake Up Protocol)
+When user says "hey" or "wake up", execute:
 - Run: `python3 scripts/session_protocol.py wake`
 ```
 
