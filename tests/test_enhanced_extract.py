@@ -2,11 +2,9 @@
 Test enhanced extract command with directory support.
 """
 
-import json
 import tempfile
 from pathlib import Path
 
-import pytest
 
 from aget.config.commands.extract import ExtractCommand
 

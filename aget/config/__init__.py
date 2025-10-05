@@ -187,7 +187,7 @@ Config Module Commands:
         else:
             print(f"❌ Error: {result.get('error', 'Unknown error')}")
             if 'internal_deps' in result:
-                print(f"   Internal dependencies found:")
+                print("   Internal dependencies found:")
                 for dep in result['internal_deps']:
                     print(f"   • {dep}")
             return 1

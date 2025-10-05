@@ -4,7 +4,6 @@ Implements three-tier degradation pattern.
 """
 
 import subprocess
-from pathlib import Path
 from typing import Any, Dict
 
 from aget.base import BaseCommand

@@ -96,19 +96,19 @@ class QualityChecker:
         # Test Coverage Section
         report.append("Test Coverage:")
         if results["has_test_infrastructure"]:
-            report.append(f"  ✓ Test infrastructure exists")
+            report.append("  ✓ Test infrastructure exists")
         else:
-            report.append(f"  ✗ No test infrastructure found")
+            report.append("  ✗ No test infrastructure found")
 
         if results["has_actual_tests"]:
             report.append(f"  ✓ {results['test_count']} actual test file(s) found")
         else:
-            report.append(f"  ✗ No actual tests (possible test theater)")
+            report.append("  ✗ No actual tests (possible test theater)")
 
         if results["has_data_tests"]:
-            report.append(f"  ✓ Data integrity tests found")
+            report.append("  ✓ Data integrity tests found")
         elif results["risk_level"] in ["CRITICAL", "HIGH"]:
-            report.append(f"  ✗ No data integrity tests (RISKY)")
+            report.append("  ✗ No data integrity tests (RISKY)")
 
         # Risk Assessment
         report.append(f"\nRisk Level: {results['risk_level']}")

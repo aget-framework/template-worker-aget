@@ -3,10 +3,8 @@ Tests for the template installer
 """
 
 import sys
-import os
 from pathlib import Path
 import tempfile
-import shutil
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 

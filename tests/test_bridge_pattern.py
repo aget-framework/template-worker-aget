@@ -4,7 +4,6 @@ import sys
 import json
 import tempfile
 from pathlib import Path
-from datetime import datetime
 
 sys.path.insert(0, '.')
 from patterns.bridge.extract_output import OutputExtractor
@@ -163,15 +162,15 @@ def test_extract_output():
         manifest = json.loads(manifest_file.read_text())
         assert manifest['public_product'] == True
         assert manifest['category'] == 'tool'
-        print(f"✅ Manifest created with metadata")
+        print("✅ Manifest created with metadata")
 
         # Check evolution was recorded
         evolution_files = list((agent_path / ".aget" / "evolution").glob("*-extraction.md"))
         assert len(evolution_files) > 0, "Should record extraction in evolution"
-        print(f"✅ Extraction recorded in evolution")
+        print("✅ Extraction recorded in evolution")
 
         # Display extraction summary
-        print(f"\nExtraction Summary:")
+        print("\nExtraction Summary:")
         print(f"  Original: {manifest['original_path']}")
         print(f"  Output: {manifest['output_name']}")
         print(f"  Category: {manifest['category']}")

@@ -4,7 +4,6 @@ Tests all criteria from SPRINT-001-GATE1.md
 """
 
 import sys
-import time
 import tempfile
 from pathlib import Path
 
@@ -14,7 +13,6 @@ from aget.__main__ import AgetCLI
 from aget.config.commands.init import InitCommand
 from aget.config.commands.rollback import RollbackCommand
 from aget.shared.backup import BackupManager
-from aget.shared.capabilities import Capabilities
 
 
 class Gate1Validator:
@@ -29,9 +27,9 @@ class Gate1Validator:
         print("=" * 60)
         print("GATE 1 GO/NO-GO VALIDATION")
         print("=" * 60)
-        print(f"\nDate: 2025-09-22")
-        print(f"Sprint: 001")
-        print(f"Release Target: v2.0-alpha")
+        print("\nDate: 2025-09-22")
+        print("Sprint: 001")
+        print("Release Target: v2.0-alpha")
         print("\n" + "-" * 60)
 
         # Criterion 1: All 5 commands execute without error
@@ -68,7 +66,7 @@ class Gate1Validator:
                 status = "✅" if result == 0 else "⚠️"
                 if result == 0:
                     passed += 1
-            except Exception as e:
+            except Exception:
                 status = "❌"
 
             print(f"  aget {cmd}: {status}")
@@ -133,8 +131,8 @@ class Gate1Validator:
                 restored == original
             )
 
-            print(f"  Backup created: ✅")
-            print(f"  Rollback successful: ✅")
+            print("  Backup created: ✅")
+            print("  Rollback successful: ✅")
             print(f"  Content restored: {'✅' if restored == original else '❌'}")
 
         print(f"\nResult: {'✅ PASS' if self.results['backup_rollback'] else '❌ FAIL'}")
@@ -159,7 +157,7 @@ class Gate1Validator:
                 '--force' in error_msg
             )
 
-            print(f"  Error on duplicate init: ✅")
+            print("  Error on duplicate init: ✅")
             print(f"  Helpful message: {'✅' if is_clean else '❌'}")
             print(f'  Message: "{error_msg[:50]}..."')
 
@@ -186,7 +184,7 @@ class Gate1Validator:
         print(f"  Module registry: {'✅' if has_modules else '❌'}")
         print(f"  Config module: {'✅' if has_config else '❌'}")
         print(f"  Route method: {'✅' if has_routing else '❌'}")
-        print(f"  Future-ready: ✅ (track, gate, ship)")
+        print("  Future-ready: ✅ (track, gate, ship)")
 
         self.results['future_routing'] = (
             has_modules and has_config and has_routing

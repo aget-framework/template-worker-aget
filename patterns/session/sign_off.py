@@ -90,7 +90,7 @@ class SignOffProtocol:
                 reason = push_result.get('reason', 'network issue')
                 print(f"ℹ️ Push failed ({reason}) - changes saved locally")
         elif push_result.get('reason') == 'no_remote':
-            print(f"ℹ️ No remote configured (local only)")
+            print("ℹ️ No remote configured (local only)")
 
         # Quick state update with error handling
         state = self._load_state()
@@ -116,7 +116,7 @@ class SignOffProtocol:
                 content = self.state_file.read_text()
                 if content.strip():
                     return json.loads(content)
-            except (json.JSONDecodeError, IOError) as e:
+            except (json.JSONDecodeError, IOError):
                 # Try backup recovery
                 backup_file = self.state_file.with_suffix('.backup')
                 if backup_file.exists():

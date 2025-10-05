@@ -4,12 +4,10 @@ CLI Agent Template Installer
 Installs patterns and templates into target projects
 """
 
-import os
 import sys
 import shutil
 import argparse
 from pathlib import Path
-import json
 
 
 class TemplateInstaller:
@@ -208,7 +206,7 @@ class TemplateInstaller:
                 link_path.symlink_to(source_name)
             except OSError:
                 # If symlinks aren't supported, create a copy instead
-                print(f"    Note: Symlinks not supported, creating copy instead")
+                print("    Note: Symlinks not supported, creating copy instead")
                 source_path = self.target / source_name
                 if source_path.exists():
                     shutil.copy2(source_path, link_path)

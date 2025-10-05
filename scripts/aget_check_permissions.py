@@ -10,7 +10,6 @@ This script verifies that all files in the template have correct permissions:
 - Documentation/config files: 644
 """
 
-import os
 import stat
 import sys
 from pathlib import Path

@@ -6,8 +6,6 @@ import unittest
 from pathlib import Path
 import tempfile
 import shutil
-import json
-from unittest.mock import Mock, patch, MagicMock
 
 from aget.quality import QualityChecker
 

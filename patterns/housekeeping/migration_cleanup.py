@@ -6,7 +6,6 @@ Part of EP-11: Migration Artifact Cleanup Pattern
 Detects and archives migration artifacts left over from transitions.
 """
 
-import os
 import shutil
 from pathlib import Path
 from datetime import datetime

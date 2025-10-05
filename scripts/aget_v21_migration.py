@@ -8,11 +8,8 @@ Usage:
     python3 scripts/aget_v21_migration.py [--check|--apply]
 """
 
-import os
-import sys
-import shutil
 from pathlib import Path
-from typing import List, Tuple
+from typing import List
 
 class V21Migration:
     """Handle migration to v2.1 ownership standard."""
@@ -91,10 +88,10 @@ class V21Migration:
         ownership_doc = self.aget_dir / "OWNERSHIP.md"
         if not ownership_doc.exists():
             if dry_run:
-                print(f"Would create: .aget/OWNERSHIP.md")
+                print("Would create: .aget/OWNERSHIP.md")
             else:
                 self.create_ownership_doc(ownership_doc)
-                print(f"✅ Created: .aget/OWNERSHIP.md")
+                print("✅ Created: .aget/OWNERSHIP.md")
 
         # 3. Update symlinks if needed
         # (Already handled by existing symlinks)

@@ -10,12 +10,10 @@ Validates:
 - Pattern compatibility
 """
 
-import os
 import sys
 import json
 import argparse
 from pathlib import Path
-from typing import Dict, List, Tuple, Optional
 import importlib.util
 import ast
 

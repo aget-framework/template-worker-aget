@@ -2,9 +2,8 @@
 Content merger for AGET migration - preserves custom content.
 """
 
-import re
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, Optional, Tuple
 
 
 class ContentMerger:

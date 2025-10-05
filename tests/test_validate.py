@@ -6,9 +6,8 @@ import unittest
 from pathlib import Path
 import tempfile
 import shutil
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import Mock, patch
 
-from unittest.mock import Mock
 
 # Create a mock ValidateCommand for testing
 class ValidateCommand:

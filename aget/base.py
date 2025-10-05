@@ -5,7 +5,7 @@ Foundation for all AGET v2 commands per ADR-004.
 
 import time
 from abc import ABC, abstractmethod
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from aget.shared.capabilities import Capabilities
 

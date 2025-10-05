@@ -9,8 +9,7 @@ import tempfile
 import shutil
 import json
 from datetime import datetime
-from unittest.mock import Mock, patch, MagicMock
-import subprocess
+from unittest.mock import Mock, patch
 
 from patterns.session.wake import apply_pattern as wake_pattern
 from patterns.session.wind_down import apply_pattern as wind_down_pattern

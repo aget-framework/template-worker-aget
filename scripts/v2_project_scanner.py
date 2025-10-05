@@ -6,7 +6,6 @@ Part of Sprint 001 / Gate 1.
 """
 
 import json
-import os
 import sys
 from datetime import datetime
 from pathlib import Path

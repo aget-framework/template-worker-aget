@@ -4,7 +4,6 @@ Session Protocol for CLI Agent Template
 Enhanced with state persistence and better session management
 """
 
-import os
 import sys
 import json
 import subprocess
@@ -248,7 +247,7 @@ def wind_down():
     session_file = date_dir / f"session_{datetime.now():%H%M}.md"
     with open(session_file, 'w') as f:
         f.write(f"# Session Notes - {datetime.now():%Y-%m-%d %H:%M}\n\n")
-        f.write(f"## Metadata\n")
+        f.write("## Metadata\n")
         f.write(f"- Duration: {state.get_session_duration()}\n")
         f.write(f"- Session #: {state.state['session_count']}\n")
         f.write(f"- Working directory: {Path.cwd()}\n")
@@ -256,11 +255,11 @@ def wind_down():
         f.write(f"- Tests run: {state.state['current_session']['tests_run']}\n")
 
         if state.state['current_session']['files_modified']:
-            f.write(f"\n## Files Modified\n")
+            f.write("\n## Files Modified\n")
             for file in state.state['current_session']['files_modified'][:10]:  # First 10
                 f.write(f"- {file}\n")
 
-        f.write(f"\n## Patterns Status\n")
+        f.write("\n## Patterns Status\n")
         patterns_dir = Path('patterns')
         if patterns_dir.exists():
             for pattern in sorted(patterns_dir.glob('*/*.py')):
@@ -303,7 +302,7 @@ def sign_off(force_push=False, status_only=False):
     if status_only:
         git_status = run_command("git status --short")
         unpushed = run_command("git log @{u}..HEAD --oneline 2>/dev/null")
-        print(f"📊 Status:")
+        print("📊 Status:")
         print(f"  • Uncommitted: {len(git_status.splitlines()) if git_status else 0} files")
         print(f"  • Unpushed: {len(unpushed.splitlines()) if unpushed else 0} commits")
         if config.get('default_branch'):
@@ -407,7 +406,7 @@ def main():
     """Main entry point"""
     if len(sys.argv) < 2:
         print(f"Usage: {sys.argv[0]} [wake|wind-down|sign-off|status] [options]")
-        print(f"       sign-off options: --force-push, --status")
+        print("       sign-off options: --force-push, --status")
         sys.exit(1)
 
     command = sys.argv[1]

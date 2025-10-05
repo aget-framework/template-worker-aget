@@ -4,12 +4,10 @@ Part of Gate 3 implementation for workspace→products promotion.
 """
 
 import ast
-import os
 import re
-import shutil
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List
 
 from aget.base import BaseCommand
 

@@ -10,7 +10,7 @@ and prepares them for public release as standalone products.
 import json
 import shutil
 from pathlib import Path
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from datetime import datetime
 
 
@@ -75,7 +75,7 @@ class OutputExtractor:
         """
         # Skip temp files
         if any(part.startswith(".") for part in file_path.parts):
-            if not file_path.name in [".gitignore", ".env.example"]:
+            if file_path.name not in [".gitignore", ".env.example"]:
                 return False
 
         # Skip tiny files
