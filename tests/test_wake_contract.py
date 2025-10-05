@@ -10,6 +10,8 @@ import json
 from pathlib import Path
 
 
+@pytest.mark.skipif(not Path(".aget/version.json").exists(),
+                    reason="Post-init contract test, skip for template context")
 def test_wake_protocol_reports_agent_name():
     """Wake protocol must report agent name from version.json (if present)."""
     version_file = Path(".aget/version.json")
@@ -24,6 +26,8 @@ def test_wake_protocol_reports_agent_name():
             assert isinstance(agent_name, str), "agent_name must be a string"
 
 
+@pytest.mark.skipif(not Path(".aget/version.json").exists(),
+                    reason="Post-init contract test, skip for template context")
 def test_wake_protocol_reports_version():
     """Wake protocol must report current AGET version."""
     version_file = Path(".aget/version.json")
@@ -38,6 +42,8 @@ def test_wake_protocol_reports_version():
         assert len(parts) == 3, f"Version format invalid: {version} (expected X.Y.Z)"
 
 
+@pytest.mark.skipif(not Path(".aget/version.json").exists(),
+                    reason="Post-init contract test, skip for template context")
 def test_wake_protocol_reports_capabilities():
     """Wake protocol must report agent capabilities (if present)."""
     version_file = Path(".aget/version.json")
@@ -51,6 +57,8 @@ def test_wake_protocol_reports_capabilities():
             assert isinstance(capabilities, dict), "capabilities must be a dictionary"
 
 
+@pytest.mark.skipif(not Path(".aget/version.json").exists(),
+                    reason="Post-init contract test, skip for template context")
 def test_wake_protocol_reports_domain():
     """Wake protocol must report agent domain for context (if present)."""
     version_file = Path(".aget/version.json")
