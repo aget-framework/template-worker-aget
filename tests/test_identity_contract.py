@@ -11,14 +11,13 @@ import json
 from pathlib import Path
 
 
-@pytest.mark.skipif(not Path(".aget/version.json").exists(),
-                    reason="Post-init contract test, skip for template context")
 def test_identity_consistency_version_json_vs_manifest():
     """Agent identity must be consistent across version.json and agent_manifest.yaml."""
     version_file = Path(".aget/version.json")
     manifest_file = Path(".aget/collaboration/agent_manifest.yaml")
 
-    assert version_file.exists(), "version.json not found"
+    if not version_file.exists():
+        pytest.skip("Post-init contract test, skip for template context")
 
     # Read version from version.json
     with open(version_file) as f:
@@ -39,12 +38,11 @@ def test_identity_consistency_version_json_vs_manifest():
                     break
 
 
-@pytest.mark.skipif(not Path(".aget/version.json").exists(),
-                    reason="Post-init contract test, skip for template context")
 def test_identity_no_conflation_with_directory_name():
     """Agent name in version.json must match directory name (identity = location)."""
     version_file = Path(".aget/version.json")
-    assert version_file.exists(), "version.json not found"
+    if not version_file.exists():
+        pytest.skip("Post-init contract test, skip for template context")
 
     with open(version_file) as f:
         data = json.load(f)
@@ -57,12 +55,11 @@ def test_identity_no_conflation_with_directory_name():
                 f"Identity conflation detected: agent_name='{agent_name}' but directory='{repo_dir}'"
 
 
-@pytest.mark.skipif(not Path(".aget/version.json").exists(),
-                    reason="Post-init contract test, skip for template context")
 def test_identity_persistence_across_invocations():
     """Agent identity fields must not change between invocations (stable identity)."""
     version_file = Path(".aget/version.json")
-    assert version_file.exists(), "version.json not found"
+    if not version_file.exists():
+        pytest.skip("Post-init contract test, skip for template context")
 
     with open(version_file) as f:
         data = json.load(f)
