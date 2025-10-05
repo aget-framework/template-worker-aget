@@ -2,13 +2,10 @@
 Enhanced tests for the installer with better coverage
 """
 
-import pytest
 import tempfile
-import shutil
 from pathlib import Path
 import sys
 import os
-import json
 
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

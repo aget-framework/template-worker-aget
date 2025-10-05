@@ -4,7 +4,7 @@ Future-ready architecture supporting subcommand expansion.
 """
 
 import sys
-from typing import List, Optional
+from typing import List
 
 from aget import __version__
 from aget.config import ConfigModule

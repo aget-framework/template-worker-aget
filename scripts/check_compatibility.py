@@ -31,7 +31,7 @@ def check_file(filepath):
         # Check for dict union operator
         if ' | ' in code and '.py' in str(filepath):
             for i, line in enumerate(code.splitlines(), 1):
-                if ' | ' in line and not '#' in line.split(' | ')[0]:
+                if ' | ' in line and '#' not in line.split(' | ')[0]:
                     # Might be dict union, warn
                     if 'dict' in line.lower() or '{' in line:
                         issues.append(f"{filepath}:{i} - Possible dict union | operator (Python 3.9+)")

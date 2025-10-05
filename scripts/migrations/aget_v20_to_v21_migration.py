@@ -6,14 +6,13 @@ Automates the upgrade from v2.0 to v2.1 with aget_ prefix convention
 Usage: python3 aget_v20_to_v21_migration.py [--dry-run] [--verbose]
 """
 
-import os
 import json
 import shutil
 import argparse
 import sys
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Tuple
+from typing import List, Tuple
 
 class V21Migrator:
     """Handles migration from AGET v2.0 to v2.1"""
@@ -286,7 +285,7 @@ class V21Migrator:
         else:
             print("✅ Migration completed successfully!")
 
-        print(f"\n📊 Summary:")
+        print("\n📊 Summary:")
         print(f"  - Patterns renamed: {len(renamed)}")
         print(f"  - Version updated: {'Yes' if not self.dry_run else 'Would update'}")
         print(f"  - Backup created: {'Yes' if not self.dry_run else 'Would create'}")

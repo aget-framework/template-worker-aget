@@ -4,10 +4,9 @@ Part of Gate 3 implementation for tracking agent evolution.
 """
 
 import json
-import os
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from aget.base import BaseCommand
 

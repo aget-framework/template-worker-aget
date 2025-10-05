@@ -8,7 +8,6 @@ Started: 2025-09-25
 This could graduate to AGET if successful, or remain a private QA tool.
 """
 
-import os
 import ast
 import sys
 from pathlib import Path

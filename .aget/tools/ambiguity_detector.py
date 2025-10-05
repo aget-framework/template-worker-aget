@@ -12,7 +12,7 @@ Experiment: Option C - Learning from Ambiguity
 import yaml
 import re
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List
 
 
 class AmbiguityDetector:
@@ -244,7 +244,7 @@ def test_detector():
         print(f"  Got: {flag_ids}")
 
         if flag_ids:
-            print(f"  Flags raised:")
+            print("  Flags raised:")
             for flag in flags:
                 print(f"    - {flag['pattern_id']}: {flag['pattern_name']} (confidence: {flag['confidence']:.2f})")
         print()

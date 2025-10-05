@@ -4,11 +4,10 @@ Sync Checker - Makes SYNC_WITH_AGET.md executable
 Validates that fundamental standards are actually shared with AGET.
 """
 
-import os
 import sys
 import hashlib
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import List
 
 # Define what MUST be synchronized (from SYNC_WITH_AGET.md)
 FUNDAMENTAL_FILES = {

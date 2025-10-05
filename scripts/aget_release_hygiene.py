@@ -13,7 +13,7 @@ import os
 import sys
 import shutil
 from pathlib import Path
-from typing import List, Tuple, Set
+from typing import List, Tuple
 
 class HygieneChecker:
     """Checks and fixes release hygiene issues"""

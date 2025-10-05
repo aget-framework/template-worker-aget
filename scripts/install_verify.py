@@ -4,10 +4,8 @@ Install verification script
 Tests that the installer works correctly in a temporary directory
 """
 
-import os
 import sys
 import tempfile
-import shutil
 import subprocess
 from pathlib import Path
 

@@ -137,7 +137,7 @@ class CleanupProtocol:
             print(f"\n✅ Cleaned {cleaned} items")
             result['status'] = 'cleaned'
         else:
-            print(f"\nℹ️ Run without --dry-run to clean these items")
+            print("\nℹ️ Run without --dry-run to clean these items")
             result['status'] = 'preview'
 
         return result

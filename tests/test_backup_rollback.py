@@ -59,16 +59,16 @@ def test_backup_rollback():
         rollback_result = rollback_cmd.execute(args=[backup1['backup_id']])
 
         if rollback_result['success']:
-            print(f"   Rollback: ✅")
+            print("   Rollback: ✅")
             print(f"   Files restored: {rollback_result['files_restored']}")
             print(f"   Performance: {rollback_result['execution_time']:.3f}s")
 
             # Verify content restored
             restored_content = agents_file.read_text()
             if restored_content == original_content:
-                print(f"   Content verification: ✅")
+                print("   Content verification: ✅")
             else:
-                print(f"   Content verification: ❌")
+                print("   Content verification: ❌")
         else:
             print(f"   Rollback: ❌ - {rollback_result.get('error')}")
 

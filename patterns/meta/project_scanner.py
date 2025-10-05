@@ -20,14 +20,12 @@ Options:
   --exit-zero      Always exit with 0 (for CI/CD compatibility)
 """
 
-import os
 import sys
 import json
 import argparse
-import subprocess
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 from enum import Enum
 
 
@@ -378,7 +376,7 @@ class ProjectScanner:
         print(f"├─ With AGENTS.md: {s['has_agents_md']}")
         print(f"└─ With AGET version: {s['has_aget_version']}")
         print()
-        print(f"Migration Status:")
+        print("Migration Status:")
         print(f"├─ Fully Migrated: {s['fully_migrated']}")
         print(f"├─ Partially Migrated: {s['partially_migrated']}")
         print(f"└─ Not Started: {s['not_started']}")
@@ -449,7 +447,7 @@ class ProjectScanner:
             lines.append(f"Project: {name}")
             lines.append(f"  Score: {project['score']}")
             lines.append(f"  Status: {project['migration_status'].value}")
-            lines.append(f"  Recommendations:")
+            lines.append("  Recommendations:")
             if project['patterns_missing']:
                 for pattern in project['patterns_missing']:
                     lines.append(f"    - Add {pattern}")

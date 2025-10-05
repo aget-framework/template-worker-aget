@@ -56,7 +56,7 @@ class PatternVersionBumper:
         # Validate pattern exists
         if pattern_name not in self.registry['patterns']:
             print(f"ERROR: Pattern not found: {pattern_name}")
-            print(f"Available patterns:")
+            print("Available patterns:")
             for p in sorted(self.registry['patterns'].keys()):
                 print(f"  - {p}")
             sys.exit(1)

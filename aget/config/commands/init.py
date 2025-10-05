@@ -3,7 +3,6 @@ Init Command - Creates AGENTS.md configuration
 Implements three-tier degradation pattern.
 """
 
-import os
 import subprocess
 from pathlib import Path
 from typing import Any, Dict, List

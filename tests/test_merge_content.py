@@ -3,7 +3,6 @@ Tests for the merge_content module.
 """
 
 import unittest
-from pathlib import Path
 from aget.config.commands.merge_content import ContentMerger
 
 

@@ -2,8 +2,6 @@
 Tests for session state management
 """
 
-import json
-import pytest
 import tempfile
 from pathlib import Path
 from datetime import datetime, timedelta

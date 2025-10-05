@@ -4,7 +4,6 @@ Housekeeping Protocol for CLI Agent Template
 Simplified version for the template repository
 """
 
-import os
 import sys
 import shutil
 import argparse
@@ -167,7 +166,6 @@ class SanityChecker:
         issues = []
 
         # Check Python
-        import sys
         version = sys.version.split()[0]
         major, minor = map(int, version.split('.')[:2])
         if major == 3 and minor >= 8:
@@ -180,10 +178,10 @@ class SanityChecker:
         import subprocess
         try:
             subprocess.run(['git', 'status'], capture_output=True, check=True)
-            print(f"  ✓ Git repository OK")
+            print("  ✓ Git repository OK")
         except:
             issues.append("Git not working")
-            print(f"  ✗ Git not working")
+            print("  ✗ Git not working")
 
         # Check critical files
         critical = ['AGENTS.md', 'README.md']
@@ -196,10 +194,10 @@ class SanityChecker:
 
         # Check pattern directories
         if Path('patterns').exists():
-            print(f"  ✓ Patterns directory present")
+            print("  ✓ Patterns directory present")
         else:
             issues.append("Missing patterns directory")
-            print(f"  ✗ Missing patterns directory")
+            print("  ✗ Missing patterns directory")
 
         # Status
         if not issues:

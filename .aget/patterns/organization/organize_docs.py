@@ -11,7 +11,6 @@ Usage:
     python3 organize_docs.py --rollback # Undo the last organization
 """
 
-import os
 import sys
 import json
 import shutil

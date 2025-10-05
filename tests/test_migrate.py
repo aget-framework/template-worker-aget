@@ -6,7 +6,6 @@ import unittest
 from pathlib import Path
 import tempfile
 import shutil
-from unittest.mock import Mock, patch, MagicMock, call
 
 # Create a mock MigrateCommand for testing
 class MigrateCommand:

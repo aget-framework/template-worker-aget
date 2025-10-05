@@ -3,8 +3,7 @@ Tests for the __main__ module - AGET CLI entry point.
 """
 
 import unittest
-from unittest.mock import Mock, patch, MagicMock
-import sys
+from unittest.mock import Mock, patch
 
 from aget.__main__ import AgetCLI, main
 from aget import __version__

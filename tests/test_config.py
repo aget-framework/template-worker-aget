@@ -3,8 +3,7 @@ Tests for the config module - Central configuration handler.
 """
 
 import unittest
-from unittest.mock import Mock, patch, MagicMock
-from io import StringIO
+from unittest.mock import Mock, patch
 
 from aget.config import ConfigModule
 

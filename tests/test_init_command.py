@@ -3,7 +3,6 @@
 
 import sys
 import tempfile
-import shutil
 from pathlib import Path
 
 sys.path.insert(0, '.')
@@ -45,7 +44,7 @@ def test_init_performance():
 
             # Check performance requirement
             if result.get('execution_time', 0) < 2.0:
-                print(f"  Performance: ✅ PASS (<2s requirement)")
+                print("  Performance: ✅ PASS (<2s requirement)")
             else:
                 print(f"  Performance: ❌ FAIL (>{2}s)")
 
@@ -56,11 +55,11 @@ def test_init_performance():
             # Verify files exist
             agents_file = test_path / "AGENTS.md"
             if agents_file.exists():
-                print(f"  AGENTS.md exists: ✅")
+                print("  AGENTS.md exists: ✅")
                 # Check content
                 content = agents_file.read_text()
                 if "test_project" in content:
-                    print(f"  Project name injected: ✅")
+                    print("  Project name injected: ✅")
 
 # Run test
 test_init_performance()
