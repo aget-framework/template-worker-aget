@@ -12,7 +12,7 @@ from pathlib import Path
 
 def test_wake_protocol_reports_agent_name():
     """Wake protocol must report agent name from version.json (if present)."""
-    version_file = Path(".aget/version.json")
+    version_file = Path(__file__).parent.parent / ".aget/version.json"
     assert version_file.exists(), "version.json not found"
 
     with open(version_file) as f:
@@ -26,7 +26,7 @@ def test_wake_protocol_reports_agent_name():
 
 def test_wake_protocol_reports_version():
     """Wake protocol must report current AGET version."""
-    version_file = Path(".aget/version.json")
+    version_file = Path(__file__).parent.parent / ".aget/version.json"
     assert version_file.exists(), "version.json not found"
 
     with open(version_file) as f:
@@ -40,7 +40,7 @@ def test_wake_protocol_reports_version():
 
 def test_wake_protocol_reports_capabilities():
     """Wake protocol must report agent capabilities (if present)."""
-    version_file = Path(".aget/version.json")
+    version_file = Path(__file__).parent.parent / ".aget/version.json"
     assert version_file.exists(), "version.json not found"
 
     with open(version_file) as f:
@@ -53,7 +53,7 @@ def test_wake_protocol_reports_capabilities():
 
 def test_wake_protocol_reports_domain():
     """Wake protocol must report agent domain for context (if present)."""
-    version_file = Path(".aget/version.json")
+    version_file = Path(__file__).parent.parent / ".aget/version.json"
     assert version_file.exists(), "version.json not found"
 
     with open(version_file) as f:

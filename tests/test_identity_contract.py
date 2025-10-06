@@ -13,8 +13,8 @@ from pathlib import Path
 
 def test_identity_consistency_version_json_vs_manifest():
     """Agent identity must be consistent across version.json and agent_manifest.yaml."""
-    version_file = Path(".aget/version.json")
-    manifest_file = Path(".aget/collaboration/agent_manifest.yaml")
+    version_file = Path(__file__).parent.parent / ".aget/version.json"
+    manifest_file = Path(__file__).parent.parent / ".aget/collaboration/agent_manifest.yaml"
 
     assert version_file.exists(), "version.json not found"
 
@@ -39,7 +39,7 @@ def test_identity_consistency_version_json_vs_manifest():
 
 def test_identity_no_conflation_with_directory_name():
     """Agent name in version.json must match directory name (identity = location)."""
-    version_file = Path(".aget/version.json")
+    version_file = Path(__file__).parent.parent / ".aget/version.json"
     assert version_file.exists(), "version.json not found"
 
     with open(version_file) as f:
@@ -48,14 +48,14 @@ def test_identity_no_conflation_with_directory_name():
         if "agent_name" in data:
             agent_name = data["agent_name"]
             # Get directory name
-            repo_dir = Path.cwd().name
+            repo_dir = Path(__file__).parent.parent.name
             assert agent_name == repo_dir, \
                 f"Identity conflation detected: agent_name='{agent_name}' but directory='{repo_dir}'"
 
 
 def test_identity_persistence_across_invocations():
     """Agent identity fields must not change between invocations (stable identity)."""
-    version_file = Path(".aget/version.json")
+    version_file = Path(__file__).parent.parent / ".aget/version.json"
     assert version_file.exists(), "version.json not found"
 
     with open(version_file) as f:
