@@ -1,6 +1,46 @@
 # Agent Configuration - AGET CLI Agent Template
 
-@aget-version: 2.4.0
+@aget-version: 2.6.0
+
+## Agent Compatibility
+This configuration follows the AGENTS.md open-source standard for universal agent configuration.
+Works with Claude Code, Cursor, Aider, Windsurf, and other CLI coding agents.
+**Note**: CLAUDE.md is a symlink to this file for backward compatibility.
+
+## Framework Positioning
+
+**AGET is a "Configuration & Lifecycle Management System for CLI-Based Human-AI Collaborative Coding"**
+
+AGET occupies a unique niche in the agent framework landscape:
+- **Not** an autonomous agent runtime (LangChain, MetaGPT, AutoGPT)
+- **Not** a production ALM platform (AgentOps, Salesforce ALM)
+- **Instead**: Human-supervised fleet management with organizational memory and version progression
+
+**Differentiators**:
+- Universal CLI compatibility (works across Claude Code, Cursor, Aider, Windsurf)
+- Contract testing and version compliance (v2.6.0)
+- Shared learning repository (.aget/evolution/)
+- Lightweight, zero-infrastructure (markdown + git)
+- Human-centric governance (gated releases, evidence-based planning)
+
+See: L143_aget_framework_landscape_positioning.md for full analysis
+
+## Configuration Size Management (v2.6.0)
+
+**Policy**: AGENTS.md must remain under 40,000 characters to ensure reliable Claude Code processing.
+
+**Validation**:
+```bash
+# Check configuration size
+wc -c AGENTS.md
+# Should show: < 40000
+```
+
+**Enforcement**: Contract test `test_configuration_size.py` validates this requirement.
+
+**Why**: Large configurations reduce context window availability and can cause processing issues. Keep configuration concise, move detailed documentation to `.aget/docs/`.
+
+**Pattern**: L146_configuration_size_management.md
 
 ## 🚨 CRITICAL: INITIALIZATION PROCEDURE (REQUIRED)
 
@@ -23,9 +63,18 @@
 Make CLI coding agents better collaborators through conversational command patterns and clean separation of framework vs project concerns.
 
 ### Current Version
-- **v2.4.0 "Clarity"** (Naming conventions and organizational structure)
-- **Released**: October 3, 2025
+- **v2.6.0 "Governance"** (Configuration management and framework positioning)
+- **Released**: October 11, 2025
 - **Coverage Target**: >80% for critical patterns
+
+### v2.6.0 Features - Configuration & Framework
+- **Configuration Size Management**: 40k character limit with contract test validation (L146)
+- **Framework Positioning**: Clear differentiation from autonomous runtimes and ALM platforms (L143)
+- **Enhanced Documentation**: Agent compatibility section, framework positioning
+
+### v2.5.0 Features (Previous)
+- Contract Testing Framework, Session Metadata Standard
+- Identity Protocol, Collaboration Patterns
 
 ### v2.4.0 Features - Naming Conventions
 - **Suffix Signaling**: `-AGET` (action-taking) vs `-aget` (information-only)

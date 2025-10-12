@@ -1,6 +1,7 @@
 {
-  "aget_version": "2.5.0",
+  "aget_version": "2.6.0",
   "created": "2025-09-21",
+  "migrated_to_v2.6.0": "2025-10-11",
   "template": "agent",
   "tier": "basic",
   "agent_name": "template-worker-aget",
@@ -36,5 +37,5 @@
     ],
     "deprecated": []
   },
-  "notes": "v2.5.0 Validation Template - Contract tests for wake/identity protocols, validation framework for agent compliance. Includes v2.4.0 naming conventions and organizational structure."
+  "notes": "v2.6.0 Worker Template - Configuration size management (40k limit), framework positioning, contract test validation. Universal CLI compatibility with governance patterns for fleet management."
 }
