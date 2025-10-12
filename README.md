@@ -4,7 +4,7 @@
 
 Transform any project into an AI agent workspace where your coding assistant discovers patterns and evolves capabilities through interaction. Works with Claude Code, Cursor, Aider, Windsurf, and other AI coding assistants.
 
-**Current Version**: v2.5.0 "Validation"
+**Current Version**: v2.6.0 "Governance"
 
 ---
 
@@ -37,11 +37,13 @@ cd my-custom-AGET
 ### 2. Open with Your AI Assistant
 
 ```bash
-# Claude Code (primary development)
+# Claude Code (primary development - conversational interface)
 claude .
 
 # Also works with: Cursor, Aider, Windsurf, and other CLI agents
 ```
+
+**Note**: Claude Code provides a conversational interface where you interact naturally - no command memorization needed.
 
 ### 3. Start with Natural Language
 
@@ -312,10 +314,10 @@ Aget is not a faster way to type commands. It's a framework for AI-human collabo
 **Template**: [aget-worker-template](https://github.com/aget-framework/aget-worker-template)
 **Hub** (issues, coordination): [aget-aget](https://github.com/aget-framework/aget)
 
-**Version**: v2.5.0 "Validation"
-- **New in v2.5.0**: Contract tests for wake/identity protocols, validation framework
-- Naming conventions established (v2.4.0)
-- Organizational grouping (v2.4.0: aget_group)
+**Version**: v2.6.0 "Governance"
+- **New in v2.6.0**: Configuration size management (40k limit), framework positioning, contract test validation
+- **v2.5.0**: Contract tests for wake/identity protocols, validation framework
+- **v2.4.0**: Naming conventions established, organizational grouping (aget_group)
 - Privacy-first architecture foundation
 
 ---
