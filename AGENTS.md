@@ -1,6 +1,6 @@
 # Agent Configuration - AGET CLI Agent Template
 
-@aget-version: 2.6.0
+@aget-version: 2.7.0
 
 ## Agent Compatibility
 This configuration follows the AGENTS.md open-source standard for universal agent configuration.
@@ -42,6 +42,41 @@ wc -c AGENTS.md
 
 **Pattern**: L146_configuration_size_management.md
 
+## Portfolio Configuration (v2.7.0)
+
+**Purpose**: Organize agents by sensitivity level for appropriate handling and governance.
+
+**Portfolio Field** in `.aget/version.json`:
+```json
+{
+  "portfolio": "main"  // or "example", "legalon", null
+}
+```
+
+**Classifications**:
+- **main** (private): Standard agents with general-purpose capabilities
+- **example** (very_personal): Personal/confidential agents with sensitive context
+- **legalon** (confidential): Domain-specific agents with proprietary data
+- **null**: Template or unassigned agent
+
+**When to Assign Portfolio**:
+- During agent creation from template
+- Based on data sensitivity and access requirements
+- Coordinated with supervisor for fleet organization
+
+**Portfolio-Specific Behaviors**:
+- Security hooks enforce portfolio boundaries (no cross-contamination)
+- Issue routing respects portfolio classification
+- Learning propagation filtered by sensitivity level
+
+**Example**:
+```bash
+# After cloning template
+vim .aget/version.json  # Set "portfolio": "main"
+```
+
+**Validation**: Contract tests verify portfolio field exists and is valid.
+
 ## 🚨 CRITICAL: INITIALIZATION PROCEDURE (REQUIRED)
 
 **You MUST follow these steps IMMEDIATELY:**
@@ -63,14 +98,21 @@ wc -c AGENTS.md
 Make CLI coding agents better collaborators through conversational command patterns and clean separation of framework vs project concerns.
 
 ### Current Version
-- **v2.6.0 "Governance"** (Configuration management and framework positioning)
-- **Released**: October 11, 2025
+- **v2.7.0 "Portfolio Governance"** (Multi-portfolio organization and fleet management)
+- **Released**: October 13, 2025
 - **Coverage Target**: >80% for critical patterns
 
-### v2.6.0 Features - Configuration & Framework
-- **Configuration Size Management**: 40k character limit with contract test validation (L146)
-- **Framework Positioning**: Clear differentiation from autonomous runtimes and ALM platforms (L143)
-- **Enhanced Documentation**: Agent compatibility section, framework positioning
+### v2.7.0 Features - Portfolio & Fleet Management
+- **Portfolio Governance**: Multi-portfolio classification (EXAMPLE/LEGALON/Main) with sensitivity levels
+- **Multi-Tier Issue Routing**: Tier 1/2/3 routing based on severity and agent ownership
+- **Learning Discovery**: 133 learnings indexed with <30s search time
+- **Security Hooks**: Pre-commit checks for private agent leaks and credential exposure
+- **HTML Specification Generation**: YAML → styled HTML companions for stakeholder review
+
+### v2.6.0 Features (Previous)
+- Configuration Size Management (40k limit)
+- Framework Positioning (L143)
+- Enhanced Documentation
 
 ### v2.5.0 Features (Previous)
 - Contract Testing Framework, Session Metadata Standard
