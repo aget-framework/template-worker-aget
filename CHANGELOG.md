@@ -5,6 +5,121 @@ All notable changes to AGET will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.0] - 2025-10-13 - "Portfolio Governance"
+
+### Added
+- **Portfolio Governance System**:
+  - `.aget/portfolios/` directory for portfolio manifests
+  - Portfolio field in version.json for organizational grouping
+  - Classification levels (very_personal, confidential, private, public)
+  - Portfolio-aware operations and security boundaries
+
+- **Organizational Memory Patterns**:
+  - Enhanced learning document structure (L51)
+  - Standardized session metadata (v1.0)
+  - Cross-agent knowledge sharing protocols
+
+- **Learning Discovery Framework**:
+  - Systematic learning capture and validation
+  - Learning reference validation tools
+  - Evolution document templates
+
+### Changed
+- Enhanced wake protocol with portfolio awareness
+- Updated identity protocol to include portfolio field
+- Improved session documentation requirements
+
+### Documentation
+- Portfolio manifests guide
+- Learning document standard (v1.0)
+- Session metadata standard (v1.0)
+
+### Compatibility
+- Backward compatible with v2.6
+- New portfolio field optional (defaults to null)
+- Existing agents work without portfolio assignment
+
+## [2.6.0] - 2025-10-11 - "Configuration Management"
+
+### Added
+- **Configuration Size Management**:
+  - 40,000 character limit for AGENTS.md (L146)
+  - Size monitoring tools and warnings
+  - Content extraction strategies for large configs
+
+- **Framework Positioning**:
+  - Clarified AGET vs autonomous agent frameworks
+  - Updated positioning documentation
+  - Landscape analysis (L143)
+
+- **Contract Test Validation**:
+  - Enhanced contract test suite
+  - Validation for configuration compliance
+  - Automated testing improvements
+
+### Documentation
+- Configuration size management guide
+- Framework positioning analysis
+- Best practices for large configurations
+
+### Compatibility
+- Fully backward compatible with v2.5
+- No breaking changes
+
+## [2.5.0] - 2025-10-06 - "Validation"
+
+### Added
+- **Contract Testing Framework**:
+  - 7 core contract tests for wake/identity protocols
+  - Automated validation of agent configuration
+  - Test suite in tests/ directory
+
+- **Identity Protocol**:
+  - Standardized agent_name field (must match directory)
+  - Instance type declaration (AGET vs aget)
+  - Domain field for specialization
+
+- **Validation Framework**:
+  - Version compliance checking
+  - Configuration consistency validation
+  - Deployment verification standards (L93)
+
+### Documentation
+- Testing guide (tests/README.md)
+- Contract test documentation
+- Identity protocol standards
+
+### Compatibility
+- Backward compatible with v2.4
+- All new agents must pass contract tests (v2.5.0 version floor)
+
+## [2.4.0] - 2025-10-03 - "Naming Conventions"
+
+### Added
+- **Naming Convention Standard**:
+  - Suffix-based capability signaling (-AGET vs -aget)
+  - Visual warning for action-taking agents
+  - Template naming convention (template-{role}-aget)
+
+- **Organizational Grouping**:
+  - aget_group field in version.json
+  - Organization migration to aget-framework
+  - Repository standardization
+
+### Changed
+- Repository names follow template-{role}-aget pattern
+- Template organization moved to aget-framework
+- Detection logic supports case-insensitive suffix (L47)
+
+### Documentation
+- Naming convention guide (L35)
+- Organization structure documentation
+- Migration guide from v2.3
+
+### Compatibility
+- Backward compatible with v2.3
+- Old repository URLs redirect automatically
+
 ## [2.3.0] - 2025-10-02 - "Collaboration"
 
 ### Added
