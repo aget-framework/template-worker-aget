@@ -4,7 +4,7 @@
 
 Transform any project into an AI agent workspace where your coding assistant discovers patterns and evolves capabilities through interaction. Works with Claude Code, Cursor, Aider, Windsurf, and other AI coding assistants.
 
-**Current Version**: v2.6.0 "Governance"
+**Current Version**: v2.7.0 "Portfolio Governance"
 
 ---
 
@@ -314,8 +314,9 @@ Aget is not a faster way to type commands. It's a framework for AI-human collabo
 **Template**: [aget-worker-template](https://github.com/aget-framework/aget-worker-template)
 **Hub** (issues, coordination): [aget-aget](https://github.com/aget-framework/aget)
 
-**Version**: v2.6.0 "Governance"
-- **New in v2.6.0**: Configuration size management (40k limit), framework positioning, contract test validation
+**Version**: v2.7.0 "Portfolio Governance"
+- **New in v2.7.0**: Portfolio governance system, organizational memory patterns, learning discovery framework
+- **v2.6.0**: Configuration size management (40k limit), framework positioning, contract test validation
 - **v2.5.0**: Contract tests for wake/identity protocols, validation framework
 - **v2.4.0**: Naming conventions established, organizational grouping (aget_group)
 - Privacy-first architecture foundation
