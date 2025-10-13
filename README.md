@@ -30,7 +30,7 @@ You never type `aget` commands. Your AI reads the patterns and uses them based o
 # -AGET suffix = action-taking (can modify systems) ⚠️
 # -aget suffix = information-only (read-only) ✅
 
-git clone https://github.com/aget-framework/aget-worker-template.git my-custom-AGET
+git clone https://github.com/aget-framework/template-worker-aget.git my-custom-AGET
 cd my-custom-AGET
 ```
 
@@ -237,7 +237,7 @@ Define capabilities before building:
 ### Example 1: Data Analysis Agent
 
 ```bash
-git clone https://github.com/aget-framework/aget-worker-template.git my-spotify-analyst-aget
+git clone https://github.com/aget-framework/template-worker-aget.git my-spotify-analyst-aget
 cd my-spotify-analyst-aget
 claude .
 ```
@@ -268,7 +268,7 @@ AI: [Commits analysis code, creates session notes, reports: "Session saved. Anal
 ### Example 2: GitHub Management Agent
 
 ```bash
-git clone https://github.com/aget-framework/aget-worker-template.git my-github-AGET
+git clone https://github.com/aget-framework/template-worker-aget.git my-github-AGET
 cd my-github-AGET
 claude .
 ```
@@ -311,7 +311,7 @@ Aget is not a faster way to type commands. It's a framework for AI-human collabo
 ## Framework Information
 
 **Organization**: [aget-framework](https://github.com/aget-framework)
-**Template**: [aget-worker-template](https://github.com/aget-framework/aget-worker-template)
+**Template**: [template-worker-aget](https://github.com/aget-framework/template-worker-aget)
 **Hub** (issues, coordination): [aget-aget](https://github.com/aget-framework/aget)
 
 **Version**: v2.7.0 "Portfolio Governance"
@@ -327,7 +327,7 @@ Aget is not a faster way to type commands. It's a framework for AI-human collabo
 
 If you have existing agents on v2.3:
 - See [v2.4 Migration Guide](https://github.com/aget-framework/aget/blob/main/docs/v2.4_MIGRATION_GUIDE.md)
-- Old URL redirects: `aget-framework/aget` → `aget-framework/aget-worker-template`
+- Old URL redirects: `aget-framework/aget` → `aget-framework/template-worker-aget`
 
 ---
 
