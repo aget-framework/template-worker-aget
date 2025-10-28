@@ -130,6 +130,74 @@ Make CLI coding agents better collaborators through conversational command patte
 - Pattern Versioning, Session Metadata, Specification Framework
 - Collaboration Tools, Intelligence Components
 
+## Session Management Protocols
+
+### Wake Up Protocol
+When user says "wake up" or "hey":
+- Read `.aget/version.json` (agent identity)
+- Read AGENTS.md (this file)
+- **Apply what you just read** - don't ignore configuration guidance
+- Check current directory and git status
+- Display: Agent-specific context + available capabilities
+
+**Output format**:
+```
+[Agent Name] v{version} (Worker)
+Domain: {domain}
+
+📍 Location: {pwd}
+📊 Git: {status}
+
+🎯 Key Capabilities:
+• [List your agent's specific capabilities]
+
+Ready for instructions.
+```
+
+### Study Up Protocol
+When user says "study up" or "study":
+- **Primary**: Run `python3 patterns/documentation/smart_docs_briefing.py` (if exists)
+- **Fallback**: Execute deep context loading sequence
+- Reads: Current documentation, recent sessions, checkpoints, work artifacts
+- **Duration**: ~30 seconds (investment in session quality)
+- **Purpose**: Deep orientation before complex work
+
+**Fallback sequence** (if smart tooling unavailable):
+1. Read `.aget/version.json` → Extract version, role, domain
+2. Read AGENTS.md sections → Focus: Project Context, Current Phase
+3. Read most recent session → `ls -t sessions/*.md 2>/dev/null | head -1`
+4. Read most recent checkpoint (if exists) → `ls -t .aget/checkpoints/*.md 2>/dev/null | head -1`
+5. Check git status → Identify modified files, untracked artifacts
+6. Synthesize and present context
+
+**Output format**:
+```
+✅ Context loaded.
+
+Recent Work: [last session summary or recent commits]
+Current Phase: [project state or current focus]
+Working Tree: [modified/untracked files summary]
+Pending: [checkpoints, blockers, or "None"]
+
+Ready for work.
+```
+
+**Two-tier orientation**:
+- **"wake up"** → Quick identity check (~2 seconds)
+- **"study up"** → Deep context loading (~30 seconds)
+
+### Wind Down Protocol
+When user says "wind down" or "save work":
+- Commit changes with descriptive message
+- Create session notes in `sessions/SESSION_YYYY-MM-DD.md` (if session metadata enabled)
+- Create checkpoint if needed in `.aget/checkpoints/CHECKPOINT_*.md`
+- Show completion
+
+### Sign Off Protocol
+When user says "sign off" or "all done":
+- Quick save and exit
+- No questions
+
 ## AGET-Specific Development Commands
 
 ### Pattern Development
