@@ -14,14 +14,14 @@ from pathlib import Path
 
 def test_claude_md_exists():
     """CLAUDE.md file must exist in root directory."""
-    claude_md = Path("CLAUDE.md")
+    claude_md = Path(__file__).parent.parent / "CLAUDE.md"
     assert claude_md.exists(), \
         "CLAUDE.md not found. Run: ln -s AGENTS.md CLAUDE.md"
 
 
 def test_claude_md_is_symlink():
     """CLAUDE.md must be a symlink, not a regular file."""
-    claude_md = Path("CLAUDE.md")
+    claude_md = Path(__file__).parent.parent / "CLAUDE.md"
 
     if not claude_md.exists():
         pytest.skip("CLAUDE.md does not exist")
@@ -33,7 +33,7 @@ def test_claude_md_is_symlink():
 
 def test_claude_md_points_to_agents_md():
     """CLAUDE.md symlink must point to AGENTS.md."""
-    claude_md = Path("CLAUDE.md")
+    claude_md = Path(__file__).parent.parent / "CLAUDE.md"
 
     if not claude_md.exists():
         pytest.skip("CLAUDE.md does not exist")
@@ -49,14 +49,14 @@ def test_claude_md_points_to_agents_md():
 
 def test_agents_md_exists():
     """AGENTS.md must exist (target of CLAUDE.md symlink)."""
-    agents_md = Path("AGENTS.md")
+    agents_md = Path(__file__).parent.parent / "AGENTS.md"
     assert agents_md.exists(), \
         "AGENTS.md not found. Cannot create CLAUDE.md symlink without target."
 
 
 def test_symlink_not_broken():
     """CLAUDE.md symlink must not be broken (target must exist)."""
-    claude_md = Path("CLAUDE.md")
+    claude_md = Path(__file__).parent.parent / "CLAUDE.md"
 
     if not claude_md.exists():
         pytest.skip("CLAUDE.md does not exist")
@@ -75,7 +75,7 @@ def test_symlink_not_broken():
 
 def test_backward_compatibility_note():
     """AGENTS.md should mention CLAUDE.md symlink for backward compatibility."""
-    agents_md = Path("AGENTS.md")
+    agents_md = Path(__file__).parent.parent / "AGENTS.md"
 
     if not agents_md.exists():
         pytest.skip("AGENTS.md does not exist")
