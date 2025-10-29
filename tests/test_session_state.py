@@ -105,17 +105,19 @@ class TestOrganizeSessionNotes:
     def test_create_session_dir(self):
         """Test SESSION_NOTES directory creation"""
         with tempfile.TemporaryDirectory() as tmpdir:
-            os.chdir(tmpdir)
+            tmpdir_path = Path(tmpdir)
+            os.chdir(tmpdir_path)
             organize_session_notes()
-            assert Path('SESSION_NOTES').exists()
+            assert (tmpdir_path / 'SESSION_NOTES').exists()
 
     def test_organize_flat_files(self):
         """Test organizing flat session files into dated directories"""
         with tempfile.TemporaryDirectory() as tmpdir:
-            os.chdir(tmpdir)
+            tmpdir_path = Path(tmpdir)
+            os.chdir(tmpdir_path)
 
             # Create SESSION_NOTES with flat files
-            session_dir = Path('SESSION_NOTES')
+            session_dir = tmpdir_path / 'SESSION_NOTES'
             session_dir.mkdir()
 
             # Use recent dates that won't be archived (within last 30 days)
@@ -142,9 +144,10 @@ class TestOrganizeSessionNotes:
     def test_archive_old_sessions(self):
         """Test archiving sessions older than 30 days"""
         with tempfile.TemporaryDirectory() as tmpdir:
-            os.chdir(tmpdir)
+            tmpdir_path = Path(tmpdir)
+            os.chdir(tmpdir_path)
 
-            session_dir = Path('SESSION_NOTES')
+            session_dir = tmpdir_path / 'SESSION_NOTES'
             session_dir.mkdir()
 
             # Create old dated directory (>30 days)
@@ -170,9 +173,10 @@ class TestOrganizeSessionNotes:
     def test_skip_invalid_filenames(self):
         """Test handling of files with invalid names"""
         with tempfile.TemporaryDirectory() as tmpdir:
-            os.chdir(tmpdir)
+            tmpdir_path = Path(tmpdir)
+            os.chdir(tmpdir_path)
 
-            session_dir = Path('SESSION_NOTES')
+            session_dir = tmpdir_path / 'SESSION_NOTES'
             session_dir.mkdir()
 
             # Create files with invalid names
