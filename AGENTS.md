@@ -98,11 +98,19 @@ vim .aget/version.json  # Set "portfolio": "main"
 Make CLI coding agents better collaborators through conversational command patterns and clean separation of framework vs project concerns.
 
 ### Current Version
-- **v2.7.0 "Portfolio Governance"** (Multi-portfolio organization and fleet management)
-- **Released**: October 13, 2025
+- **v2.8.0 "Friction Reduction"** (Making AGET easier to improve and use)
+- **Released**: November 8, 2025
 - **Coverage Target**: >80% for critical patterns
 
-### v2.7.0 Features - Portfolio & Fleet Management
+### v2.8.0 Features - Friction Reduction
+- **Interactive Issue Filing**: `make issue` command for 67% faster issue creation (90s → 30s)
+- **Enhancement Filing Protocol**: Standardized workflow for filing framework improvements
+- **Planning Framework**: Decision tree, OKR patterns, and 5 planning templates (Enhancement/Gate/Project/Checkpoint/Critique)
+- **Learning Registry**: Complete L-series index (212 documents) with category navigation
+- **Naming Conventions**: V{X}.{Y} for framework work, DATE format for domain work
+- **Framework Consolidation**: `.aget/docs/releases/`, `.aget/migrations/` structure for organized framework evolution
+
+### v2.7.0 Features (Previous) - Portfolio & Fleet Management
 - **Portfolio Governance**: Multi-portfolio classification (EXAMPLE/LEGALON/Main) with sensitivity levels
 - **Multi-Tier Issue Routing**: Tier 1/2/3 routing based on severity and agent ownership
 - **Learning Discovery**: 133 learnings indexed with <30s search time
@@ -200,6 +208,16 @@ When user says "sign off" or "all done":
 
 ## AGET-Specific Development Commands
 
+### Issue Filing (v2.8.0)
+When you need to file a GitHub issue:
+1. **Interactive workflow**: `make issue` (67% faster - 30s vs 90s)
+   - Prompts for title, description, severity, type
+   - Optional learning reference (e.g., L100)
+   - Confirmation before creation
+2. **Direct CLI**: `python3 .aget/patterns/github/create_issue.py --title "..." --body "..." --type improvement --severity medium`
+
+**Enhancement Filing Protocol**: See `.aget/docs/ENHANCEMENT_FILING_PROTOCOL_v1.0.md` for standardized workflow
+
 ### Pattern Development
 When user says "new pattern [category]/[name]":
 1. Create `patterns/[category]/[name].py` with apply_pattern() function
@@ -274,6 +292,17 @@ When user says "validate patterns":
 4. Verify pattern registry is complete
 
 ## Development Standards
+
+### Planning & Workflow (v2.8.0)
+**Planning Framework**: See `.aget/docs/PLANNING_GUIDE_v1.0.md` for comprehensive planning guidance
+- **Decision tree**: Choose right approach (Enhancement/Gate/Project/Checkpoint/Critique)
+- **OKR patterns**: L274 (Project Initiation) and L275 (Multi-Gate Execution)
+- **Templates**: Use `.aget/templates/` for structured planning (5 templates available)
+
+**Naming Conventions** (v2.8.0):
+- **Framework work**: Use V{X}.{Y} format (e.g., `V2.8_PROJECT_PLAN.md`)
+- **Domain work**: Use DATE format (e.g., `2025-11-08_analysis.md`, `SESSION_2025-11-08_notes.md`)
+- **Guide**: See `.aget/docs/WORK_TYPE_NAMING_CONVENTION.md`
 
 ### Code Quality Requirements
 - **Test Coverage**: Minimum 80% overall, 85% for critical patterns
