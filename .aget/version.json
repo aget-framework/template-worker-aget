@@ -1,7 +1,7 @@
 {
-  "aget_version": "2.10.0",
+  "aget_version": "2.11.0",
   "created": "2025-09-21",
-  "updated": "2025-12-13",
+  "updated": "2025-12-24",
   "migrated_to_v2.6.0": "2025-10-11",
   "migrated_to_v2.7.0": "2025-10-13",
   "migrated_to_v2.8.0": "2025-11-08",
@@ -43,5 +43,8 @@
     ],
     "deprecated": []
   },
-  "notes": "v2.8.0 Worker Template - Friction Reduction: Interactive issue filing (make issue), enhancement filing protocol, planning framework (OKR/Multi-Gate), learning registry (212 L-series), naming conventions (V{X}.{Y} vs DATE), framework consolidation (.aget/docs/releases/)."
+  "notes": "v2.8.0 Worker Template - Friction Reduction: Interactive issue filing (make issue), enhancement filing protocol, planning framework (OKR/Multi-Gate), learning registry (212 L-series), naming conventions (V{X}.{Y} vs DATE), framework consolidation (.aget/docs/releases/).",
+  "migration_history": [
+    "v2.10.0 -> v2.11.0: 2025-12-24 (Memory Architecture + L352 Traceability + Version Migration)"
+  ]
 }
