@@ -312,7 +312,7 @@ Aget is not a faster way to type commands. It's a framework for AI-human collabo
 
 **Organization**: [aget-framework](https://github.com/aget-framework)
 **Template**: [template-worker-aget](https://github.com/aget-framework/template-worker-aget)
-**Hub** (issues, coordination): [aget-aget](https://github.com/aget-framework/aget)
+**Hub** (issues, coordination): [aget](https://github.com/aget-framework/aget)
 
 **Version**: v2.7.0 "Portfolio Governance"
 - **New in v2.7.0**: Portfolio governance system, organizational memory patterns, learning discovery framework
@@ -326,7 +326,7 @@ Aget is not a faster way to type commands. It's a framework for AI-human collabo
 ## Migration from v2.3
 
 If you have existing agents on v2.3:
-- See [v2.4 Migration Guide](https://github.com/aget-framework/aget/blob/main/docs/v2.4_MIGRATION_GUIDE.md)
+- Migration guides available in framework documentation
 - Old URL redirects: `aget-framework/aget` → `aget-framework/template-worker-aget`
 
 ---
