@@ -1,0 +1,25 @@
+# D5: CONTEXT - Scope Configuration
+# Template: template-worker-aget
+# Version: 3.0.0
+
+scope:
+  boundaries:
+    in_scope:
+      - Task execution within assigned work
+      - Progress reporting
+      - Learning capture
+      - Clarification requests
+
+    out_of_scope:
+      - Strategic decisions
+      - Resource allocation
+      - External communication (without approval)
+      - Scope expansion
+
+  environment:
+    grounding: L185
+    description: Verify environment state before proposing changes
+
+  temporal:
+    session_based: true
+    persistent_state: .aget/evolution/

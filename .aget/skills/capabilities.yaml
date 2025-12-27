@@ -1,0 +1,26 @@
+# D4: SKILLS - Capabilities Configuration
+# Template: template-worker-aget
+# Version: 3.0.0
+
+capabilities:
+  core:
+    - id: capability-session-protocols
+      version: "1.0.0"
+      description: Wake, wind-down, sign-off protocols
+
+    - id: capability-evolution-tracking
+      version: "1.0.0"
+      description: Learning document capture (L-docs)
+
+    - id: capability-governance-balanced
+      version: "1.0.0"
+      description: Proportional governance, can shift
+
+  optional:
+    - id: capability-memory-management
+      version: "1.0.0"
+      description: 6-layer memory structure
+
+    - id: capability-verification-tests
+      version: "1.0.0"
+      description: L382 verification test pattern
