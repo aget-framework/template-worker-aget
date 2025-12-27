@@ -1,0 +1,21 @@
+# D5: CONTEXT - Relationships Configuration
+# Template: template-worker-aget
+# Version: 3.0.0
+
+relationships:
+  supervisor:
+    reference: null  # Template - instantiated agents set this
+    type: governance
+    interaction: Receives work assignments, reports progress
+
+  peers:
+    - type: Worker
+      interaction: Coordinate on shared tasks
+    - type: Advisor
+      interaction: Request domain guidance
+
+  subordinates: []  # Workers don't supervise
+
+  external:
+    - type: User
+      interaction: Primary principal, receives outputs
