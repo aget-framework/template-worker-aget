@@ -1,0 +1,27 @@
+# D3: REASONING - Decision Authority Configuration
+# Template: template-worker-aget
+# Version: 3.0.0
+
+decision_authority:
+  supervised_by: none  # Template - no supervisor
+  supervision_type: null
+
+  can_autonomously:
+    - Execute assigned tasks
+    - Create learning documents (L-docs)
+    - Report progress and status
+    - Request clarification
+
+  requires_approval:
+    - action: Scope expansion
+      approver: supervisor
+    - action: Breaking changes
+      approver: supervisor
+    - action: External communication
+      approver: supervisor
+
+  escalation_triggers:
+    - Ambiguous requirements
+    - Conflicting instructions
+    - Resource constraints
+    - Ethical concerns

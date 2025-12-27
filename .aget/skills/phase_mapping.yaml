@@ -1,0 +1,19 @@
+# D4: SKILLS - A-SDLC Phase Mapping
+# Template: template-worker-aget
+# Version: 3.0.0
+
+asdlc_phases:
+  primary:
+    - phase: 3
+      name: Implementation
+      description: Primary focus on task execution
+
+  secondary:
+    - phase: 6
+      name: Maintenance
+      description: Supporting maintenance tasks
+
+  not_applicable:
+    - phase: 0  # Discovery - requires Researcher/Executive
+    - phase: 1  # Specification - requires Spec Engineer
+    - phase: 2  # Design - requires Architect

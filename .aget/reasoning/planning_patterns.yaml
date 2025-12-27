@@ -1,0 +1,29 @@
+# D3: REASONING - Planning Patterns Configuration
+# Template: template-worker-aget
+# Version: 3.0.0
+
+planning:
+  approach: gated
+  description: Uses GO/NOGO gates for substantial work
+
+  substantial_change_protocol:
+    enabled: true
+    triggers:
+      - Multi-file changes
+      - New features
+      - Architectural decisions
+
+  patterns:
+    project_plan:
+      when: Substantial changes
+      format: PROJECT_PLAN_*.md
+      gates: true
+
+    todo_list:
+      when: Multi-step tasks
+      tool: TodoWrite
+
+  verification:
+    enabled: true
+    pattern: L382
+    description: Include verification tests in plans
