@@ -347,17 +347,9 @@ See: [Full specification](https://github.com/aget-framework/aget/tree/main/specs
 
 ---
 
-## Migration from v2.x
-
-If you have existing agents on v2.3:
-- Migration guides available in framework documentation
-- Old URL redirects: `aget-framework/aget` → `aget-framework/template-worker-aget`
-
----
-
 ## Contributing
 
-Framework is in active development. Contribution guidelines coming in v2.5+.
+Contributions welcome! See the [hub repo](https://github.com/aget-framework/aget) for issues and coordination.
 
 ---
 
