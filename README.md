@@ -4,7 +4,7 @@
 
 Transform any project into an AI agent workspace where your coding assistant discovers patterns and evolves capabilities through interaction. Works with Claude Code, Cursor, Aider, Windsurf, and other AI coding assistants.
 
-**Current Version**: v2.7.0 "Portfolio Governance"
+**Current Version**: v3.0.0 "5D Composition Architecture"
 
 ---
 
@@ -314,16 +314,40 @@ Aget is not a faster way to type commands. It's a framework for AI-human collabo
 **Template**: [template-worker-aget](https://github.com/aget-framework/template-worker-aget)
 **Hub** (issues, coordination): [aget](https://github.com/aget-framework/aget)
 
-**Version**: v2.7.0 "Portfolio Governance"
-- **New in v2.7.0**: Portfolio governance system, organizational memory patterns, learning discovery framework
-- **v2.6.0**: Configuration size management (40k limit), framework positioning, contract test validation
-- **v2.5.0**: Contract tests for wake/identity protocols, validation framework
-- **v2.4.0**: Naming conventions established, organizational grouping (aget_group)
-- Privacy-first architecture foundation
+**Version**: v3.0.0 "5D Composition Architecture"
+- **New in v3.0.0**: 5D Composition Architecture (persona, memory, reasoning, skills, context), manifest v3 schema
+- **v2.12.0**: Capability composition system, template manifests
+- **v2.11.0**: Memory architecture, L352 traceability pattern
+- **v2.7.0**: Portfolio governance system, organizational memory patterns
 
 ---
 
-## Migration from v2.3
+## Specification
+
+| Attribute | Value |
+|-----------|-------|
+| **Governed By** | [AGET_TEMPLATE_SPEC v3.1](https://github.com/aget-framework/aget/blob/main/specs/AGET_TEMPLATE_SPEC.md) |
+| **Foundation** | [WORKER_TEMPLATE_SPEC v1.0](https://github.com/aget-framework/aget/blob/main/specs/WORKER_TEMPLATE_SPEC_v1.0.yaml) |
+| **Archetype** | Worker |
+| **Manifest Version** | 3.0 |
+| **Contract Tests** | 122 tests |
+
+### Key Capabilities
+
+| ID | Capability | Pattern |
+|----|------------|---------|
+| CAP-001 | Wake Protocol | event-driven |
+| CAP-009 | Wind Down Protocol | event-driven |
+| CAP-020 | Version Configuration | ubiquitous |
+| CAP-028 | Project Plan Pattern | event-driven |
+
+Validate compliance: `pytest tests/ -v`
+
+See: [Full specification](https://github.com/aget-framework/aget/tree/main/specs)
+
+---
+
+## Migration from v2.x
 
 If you have existing agents on v2.3:
 - Migration guides available in framework documentation
