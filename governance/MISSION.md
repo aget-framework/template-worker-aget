@@ -1,7 +1,7 @@
 # Worker Template Mission
 
 **Template**: template-worker-aget
-**Version**: 3.0.0
+**Version**: 3.1.0
 **Date**: 2025-12-27
 
 ---
@@ -48,4 +48,4 @@ Enable consistent, high-quality task execution through standardized patterns and
 
 ---
 
-*Worker Template Mission v3.0.0*
+*Worker Template Mission v3.1.0*

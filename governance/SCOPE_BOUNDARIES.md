@@ -1,7 +1,7 @@
 # Worker Template Scope Boundaries
 
 **Template**: template-worker-aget
-**Version**: 3.0.0
+**Version**: 3.1.0
 **Date**: 2025-12-27
 
 ---
@@ -43,4 +43,4 @@ Escalate to supervisor when:
 
 ---
 
-*Worker Template Scope Boundaries v3.0.0*
+*Worker Template Scope Boundaries v3.1.0*

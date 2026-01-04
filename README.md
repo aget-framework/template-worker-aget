@@ -4,7 +4,7 @@
 
 Transform any project into an AI agent workspace where your coding assistant discovers patterns and evolves capabilities through interaction. Works with Claude Code, Cursor, Aider, Windsurf, and other AI coding assistants.
 
-**Current Version**: v3.0.0 "5D Composition Architecture"
+**Current Version**: v3.1.0 "5D Composition Architecture"
 
 ---
 
@@ -314,8 +314,8 @@ Aget is not a faster way to type commands. It's a framework for AI-human collabo
 **Template**: [template-worker-aget](https://github.com/aget-framework/template-worker-aget)
 **Hub** (issues, coordination): [aget](https://github.com/aget-framework/aget)
 
-**Version**: v3.0.0 "5D Composition Architecture"
-- **New in v3.0.0**: 5D Composition Architecture (persona, memory, reasoning, skills, context), manifest v3 schema
+**Version**: v3.1.0 "5D Composition Architecture"
+- **New in v3.1.0**: 5D Composition Architecture (persona, memory, reasoning, skills, context), manifest v3 schema
 - **v2.12.0**: Capability composition system, template manifests
 - **v2.11.0**: Memory architecture, L352 traceability pattern
 - **v2.7.0**: Portfolio governance system, organizational memory patterns
