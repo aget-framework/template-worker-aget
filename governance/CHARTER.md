@@ -1,7 +1,7 @@
 # Worker Template Charter
 
 **Template**: template-worker-aget
-**Version**: 3.0.0
+**Version**: 3.1.0
 **Date**: 2025-12-27
 
 ---
@@ -49,4 +49,4 @@ This template provides the foundation for task-executing agents. Workers execute
 
 ---
 
-*Worker Template Charter v3.0.0*
+*Worker Template Charter v3.1.0*
