@@ -4,7 +4,7 @@
 
 Transform any project into an AI agent workspace where your coding assistant discovers patterns and evolves capabilities through interaction. Works with Claude Code, Cursor, Aider, Windsurf, and other AI coding assistants.
 
-**Current Version**: v3.1.0 "5D Composition Architecture"
+**Current Version**: v3.3.0 "Specification Maturity"
 
 ---
 
