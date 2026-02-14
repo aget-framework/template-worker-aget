@@ -1,0 +1,341 @@
+# ONTOLOGY: Worker Archetype v1.0
+# SKOS-aligned concept definitions for task execution and deliverable production
+#
+# Archetype: worker
+# Created: 2026-02-14
+# Author: private-aget-framework-AGET
+# Format: SKOS-inspired YAML (aget-framework convention)
+# Concepts: 7
+# Project: ARC-001 (Archetype Customization v3.5)
+
+apiVersion: aget.framework/v1
+kind: OntologySpec
+metadata:
+  name: worker-archetype-ontology
+  version: 1.0.0
+  created: 2026-02-14
+  author: private-aget-framework-AGET
+  archetype: worker
+  description: >
+    Formal vocabulary for worker archetype agents. Defines concepts for
+    task execution, deliverable production, progress reporting, and work
+    completion. Grounded in task management and workflow theory.
+  extends: ONTOLOGY_personal_ai_systems_v1.0.yaml
+
+# ============================================================================
+# CONCEPT SCHEME
+# ============================================================================
+
+conceptScheme:
+  uri: aget:ontology/worker
+  prefLabel: Worker Archetype Ontology
+  definition: >
+    A vocabulary for describing worker agent capabilities including task
+    execution, deliverable creation, progress tracking, and work completion.
+  hasTopConcept:
+    - aget:archetype/worker/Task
+    - aget:archetype/worker/Deliverable
+  relatedScheme:
+    - aget:ontology/personal-ai-systems
+
+# ============================================================================
+# CONCEPTS
+# ============================================================================
+
+concepts:
+
+  # --------------------------------------------------------------------------
+  # Concept: Task
+  # --------------------------------------------------------------------------
+  - id: WRK-001
+    uri: aget:archetype/worker/Task
+    prefLabel: Task
+    altLabel:
+      - Work_Item
+      - Assignment
+      - Action_Item
+    definition: >
+      A discrete unit of work assigned to or undertaken by a worker agent.
+      Tasks have defined scope, acceptance criteria, and completion state.
+    scopeNote: >
+      AGET: Tasks may come from supervisor, principal, or self-identified.
+      Per L99, every agent is a worker. Task execution is core capability.
+    theoreticalBasis:
+      primary: Task Management
+      source: Getting Things Done (GTD)
+      reference: https://en.wikipedia.org/wiki/Getting_Things_Done
+    broader: null
+    narrower: null
+    related:
+      - aget:archetype/worker/Deliverable
+      - aget:archetype/worker/Task_Status
+      - aget:archetype/worker/Progress
+    example:
+      - "Create ONTOLOGY_worker.yaml"
+      - "Review and fix bug in parser"
+    inScheme: aget:ontology/worker
+    cluster: Task Management
+
+  # --------------------------------------------------------------------------
+  # Concept: Task_Status
+  # --------------------------------------------------------------------------
+  - id: WRK-002
+    uri: aget:archetype/worker/Task_Status
+    prefLabel: Task_Status
+    altLabel:
+      - Work_State
+      - Completion_State
+    definition: >
+      The current state of a task in its lifecycle: pending, in progress,
+      blocked, completed, or cancelled.
+    scopeNote: >
+      Status transitions follow defined workflow. Blocked tasks require
+      escalation or dependency resolution.
+    theoreticalBasis:
+      primary: State Machine
+      source: Workflow Management
+    broader: null
+    narrower: null
+    related:
+      - aget:archetype/worker/Task
+      - aget:archetype/worker/Progress
+    enumValues:
+      - Pending      # Not yet started
+      - InProgress   # Currently being worked
+      - Blocked      # Waiting on dependency
+      - Completed    # Successfully finished
+      - Cancelled    # Abandoned
+    inScheme: aget:ontology/worker
+    cluster: Task Management
+
+  # --------------------------------------------------------------------------
+  # Concept: Deliverable
+  # --------------------------------------------------------------------------
+  - id: WRK-003
+    uri: aget:archetype/worker/Deliverable
+    prefLabel: Deliverable
+    altLabel:
+      - Work_Product
+      - Output
+      - Artifact
+    definition: >
+      A tangible output produced by completing a task. Deliverables are
+      the evidence of work completion and value creation.
+    scopeNote: >
+      AGET: Deliverables include files, commits, documentation, L-docs,
+      specs. Quality of deliverables reflects agent capability.
+    theoreticalBasis:
+      primary: Project Management
+      source: PMBOK
+      reference: https://en.wikipedia.org/wiki/Project_Management_Body_of_Knowledge
+    broader: null
+    narrower: null
+    related:
+      - aget:archetype/worker/Task
+      - aget:archetype/worker/Acceptance_Criteria
+    example:
+      - "ONTOLOGY_worker.yaml file"
+      - "SESSION_2026-02-14.md"
+    inScheme: aget:ontology/worker
+    cluster: Deliverables
+
+  # --------------------------------------------------------------------------
+  # Concept: Acceptance_Criteria
+  # --------------------------------------------------------------------------
+  - id: WRK-004
+    uri: aget:archetype/worker/Acceptance_Criteria
+    prefLabel: Acceptance_Criteria
+    altLabel:
+      - Definition_of_Done
+      - Completion_Criteria
+      - Success_Criteria
+    definition: >
+      The conditions that must be met for a task to be considered complete.
+      Defines the quality bar for deliverables.
+    scopeNote: >
+      AGET: V-tests in PROJECT_PLANs define acceptance criteria. Per ADR-007,
+      acceptance criteria must be testable, not theatrical.
+    theoreticalBasis:
+      primary: User Stories
+      source: Agile methodology
+      reference: https://en.wikipedia.org/wiki/User_story
+    broader: null
+    narrower: null
+    related:
+      - aget:archetype/worker/Task
+      - aget:archetype/worker/Deliverable
+    example:
+      - "V-G1.1: 12 ONTOLOGY files exist"
+      - "All tests pass"
+    inScheme: aget:ontology/worker
+    cluster: Task Management
+
+  # --------------------------------------------------------------------------
+  # Concept: Progress
+  # --------------------------------------------------------------------------
+  - id: WRK-005
+    uri: aget:archetype/worker/Progress
+    prefLabel: Progress
+    altLabel:
+      - Progress_Report
+      - Status_Update
+      - Work_Progress
+    definition: >
+      Information about how much of a task has been completed and what
+      remains. Enables oversight and planning.
+    scopeNote: >
+      AGET: Progress tracked in session notes, PROJECT_PLAN checkmarks,
+      and explicit status updates. Enables session continuity.
+    theoreticalBasis:
+      primary: Progress Tracking
+      source: Project Management
+    broader: null
+    narrower: null
+    related:
+      - aget:archetype/worker/Task_Status
+      - aget:archetype/worker/Task
+    example:
+      - "3 of 12 ontologies complete"
+      - "Gate 0 complete, ready for Gate 1"
+    inScheme: aget:ontology/worker
+    cluster: Progress Tracking
+
+  # --------------------------------------------------------------------------
+  # Concept: Work_Session
+  # --------------------------------------------------------------------------
+  - id: WRK-006
+    uri: aget:archetype/worker/Work_Session
+    prefLabel: Work_Session
+    altLabel:
+      - Session
+      - Work_Period
+    definition: >
+      A bounded period of focused work on tasks. Sessions have start,
+      end, and produce session artifacts documenting work done.
+    scopeNote: >
+      AGET: Sessions follow wake-up/wind-down protocol. Per L342, sessions
+      have scope that should not expand without justification.
+    theoreticalBasis:
+      primary: Time Boxing
+      source: Agile Timeboxing
+    broader: null
+    narrower: null
+    related:
+      - aget:archetype/worker/Task
+      - aget:archetype/worker/Progress
+    example:
+      - "session_2026-02-14_0138.md"
+    inScheme: aget:ontology/worker
+    cluster: Progress Tracking
+
+  # --------------------------------------------------------------------------
+  # Concept: Handoff
+  # --------------------------------------------------------------------------
+  - id: WRK-007
+    uri: aget:archetype/worker/Handoff
+    prefLabel: Handoff
+    altLabel:
+      - Work_Transfer
+      - Session_Handoff
+      - Continuation
+    definition: >
+      The transfer of work context from one session to another, enabling
+      continuity across session boundaries.
+    scopeNote: >
+      AGET: Per L335 memory architecture. Handoffs preserve context through
+      session notes, pending work lists, and explicit continuation points.
+    theoreticalBasis:
+      primary: Knowledge Transfer
+      source: Transactive Memory
+      reference: https://en.wikipedia.org/wiki/Transactive_memory
+    broader: null
+    narrower: null
+    related:
+      - aget:archetype/worker/Work_Session
+      - aget:archetype/worker/Progress
+    example:
+      - "Next Session: Gate 1 execution"
+      - "Pending Work: [list of PROJECT_PLANs]"
+    inScheme: aget:ontology/worker
+    cluster: Progress Tracking
+
+# ============================================================================
+# RELATIONSHIPS
+# ============================================================================
+
+relationships:
+  - subject: aget:archetype/worker/Task
+    predicate: skos:related
+    object: aget:archetype/worker/Deliverable
+    note: Tasks produce deliverables
+
+  - subject: aget:archetype/worker/Task_Status
+    predicate: skos:related
+    object: aget:archetype/worker/Task
+    note: Tasks have status
+
+  - subject: aget:archetype/worker/Acceptance_Criteria
+    predicate: skos:related
+    object: aget:archetype/worker/Deliverable
+    note: Acceptance criteria validate deliverables
+
+  - subject: aget:archetype/worker/Work_Session
+    predicate: skos:related
+    object: aget:archetype/worker/Task
+    note: Sessions contain task execution
+
+  - subject: aget:archetype/worker/Handoff
+    predicate: skos:related
+    object: aget:archetype/worker/Work_Session
+    note: Handoffs transfer context between sessions
+
+# ============================================================================
+# COLLECTIONS
+# ============================================================================
+
+collections:
+  - uri: aget:collection/worker/TaskManagement
+    prefLabel: Task Management Concepts
+    description: Concepts for managing work tasks
+    members:
+      - aget:archetype/worker/Task
+      - aget:archetype/worker/Task_Status
+      - aget:archetype/worker/Acceptance_Criteria
+
+  - uri: aget:collection/worker/Deliverables
+    prefLabel: Deliverable Concepts
+    description: Concepts for work outputs
+    members:
+      - aget:archetype/worker/Deliverable
+
+  - uri: aget:collection/worker/ProgressTracking
+    prefLabel: Progress Tracking Concepts
+    description: Concepts for tracking work progress
+    members:
+      - aget:archetype/worker/Progress
+      - aget:archetype/worker/Work_Session
+      - aget:archetype/worker/Handoff
+
+# ============================================================================
+# METADATA
+# ============================================================================
+
+provenance:
+  project: ARC-001
+  created: 2026-02-14
+  author: private-aget-framework-AGET
+  methodology: >
+    Derived from worker archetype WORKER_SPEC.md, L99 (every agent is a worker),
+    and operational patterns for task execution and progress tracking.
+  relatedLdocs:
+    - L099_every_agent_is_worker.md
+    - L463_entity_archetype_alignment.md
+    - L398_instance_archetype_baseline_compliance.md
+
+validation:
+  conceptCount: 7
+  clusters: 3
+  theoreticalGrounding: 100%
+  skosCompliance: partial
+
+# End of ONTOLOGY_worker.yaml
