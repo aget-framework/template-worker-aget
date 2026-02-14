@@ -1,405 +1,128 @@
-# Aget Worker Template
+# Template: Worker Agent
 
-> **Framework for AI-assisted software engineering agents**
+> Execute tasks reliably with progress tracking and deliverable production
 
-Transform any project into an AI agent workspace where your coding assistant discovers patterns and evolves capabilities through interaction. Works with Claude Code, Cursor, Aider, Windsurf, and other AI coding assistants.
-
-**Current Version**: v3.4.0 "Session Skills Maturity"
+**Version**: v3.5.0 | **Archetype**: Worker | **Skills**: 2 specialized + 13 universal
 
 ---
 
-## What This Is
+## Why Worker?
 
-**Not a traditional CLI tool** - Aget is a template and pattern system that your AI assistant uses to organize work, discover patterns, and maintain context across sessions.
+The Worker archetype is the **foundation of task execution** in AGET. While every agent can do work, worker agents excel at:
 
-**Mental Model**:
-```
-You → Natural Language → AI Assistant → Discovers Aget Patterns → Executes
-```
+- **Structured execution** — Break tasks into steps, track progress, produce deliverables
+- **Visibility** — Report completion status, blockers, and handoff context
+- **Reliability** — Never claim completion without evidence, never skip steps silently
 
-You never type `aget` commands. Your AI reads the patterns and uses them based on your natural language requests.
+**For evaluators**: If you need an AI that executes defined work items with clear tracking and accountability, the Worker archetype provides the discipline of task management without heavyweight tooling.
 
 ---
 
-## Quick Start (2 Minutes)
+## Skills
 
-### 1. Clone the Template
+Worker agents come with **2 archetype-specific skills** plus 13 universal AGET skills.
+
+### Archetype Skills
+
+| Skill | Description |
+|-------|-------------|
+| **aget-execute-task** | Execute defined tasks with step-by-step progress tracking. Validates prerequisites, produces deliverables, handles blockers with human escalation. |
+| **aget-report-progress** | Report work status including completion percentage, blockers, and risks. Supports handoff documentation for session continuity. |
+
+### Universal Skills
+
+All AGET agents include session management, knowledge capture, and health monitoring:
+
+- `aget-wake-up` / `aget-wind-down` — Session lifecycle
+- `aget-create-project` / `aget-review-project` — Project management
+- `aget-record-lesson` / `aget-capture-observation` — Learning capture
+- `aget-check-health` / `aget-check-kb` / `aget-check-evolution` — Health monitoring
+- `aget-propose-skill` / `aget-create-skill` — Skill development
+- `aget-save-state` / `aget-file-issue` — State and issue management
+
+---
+
+## Ontology
+
+Worker agents use a **formal vocabulary** of 7 concepts organized into 2 clusters:
+
+| Cluster | Concepts |
+|---------|----------|
+| **Task Management** | Task, Task_Status, Progress, Blocker |
+| **Deliverable Production** | Deliverable, Handoff, Completion |
+
+This vocabulary enables precise communication about work execution and progress.
+
+See: [`ontology/ONTOLOGY_worker.yaml`](ontology/ONTOLOGY_worker.yaml)
+
+---
+
+## Quick Start
 
 ```bash
-# Choose your agent name based on capability:
-# -AGET suffix = action-taking (can modify systems) ⚠️
-# -aget suffix = information-only (read-only) ✅
+# 1. Clone the template
+git clone https://github.com/aget-framework/template-worker-aget.git my-worker-agent
+cd my-worker-agent
 
-git clone https://github.com/aget-framework/template-worker-aget.git my-custom-AGET
-cd my-custom-AGET
+# 2. Configure identity
+# Edit .aget/version.json:
+#   "agent_name": "my-worker-agent"
+#   "domain": "your-domain"
+
+# 3. Verify setup
+python3 -m pytest tests/ -v
+# Expected: All tests passing
 ```
 
-### 2. Open with Your AI Assistant
+### Try the Skills
 
 ```bash
-# Claude Code (primary development - conversational interface)
-claude .
-
-# Also works with: Cursor, Aider, Windsurf, and other CLI agents
-```
-
-**Note**: Claude Code provides a conversational interface where you interact naturally - no command memorization needed.
-
-### 3. Start with Natural Language
-
-```
-You: hey
-
-AI: [Reads AGENTS.md, checks environment, reports status]
-
-You: initialize this for a Python data analysis project
-
-AI: [Creates workspace/, products/, data/ structure with Python tooling]
-
-You: wind down
-
-AI: [Commits changes, creates session notes, reports completion]
-```
-
-**That's it.** Your AI assistant handles the mechanics. You focus on what you want to accomplish.
-
----
-
-## How It Works
-
-### AI-Discovered Patterns
-
-Your AI assistant discovers patterns from:
-
-1. **AGENTS.md** - Configuration and protocols (read on wake-up)
-2. **.aget/** - Framework metadata, patterns, learnings
-3. **Directory structure** - Conventional organization
-4. **Session history** - Previous interactions and context
-
-### Natural Language Interface
-
-Instead of commands, you use conversational language:
-
-| You Say | AI Understands |
-|---------|----------------|
-| "hey" or "wake up" | Read configuration, check status, report readiness |
-| "create a web scraper" | Scaffold tool in workspace/, add tests, document |
-| "run tests" | Execute test suite, report results |
-| "what did we work on last time?" | Read session notes, summarize |
-| "wind down" | Commit changes, create session notes |
-| "sign off" | Quick save and exit |
-
-### Session Workflow
-
-```
-wake up → work (iterative) → wind down → sign off
-   ↓           ↓                  ↓
-Read       Natural           Create
-config     language          session
-           interaction       notes
+# In Claude Code CLI
+/aget-execute-task       # Execute a defined task
+/aget-report-progress    # Report on current work status
 ```
 
 ---
 
-## Who This Is For
+## What Makes Worker Different
 
-- **Software Owners** - Govern project evolution with AI assistance
-- **Data Scientists** - Organize analysis work (Spotify data, financial, etc.)
-- **Contributors** - Private workspace for external projects
-- **Analysts** - Examine codebases without modifying
-- **Learners** - Use AI to understand and build software
-
----
-
-## Naming Convention
-
-**Suffix signals capability** (v2.4 framework convention):
-
-- **-AGET** = Action-taking agent (⚠️ can modify systems, create PRs, deploy)
-- **-aget** = Information-only agent (✅ read-only, reports, analysis)
-
-**Examples**:
-```
-my-github-AGET              # Can create PRs, merge code, modify repos
-my-spotify-analyst-aget     # Reports analytics only (read-only)
-my-deployment-AGET          # Can deploy to production
-my-code-reviewer-aget       # Reviews code, provides feedback only
-```
-
-Like `sudo` or `rm -rf`, the capitalized AGET provides visual warning of powerful operations.
+| Aspect | Generic AI Assistant | Worker Agent |
+|--------|---------------------|--------------|
+| **Task execution** | Ad-hoc completion | Step tracking with deliverables |
+| **Progress reporting** | Manual updates | Structured reports with percentages |
+| **Blockers** | Silent failures | Explicit escalation with impact |
+| **Handoffs** | Context lost | Documented state for continuation |
 
 ---
 
-## Directory Structure
-
-```
-my-custom-AGET/
-├── AGENTS.md              # Configuration (AI reads on wake-up)
-├── .aget/                 # Framework metadata
-│   ├── version.json       # Agent identity and capabilities
-│   ├── evolution/         # Learnings and decisions (L*.md)
-│   ├── checkpoints/       # State snapshots
-│   └── patterns/          # Reusable patterns (optional)
-├── workspace/             # Private workspace for exploration
-├── products/              # Public artifacts for others
-├── data/                  # Persistent data storage
-├── docs/                  # Documentation
-├── src/                   # Source code (if building tool)
-├── tests/                 # Test suite
-└── sessions/              # Session notes (timestamped)
-```
-
-**Vocabulary**:
-- `workspace/` = Your agent's private scratchpad
-- `products/` = Public outputs for others
-- `.aget/evolution/` = Learnings discovered over time
-- `sessions/` = Interaction history
-
----
-
-## What Your AI Understands
-
-When you open a project with Aget template, your AI can:
-
-### Session Management
-- **"hey"** - Wake up, check environment, report status
-- **"wind down"** - Commit changes, create session notes
-- **"sign off"** - Quick save and exit
-
-### Work Commands
-- **"run tests"** - Execute test suite
-- **"check documentation"** - Analyze docs completeness
-- **"tidy up"** - Clean temporary files
-- **"sanity check"** - Verify critical components
-
-### Discovery
-- **"read docs"** - Smart documentation briefing
-- **"what did we work on last time?"** - Session history
-- **"show recent learnings"** - Evolution documents
-
-### Development
-- **"create [type] for [purpose]"** - Scaffold new component
-- **"refactor [component]"** - Improve code structure
-- **"add tests for [feature]"** - Expand test coverage
-
-**Note**: Exact phrasing is flexible. Your AI interprets intent, not rigid commands.
-
----
-
-## Key Features
-
-### Progressive Understanding
-
-Agents start empty and grow knowledge through:
-- Session notes capturing what worked
-- Evolution documents (L*.md) capturing learnings
-- Checkpoints for significant state changes
-
-### Universal Compatibility
-
-Works with all major AI coding assistants:
-- ✅ Claude Code (primary development)
-- ✅ Cursor
-- ✅ Aider
-- ✅ Windsurf
-- ✅ GitHub Copilot CLI
-- ✅ Any AI assistant that can read project files
-
-### Privacy-First
-
-- Works fully offline
-- No telemetry or tracking
-- Private by default
-- Selective sharing (your choice)
-
-### Specification-Driven
-
-Define capabilities before building:
-- EARS patterns (aerospace requirements format)
-- Ambiguity detection
-- Validation frameworks
-
----
-
-## Documentation
-
-- **[Getting Started Guide](docs/GET_STARTED.md)** - Detailed setup and customization
-- **[Pattern Explained](docs/PATTERNS_EXPLAINED.md)** - How patterns work
-- **[Why This Matters](docs/WHY_THIS_MATTERS.md)** - Philosophy and rationale
-- **[Troubleshooting](docs/TROUBLESHOOTING.md)** - Common issues
-- **[Testing Guide](tests/README.md)** - Contract tests, test philosophy, and running tests
-- **[docs/README.md](docs/README.md)** - Documentation index
-
----
-
-## Examples
-
-### Example 1: Data Analysis Agent
-
-```bash
-git clone https://github.com/aget-framework/template-worker-aget.git my-spotify-analyst-aget
-cd my-spotify-analyst-aget
-claude .
-```
-
-```
-You: hey
-AI: [Reads config, reports readiness]
-
-You: I want to analyze my Spotify streaming history
-
-AI: I'll help you set up a Spotify analysis workspace. First, where is your data?
-
-You: I have spotify_streaming_history.json in ~/Downloads
-
-AI: [Copies data to data/, creates analysis notebook in workspace/, sets up Python environment]
-
-You: analyze top artists by decade
-
-AI: [Runs analysis, creates visualization in products/, reports findings]
-
-You: wind down
-
-AI: [Commits analysis code, creates session notes, reports: "Session saved. Analysis available in products/top_artists_by_decade.html"]
-```
-
-**Result**: Read-only analysis, no system modifications (suffix: -aget ✅)
-
-### Example 2: GitHub Management Agent
-
-```bash
-git clone https://github.com/aget-framework/template-worker-aget.git my-github-AGET
-cd my-github-AGET
-claude .
-```
-
-```
-You: hey
-AI: [Reads config, reports readiness]
-
-You: Create a PR for the feature branch
-
-AI: I can create PRs. Which repository and what's the branch name?
-
-You: my-project repo, feature/new-api branch to main
-
-AI: [Uses gh CLI to create PR, adds description from recent commits, reports PR URL]
-
-You: wind down
-
-AI: [Commits session notes: "Created PR #123 for feature/new-api"]
-```
-
-**Result**: Modified GitHub state (suffix: -AGET ⚠️)
-
----
-
-## Comparison to Traditional Tools
-
-| Traditional CLI | Aget Template |
-|----------------|---------------|
-| Human types commands | AI discovers patterns |
-| Rigid command syntax | Natural language |
-| Documentation as reference | AI reads configuration |
-| State in shell history | State in session notes |
-| One-off execution | Evolving capabilities |
-
-Aget is not a faster way to type commands. It's a framework for AI-human collaboration.
-
----
-
-## Framework Information
-
-**Organization**: [aget-framework](https://github.com/aget-framework)
-**Template**: [template-worker-aget](https://github.com/aget-framework/template-worker-aget)
-**Hub** (issues, coordination): [aget](https://github.com/aget-framework/aget)
-
-**Version**: v3.1.0 "5D Composition Architecture"
-- **New in v3.1.0**: 5D Composition Architecture (persona, memory, reasoning, skills, context), manifest v3 schema
-- **v2.12.0**: Capability composition system, template manifests
-- **v2.11.0**: Memory architecture, L352 traceability pattern
-- **v2.7.0**: Portfolio governance system, organizational memory patterns
-
----
-
-## Specification
+## Framework Specification
 
 | Attribute | Value |
 |-----------|-------|
-| **Governed By** | [AGET_TEMPLATE_SPEC v3.1](https://github.com/aget-framework/aget/blob/main/specs/AGET_TEMPLATE_SPEC.md) |
-| **Foundation** | [WORKER_TEMPLATE_SPEC v1.0](https://github.com/aget-framework/aget/blob/main/specs/WORKER_TEMPLATE_SPEC_v1.0.yaml) |
+| **Framework** | [AGET v3.5.0](https://github.com/aget-framework/aget) |
 | **Archetype** | Worker |
-| **Manifest Version** | 3.0 |
-| **Contract Tests** | 122 tests |
-
-### Key Capabilities
-
-| ID | Capability | Pattern |
-|----|------------|---------|
-| CAP-001 | Wake Protocol | event-driven |
-| CAP-009 | Wind Down Protocol | event-driven |
-| CAP-020 | Version Configuration | ubiquitous |
-| CAP-028 | Project Plan Pattern | event-driven |
-
-Validate compliance: `pytest tests/ -v`
-
-See: [Full specification](https://github.com/aget-framework/aget/tree/main/specs)
+| **Skills** | 15 total (2 archetype + 13 universal) |
+| **Ontology** | 7 concepts, 2 clusters |
+| **License** | Apache 2.0 |
 
 ---
 
-## Contributing
+## Learn More
 
-Contributions welcome! See the [hub repo](https://github.com/aget-framework/aget) for issues and coordination.
-
----
-
-## License
-
-**AGET Framework (This Template)**: Apache License 2.0
-
-This template and all framework code (`.aget/` structure, patterns, protocols) are licensed under the Apache License 2.0. This ensures:
-
-- **Patent protection** for all adopters
-- **Freedom to fork**, modify, and redistribute
-- **Enterprise-safe** licensing for production use
-
-See [LICENSE](LICENSE) for full terms.
-
-**Your Agent Instance**: Your Choice
-
-When you create an agent from this template, **you choose the license** for your specific instance:
-
-- Keep it Apache 2.0 (recommended for public/shared agents)
-- Make it private (all rights reserved)
-- Choose MIT, GPL, or any other license
-
-**The framework is open commons. What you build with it is yours.**
-
-### Why Apache 2.0?
-
-AGET is production infrastructure for agent configuration and lifecycle management. Apache 2.0 provides:
-
-1. **Patent Grant**: Contributors can't patent their contributions and sue adopters
-2. **Patent Retaliation**: If someone sues for patent infringement, they lose their license
-3. **Ecosystem Immunity**: The standard stays free even as it becomes valuable
-4. **Enterprise Adoption**: Legal teams approve Apache 2.0 more readily than other licenses
-
-This follows the precedent of Kubernetes, Android, Swift, and other infrastructure projects.
-
-### Upgrading Existing Agents
-
-If you created an agent from an earlier MIT-licensed template, no action is required. Your agent remains valid under MIT (grandfathered).
-
-To upgrade to Apache 2.0 for patent protection benefits, see the upgrade guide in the [AGET Framework documentation](https://github.com/aget-framework).
+- **[AGET Framework](https://github.com/aget-framework/aget)** — Core framework documentation
+- **[Archetype Guide](https://github.com/aget-framework/aget/blob/main/docs/ARCHETYPE_GUIDE.md)** — All 12 archetypes explained
+- **[Getting Started](https://github.com/aget-framework/aget/blob/main/docs/GETTING_STARTED.md)** — Full onboarding guide
 
 ---
 
-## Support
+## Related Archetypes
 
-- **Issues**: [File to hub repo](https://github.com/aget-framework/aget/issues) with `[worker-template]` prefix
-- **Discussions**: GitHub Discussions (coming soon)
-- **Documentation**: Start with [docs/README.md](docs/README.md)
+| Archetype | Best For |
+|-----------|----------|
+| **[Developer](https://github.com/aget-framework/template-developer-aget)** | Code building, testing, review |
+| **[Supervisor](https://github.com/aget-framework/template-supervisor-aget)** | Fleet coordination and oversight |
+| **[Operator](https://github.com/aget-framework/template-operator-aget)** | Incident handling and playbooks |
 
 ---
 
-*Aget Framework - AI discovers patterns, you describe intent*
+**AGET Framework** | Apache 2.0 | [Issues](https://github.com/aget-framework/template-worker-aget/issues)
