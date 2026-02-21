@@ -1,13 +1,13 @@
 # AGET Skill Vocabulary
 
-**Version**: 1.2.0
+**Version**: 1.3.0
 **Created**: 2026-02-10
-**Updated**: 2026-02-15
+**Updated**: 2026-02-20
 **Status**: production
 
 This vocabulary defines terms specific to AGET Skills and their specifications.
 
-**Term Count**: 30 terms across 7 categories
+**Term Count**: 33 terms across 8 categories
 
 ---
 
@@ -353,19 +353,67 @@ This vocabulary defines terms specific to AGET Skills and their specifications.
 
 ---
 
+## Lifecycle Terms
+
+### Skill_Status
+
+**Definition**: Lifecycle state of a skill indicating its current operational standing.
+
+**Values**:
+| Status | Meaning | SKILL.md visible? |
+|--------|---------|-------------------|
+| `active` | Current, maintained, invocable (default) | Yes |
+| `deprecated` | Superseded, not recommended, still invocable | Yes (with warning) |
+| `archived` | No longer invocable, retained for history | No |
+
+**Location**: SKILL.md frontmatter `status:` field
+
+**Related**: Skill_Deprecation, Skill_Supersession
+
+---
+
+### Skill_Deprecation
+
+**Definition**: Process of marking a skill as superseded or no longer recommended for use.
+
+**Characteristics**:
+- Skill remains invocable but tagged with `status: deprecated`
+- Requires `superseded_by:` field identifying replacement skill
+- Does not block invocation (advisory enforcement)
+- Supervisor detects via healthcheck and drift detection
+
+**Related**: Skill_Status, Skill_Supersession, Advisory_Enforcement
+
+---
+
+### Skill_Supersession
+
+**Definition**: Relationship where one skill replaces another, making the original deprecated.
+
+**Characteristics**:
+- Expressed via `superseded_by:` field in SKILL.md frontmatter
+- The superseding skill should cover all capabilities of the deprecated one
+- Common pattern: naming convention updates (e.g., `aget-healthcheck-*` → `aget-check-*`)
+
+**Related**: Skill_Status, Skill_Deprecation
+
+---
+
 ## Traceability
 
 | Link | Reference |
 |------|-----------|
-| L-docs | L532, L586, L589 |
+| L-docs | L319, L532, L586, L589 |
 | Template | SKILL_SPEC_TEMPLATE.yaml |
 | Specs | SKILL-001 through SKILL-015 |
 | Validator | `.aget/tools/validate_skill_dependencies.py` |
 | SOP | `.aget/sops/SOP_skill_deployment.md` |
 | Project | PROJECT_PLAN_skill_specification_remediation_v1.0.md |
+| Project | PROJECT_PLAN_skill_deprecation_lifecycle_v1.0.md |
 
 ---
 
-*SKILL_VOCABULARY.md v1.2.0*
+*SKILL_VOCABULARY.md v1.3.0*
+*v1.3.0: Added Skill_Status, Skill_Deprecation, Skill_Supersession terms (L319)*
 *v1.2.0: Added Skill_Dependency term (L586)*
 *Created as part of Skill Specification Remediation project*
