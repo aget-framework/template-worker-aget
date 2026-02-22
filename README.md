@@ -2,7 +2,7 @@
 
 > Execute tasks reliably with progress tracking and deliverable production
 
-**Version**: v3.5.0 | **Archetype**: Worker | **Skills**: 2 specialized + 13 universal
+**Version**: v3.6.0 | **Archetype**: Worker | **Skills**: 2 specialized + 14 universal
 
 ---
 
@@ -20,7 +20,7 @@ The Worker archetype is the **foundation of task execution** in AGET. While ever
 
 ## Skills
 
-Worker agents come with **2 archetype-specific skills** plus 13 universal AGET skills.
+Worker agents come with **2 archetype-specific skills** plus the universal AGET skills.
 
 ### Archetype Skills
 
@@ -99,9 +99,9 @@ python3 -m pytest tests/ -v
 
 | Attribute | Value |
 |-----------|-------|
-| **Framework** | [AGET v3.5.0](https://github.com/aget-framework/aget) |
+| **Framework** | [AGET v3.6.0](https://github.com/aget-framework/aget) |
 | **Archetype** | Worker |
-| **Skills** | 15 total (2 archetype + 13 universal) |
+| **Skills** | 16 total (2 archetype + 14 universal) |
 | **Ontology** | 7 concepts, 2 clusters |
 | **License** | Apache 2.0 |
 
