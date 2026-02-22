@@ -17,7 +17,7 @@ AGET occupies a unique niche in the agent framework landscape:
 - **Instead**: Human-supervised fleet management with organizational memory and version progression
 
 **Differentiators**:
-- Universal CLI compatibility (works across Claude Code, Cursor, Aider, Windsurf)
+- Universal CLI compatibility (works across Claude Code, Codex CLI, Gemini CLI)
 - Contract testing and version compliance (v2.6.0)
 - Shared learning repository (.aget/evolution/)
 - Lightweight, zero-infrastructure (markdown + git)
