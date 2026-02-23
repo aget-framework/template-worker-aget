@@ -120,7 +120,7 @@ python3 -m pytest tests/ -v
 | Archetype | Best For |
 |-----------|----------|
 | **[Developer](https://github.com/aget-framework/template-developer-aget)** | Code building, testing, review |
-| **[Supervisor](https://github.com/aget-framework/template-supervisor-aget)** | Fleet coordination and oversight |
+| **Supervisor** (private) | Fleet coordination and oversight |
 | **[Operator](https://github.com/aget-framework/template-operator-aget)** | Incident handling and playbooks |
 
 ---
