@@ -16,6 +16,8 @@ The Worker archetype is the **foundation of task execution** in AGET. While ever
 
 **For evaluators**: If you need an AI that executes defined work items with clear tracking and accountability, the Worker archetype provides the discipline of task management without heavyweight tooling.
 
+**Domain knowledge that compounds**: Worker agents build persistent understanding of your task patterns — common blockers, resolution strategies, and handoff conventions. Unlike tools that start fresh each session, your agent accumulates execution context that makes each task more efficient and each handoff more complete.
+
 ---
 
 ## Skills
@@ -92,6 +94,7 @@ python3 -m pytest tests/ -v
 | **Progress reporting** | Manual updates | Structured reports with percentages |
 | **Blockers** | Silent failures | Explicit escalation with impact |
 | **Handoffs** | Context lost | Documented state for continuation |
+| **Domain memory** | Starts fresh each session | Accumulates task execution expertise over time |
 
 ---
 
