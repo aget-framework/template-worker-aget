@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.6.0] - 2026-02-21 - "Infrastructure Maturation"
 
 ### Added
-- Universal skill: `aget-studyup` (focused KB research before implementation)
+- Universal skill: `aget-study-up` (focused KB research before implementation)
 - Canonical script: `scripts/study_up.py`
 
 ### Changed
