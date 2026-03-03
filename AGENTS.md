@@ -138,6 +138,41 @@ Make CLI coding agents better collaborators through conversational command patte
 - Pattern Versioning, Session Metadata, Specification Framework
 - Collaboration Tools, Intelligence Components
 
+---
+
+## Skill Routing
+
+| Task | Skill | When to Use |
+|------|-------|-------------|
+| Start session | /aget-wake-up | Beginning of every session |
+| End session | /aget-wind-down | End of every session |
+| Research topic | /aget-study-up | Before proposing changes |
+| Record learning | /aget-record-lesson | After discovering reusable insight |
+| Create project | /aget-create-project | Starting multi-gate work |
+| Review project | /aget-review-project | Mid-flight assessment |
+| File issue | /aget-file-issue | Reporting bugs or gaps |
+| Check health | /aget-check-health | Verifying agent structure |
+
+## Prohibitive Constraints
+
+The following actions are NEVER permitted regardless of context:
+
+- NEVER modify files outside this agent's repository without explicit principal approval
+- NEVER commit secrets, credentials, or API keys to version control
+- NEVER delete L-docs, governance files, or session artifacts without explicit instruction
+
+## Write Scope
+
+| Target | Allowed | Notes |
+|--------|---------|-------|
+| This agent's `.aget/` | YES | Own configuration and evolution |
+| This agent's `planning/`, `sessions/`, `docs/` | YES | Own operational artifacts |
+| This agent's `.claude/skills/` | YES | Own skill customizations (Instance_Artifacts only) |
+| Other agents' repositories | NO | Cross-KB write requires principal mediation |
+| Public framework repos (`aget-framework/*`) | NO | Requires release governance (SOP_release_process.md) |
+
+---
+
 ## Session Management Protocols
 
 ### Wake Up Protocol
