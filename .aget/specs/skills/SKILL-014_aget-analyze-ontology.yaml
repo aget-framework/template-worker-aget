@@ -1,0 +1,211 @@
+# SKILL-014: aget-analyze-ontology
+# Purpose: Analyze ontology health and coverage across controlled vocabularies
+# Created: 2026-02-13
+# Based on: L537, SKILL_VOCABULARY.md, v3.5.0 ontology research
+
+spec:
+  id: SKILL-014
+  name: aget-analyze-ontology
+  version: 1.1.0
+  status: production
+  maturity: minimal
+  updated: 2026-03-11
+  format_version: '1.1'
+  system_name: aget-analyze-ontology
+  created: 2026-02-13
+  format: "EARS with controlled vocabulary"
+  category: Monitoring
+  scope: "Analyze ontology completeness, consistency, coverage, freshness, and concept-to-requirement ratio"
+
+  traceability:
+    skill_md: ".claude/skills/aget-analyze-ontology/SKILL.md"
+    proposal: "planning/skill-proposals/PROPOSAL_aget-analyze-ontology.md"
+    l_docs:
+      - "L537: AGET Verb Taxonomy"
+      - "L322: Knowledge Taxonomy Clarification"
+      - "L525: Ontology-First Agent Creation Validation"
+      - "L566: Ontology Value Attribution Gap"
+      - "L565: Ontology Behavioral Specification Gap"
+    related_specs:
+      - "ONTOLOGY_TIER_SPEC_v1.0.yaml (OT-022: Concept Surplus Detection)"
+    vocabulary_terms:
+      - "AGET_Skill"
+      - "Vocabulary_Compliance"
+      - "EARS_Pattern"
+
+capabilities:
+  AO-001:
+    domain: invocation
+    statement: "WHEN user invokes `/aget-analyze-ontology`, the SKILL shall analyze controlled vocabularies and report health status."
+    pattern: event-driven
+    trigger: slash_command
+    priority: critical
+    outputs:
+      - "Vocabularies scanned count"
+      - "Total terms count"
+      - "Health status with issues"
+    verification: "Analysis report displayed with metrics"
+
+  AO-002:
+    domain: completeness
+    statement: "The SKILL shall identify terms used in specifications but not defined in vocabularies."
+    pattern: ubiquitous
+    priority: high
+    outputs:
+      - "Undefined terms list"
+      - "Count of undefined terms"
+    verification: "Undefined terms detected and listed"
+
+  AO-003:
+    domain: consistency
+    statement: "The SKILL shall detect cross-vocabulary inconsistencies where same term has different definitions."
+    pattern: ubiquitous
+    priority: high
+    outputs:
+      - "Inconsistent terms list"
+      - "Conflicting definitions"
+    verification: "Cross-vocabulary conflicts identified"
+
+  AO-004:
+    domain: coverage
+    statement: "The SKILL shall calculate coverage percentage for each vocabulary."
+    pattern: ubiquitous
+    priority: medium
+    outputs:
+      - "Coverage percentage per vocabulary"
+    verification: "Coverage metrics accurate"
+
+  AO-005:
+    domain: freshness
+    statement: "The SKILL shall identify vocabulary terms with no usage in specifications for 90+ days."
+    pattern: ubiquitous
+    priority: medium
+    outputs:
+      - "Stale terms count"
+      - "Terms not used recently"
+    verification: "Staleness tracked"
+
+  AO-006:
+    domain: output
+    statement: "The SKILL shall report overall ontology health as OK, WARN, or CRITICAL."
+    pattern: ubiquitous
+    priority: critical
+    outputs:
+      - "Health Status: OK | WARN | CRITICAL"
+    verification: "Health status determined correctly"
+
+  AO-007:
+    domain: thresholds
+    statement: "WHEN undefined terms > 10 OR inconsistencies > 5, the SKILL shall report CRITICAL."
+    pattern: conditional
+    priority: high
+    verification: "CRITICAL at threshold"
+
+  AO-008:
+    domain: thresholds
+    statement: "WHEN undefined terms > 3 OR inconsistencies > 0 OR coverage < 80%, the SKILL shall report WARN."
+    pattern: conditional
+    priority: medium
+    verification: "WARN at warning threshold"
+
+  AO-009:
+    domain: tier_assessment
+    statement: "WHEN /aget-analyze-ontology is invoked, the SKILL shall assess ontology operational depth by reading ontology_tier from version.json, validating tier-specific requirements per ONTOLOGY_TIER_SPEC_v1.0.yaml, and reporting tier compliance status."
+    pattern: event-driven
+    trigger: skill_invocation
+    priority: high
+    inputs:
+      - "ontology_tier from .aget/version.json"
+      - "ONTOLOGY_TIER_SPEC_v1.0.yaml tier requirements"
+    outputs:
+      - "Tier: [inherited|domain|operational]"
+      - "Status: [COMPLIANT|GAP]"
+      - "Gap details (if any)"
+    verification: "Invoke /aget-analyze-ontology; output includes Tier Assessment section"
+
+  AO-010:
+    domain: ratio_analysis
+    statement: "WHEN /aget-analyze-ontology is invoked for a Domain_Tier or Operational_Tier agent, the SKILL shall calculate the concept-to-requirement ratio by counting ontology prefLabels and EARS requirements, and report the ratio with a status classification."
+    pattern: event-driven
+    trigger: skill_invocation
+    priority: high
+    inputs:
+      - "Concept count from ontology/*.yaml and vocabulary/*.yaml (prefLabel count)"
+      - "EARS requirement count from .aget/specs/*.yaml (R-* pattern count)"
+    outputs:
+      - "Concept count"
+      - "EARS requirement count"
+      - "Ratio value (concepts / requirements)"
+      - "Status: UNDER_SPECIFIED (<1.0) | HEALTHY (1.0-3.0) | CONCEPT_SURPLUS (>3.0) | SELF_REFERENTIAL (>10.0)"
+    verification: "Invoke /aget-analyze-ontology on domain/operational agent; output includes Concept-to-Requirement Ratio section with status"
+    notes: "Implements OT-022 from ONTOLOGY_TIER_SPEC_v1.0.yaml. Addresses L566 (value attribution gap)."
+
+  AO-011:
+    domain: ratio_analysis
+    statement: "WHILE an agent is classified as Inherited_Tier, the SKILL shall skip the concept-to-requirement ratio check."
+    pattern: state-driven
+    priority: medium
+    inputs:
+      - "ontology_tier from .aget/version.json"
+    outputs:
+      - "Ratio check skipped (no output)"
+    verification: "Invoke /aget-analyze-ontology on inherited agent; no ratio section in output"
+    notes: "Implements OT-021 exemption from ONTOLOGY_TIER_SPEC_v1.0.yaml."
+
+test_cases:
+  T-AO-001:
+    capability: "AO-001"
+    scenario: "Healthy ontology"
+    given: "All vocabularies consistent, coverage >90%"
+    when: "User runs `/aget-analyze-ontology`"
+    then: "Reports OK status"
+    verification_method: "manual"
+
+  T-AO-002:
+    capability: "AO-002"
+    scenario: "Undefined terms detected"
+    given: "Skill spec uses term 'Foo_Bar' not in vocabulary"
+    when: "User runs `/aget-analyze-ontology`"
+    then: "Lists 'Foo_Bar' as undefined"
+    verification_method: "manual"
+
+  T-AO-003:
+    capability: "AO-003"
+    scenario: "Cross-vocabulary inconsistency"
+    given: "'Session' defined differently in two vocabularies"
+    when: "User runs `/aget-analyze-ontology`"
+    then: "Reports inconsistency with both definitions"
+    verification_method: "manual"
+
+  T-AO-009:
+    capability: "AO-009"
+    scenario: "Tier assessment included in output"
+    given: "Agent with ontology_tier in version.json"
+    when: "User runs `/aget-analyze-ontology`"
+    then: "Output includes Tier Assessment section with tier and compliance status"
+    verification_method: "manual"
+
+  T-AO-010:
+    capability: "AO-010"
+    scenario: "Concept surplus detected"
+    given: "Operational agent with concept:requirement ratio >3:1 (e.g., professional-core with ~1,253 concepts and ~35 requirements)"
+    when: "User runs `/aget-analyze-ontology`"
+    then: "Reports CONCEPT_SURPLUS status with ratio value"
+    verification_method: "manual"
+
+  T-AO-011:
+    capability: "AO-011"
+    scenario: "Inherited agent skips ratio check"
+    given: "Inherited-tier agent (ontology_tier: inherited in version.json)"
+    when: "User runs `/aget-analyze-ontology`"
+    then: "No Concept-to-Requirement Ratio section in output"
+    verification_method: "manual"
+
+constraints:
+  C-AO-001:
+    statement: "The SKILL shall NOT modify any vocabulary or specification files."
+    rationale: "Analysis is read-only"
+
+  C-AO-002:
+    statement: "The SKILL shall scan all three vocabulary sources: SKILL_VOCABULARY.md, AGET_CONTROLLED_VOCABULARY.md, CONTROLLED_VOCABULARY.md."
+    rationale: "Complete coverage requires all sources"

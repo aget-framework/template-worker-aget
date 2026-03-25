@@ -1,0 +1,140 @@
+# ONTOLOGY: {Domain Name} v1.0
+# SKOS-aligned concept definitions for {domain_description}
+#
+# Template: ONTOLOGY_DOMAIN_TEMPLATE.yaml v1.0.0
+# SOP: SOP_ontology_management.md (Step 3: Create Domain Ontology)
+# Spec: ONTOLOGY_TIER_SPEC v1.0 (OT-003: >=25 domain-specific terms, OT-006: SKOS compliance)
+#
+# INSTRUCTIONS:
+#   1. Copy this file to your agent's ontology/ directory
+#   2. Rename to ONTOLOGY_{your_domain}.yaml
+#   3. Replace all {placeholders} with actual values
+#   4. Define >= 25 domain-specific SKOS terms (OT-003 threshold)
+#   5. Run /aget-expand-ontology to bootstrap from your KB
+#   6. Run cross_reference_vocabulary.py to check for framework collisions
+#   7. Delete this instruction block before finalizing
+#
+# Created: 2026-03-23
+# Author: private-supervisor-AGET
+# Governing: L600 (Ontologies Are AGET Artifacts), L481 (Ontology-Driven Creation)
+
+apiVersion: aget.framework/v1
+kind: OntologySpec
+metadata:
+  name: {agent-name}-{domain}-ontology
+  version: 1.0.0
+  created: "{YYYY-MM-DD}"
+  author: "{agent-name}"
+  archetype: "{worker|supervisor|advisor|developer}"
+  domain_area: "{domain_area from FLEET_STATE.yaml}"
+  description: >
+    Domain-specific vocabulary for {agent-name}. Defines concepts for
+    {brief description of what this vocabulary covers}. Grounded in
+    the agent's knowledge base and session evidence.
+  extends: ONTOLOGY_personal_ai_systems_v1.0.yaml
+  tier_target: domain
+  term_count: "{N — must be >= 25 for Domain tier}"
+
+# ============================================================================
+# CONCEPT SCHEME
+# ============================================================================
+
+conceptScheme:
+  uri: "aget:ontology/{domain}"
+  prefLabel: "{Domain Name} Ontology"
+  definition: >
+    A vocabulary for describing {domain} concepts including
+    {list 3-5 key concept areas this ontology covers}.
+  hasTopConcept:
+    - "aget:domain/{domain}/{TopConcept1}"
+    - "aget:domain/{domain}/{TopConcept2}"
+    - "aget:domain/{domain}/{TopConcept3}"
+  relatedScheme:
+    - aget:ontology/personal-ai-systems
+    - "aget:ontology/{related-domain-if-any}"
+
+# ============================================================================
+# CONCEPTS
+# ============================================================================
+#
+# SKOS Term Structure (required fields marked with *):
+#   - id*: Unique identifier (format: {DOMAIN_PREFIX}-NNN)
+#   - prefLabel*: Primary human-readable label
+#   - definition*: Clear, unambiguous definition
+#   - broader: Parent concept URI (for hierarchy)
+#   - narrower: Child concept URIs (for hierarchy)
+#   - related: Related concept URIs (for lateral links)
+#   - example: Concrete example of this concept in use
+#   - source: Where this term originates (L-doc, session, domain literature)
+#
+# QUALITY CRITERIA (from ONTOLOGY_QUALITY_RUBRIC_v1.0.md):
+#   - Coverage: >= 25 terms for Domain tier
+#   - Interlinkage: >= 3 broader/narrower relationships
+#   - Domain Alignment: >= 80% of terms must be domain-relevant
+#   - SKOS Compliance: 100% — every term has id, prefLabel, definition
+#
+# ANTI-PATTERNS:
+#   - Don't copy terms from another agent's ontology (cross-domain pollution)
+#   - Don't define terms already in framework vocabulary (collision)
+#   - Don't define terms with no usage evidence in your KB (decorative)
+
+concepts:
+
+  # --------------------------------------------------------------------------
+  # Top Concept 1: {TopConcept1Name}
+  # --------------------------------------------------------------------------
+
+  - id: "{PREFIX}-001"
+    prefLabel: "{Term1}"
+    definition: >
+      {Clear definition of this domain concept}
+    broader: "aget:domain/{domain}/{TopConcept1}"
+    example: "{Concrete example from agent KB or sessions}"
+    source: "{L-doc, session, or domain reference}"
+
+  - id: "{PREFIX}-002"
+    prefLabel: "{Term2}"
+    definition: >
+      {Clear definition}
+    broader: "aget:domain/{domain}/{TopConcept1}"
+    narrower:
+      - "aget:domain/{domain}/{SubTerm}"
+    source: "{source}"
+
+  # --------------------------------------------------------------------------
+  # Top Concept 2: {TopConcept2Name}
+  # --------------------------------------------------------------------------
+
+  - id: "{PREFIX}-003"
+    prefLabel: "{Term3}"
+    definition: >
+      {Clear definition}
+    broader: "aget:domain/{domain}/{TopConcept2}"
+    related:
+      - "aget:domain/{domain}/{RelatedTerm}"
+    source: "{source}"
+
+  # --------------------------------------------------------------------------
+  # Continue defining terms...
+  # Minimum 25 terms required for Domain tier (OT-003)
+  # --------------------------------------------------------------------------
+
+# ============================================================================
+# VALIDATION CHECKLIST
+# ============================================================================
+#
+# Before committing this ontology, verify:
+#
+# [ ] >= 25 domain-specific terms defined
+# [ ] Every term has: id, prefLabel, definition (SKOS minimum)
+# [ ] >= 3 broader/narrower relationships (interlinkage)
+# [ ] extends: references a valid framework vocabulary
+# [ ] Zero collisions with framework vocabulary (run cross_reference_vocabulary.py)
+# [ ] >= 80% of terms are domain-relevant (not generic/framework concepts)
+# [ ] Terms grounded in agent KB evidence (not speculative)
+# [ ] Quality rubric score meets Domain tier minimums
+#
+# Post-commit:
+# [ ] Update version.json: ontology_tier: domain
+# [ ] Update FLEET_STATE.yaml: ontology_tier + ontology_concepts count
+# [ ] Run /aget-analyze-ontology to confirm tier compliance

@@ -1,0 +1,499 @@
+# SKILL-019: aget-expand-ontology
+# Purpose: Expand ontology with web-researched, evidence-backed concepts and enhance existing concepts
+# Created: 2026-02-25
+# Based on: Professional-core v1.2.0 SKILL.md + fleet agent v1.2.0 merge spec (G0.3)
+# Note: Fleet-agent-only capabilities marked [PENDING_VALIDATION] — to be verified against source SKILL.md when G0.1 unblocks
+
+spec:
+  id: SKILL-019
+  name: aget-expand-ontology
+  version: 2.0.0
+  status: draft
+  maturity: bootstrapping
+  format_version: '1.1'
+  system_name: aget-expand-ontology
+  created: 2026-02-25
+  format: "EARS with controlled vocabulary"
+  category: Creation
+  scope: "Expand agent ontology with web-researched concepts, enhance matched existing entries, validate results"
+
+  traceability:
+    skill_md: ".claude/skills/aget-expand-ontology/SKILL.md"
+    project_plan: "planning/PROJECT_PLAN_expand_ontology_skill_promotion_v1.0.md"
+    l_docs:
+      - "L533: Spec-First Skill Development"
+      - "L545: Convergent Independent Skill Evolution"
+      - "L552: Spec-First Applies to Merge and Promotion"
+      - "L551: Due Diligence Process Compliance Gap"
+    vocabulary_terms:
+      - "AGET_Skill"
+      - "Skill_Specification"
+      - "EARS_Pattern"
+      - "Skill_Promotion"
+
+  lineage:
+    professional_core_v1_2_0:
+      features: "Steps 1-10, 5b (enhance matched), 10b (registry update), C1-C14, PrefLabel spec"
+      status: "verified (read 2026-02-25)"
+    fleet_agent_v1_2_0:
+      features: "Step 0.5 (prereq validation), Step 8b (index update), Step 10b (summary), multi-vocabulary, orphan detection, --vocabulary, --plan, --summary, C11, pipeline diagram"
+      status: "PENDING_VALIDATION — fleet agent SKILL.md not yet obtained (G0.1 blocked)"
+    supervisor_additions:
+      features: "Ontology config block, --from-kb mode, concept staging, PROCO ID auto-increment, lifecycle frontmatter"
+      status: "specified in merge spec (G0.3)"
+
+# =============================================================================
+# CAPABILITIES
+# =============================================================================
+
+capabilities:
+
+  # --- Invocation & Configuration ---
+
+  EO-001:
+    domain: invocation
+    statement: "WHEN user invokes `/aget-expand-ontology`, the SKILL shall load the ontology configuration from the config block in SKILL.md frontmatter and execute the expansion workflow."
+    pattern: event-driven
+    trigger: slash_command
+    priority: critical
+    inputs:
+      - "Ontology config block (vocabulary_glob, validation_command, quality_history, vocabulary_index, project_prefix, staging_file)"
+    outputs:
+      - "Expansion report with concept counts, topic impact, quality score"
+    verification: "Skill invocable via slash command; config block parsed correctly"
+
+  EO-002:
+    domain: configuration
+    statement: "The SKILL shall read ontology paths from the config block rather than hardcoding vocabulary, validation, or index paths."
+    pattern: ubiquitous
+    priority: critical
+    verification: "grep -c hardcoded paths in SKILL.md returns 0; all paths from config block"
+    notes: "Key generalization — enables multi-vocabulary and cross-agent portability"
+
+  EO-003:
+    domain: configuration
+    source: fleet_agent_v1_2_0
+    validation: PENDING_VALIDATION
+    statement: "WHEN `--vocabulary <name>` parameter is provided, the SKILL shall filter vocabulary_glob to match only the specified vocabulary."
+    pattern: optional
+    priority: medium
+    verification: "--vocabulary param filters correctly; single vocabulary expanded"
+
+  # --- Prerequisite Validation ---
+
+  EO-004:
+    domain: prerequisite
+    source: fleet_agent_v1_2_0
+    validation: PENDING_VALIDATION
+    statement: "WHEN the SKILL is invoked, the SKILL shall first validate that required files exist (vocabulary files matching vocabulary_glob, validation command, quality_history) before proceeding to Step 1."
+    pattern: event-driven
+    trigger: skill_invocation
+    priority: high
+    outputs:
+      - "Prerequisite check pass/fail"
+      - "Missing file list (if any)"
+    verification: "Missing prerequisite file causes STOP with advisory message"
+    notes: "Fleet agent Step 0.5"
+
+  # --- Gap Analysis (Steps 1-3) ---
+
+  EO-005:
+    domain: gap_analysis
+    statement: "The SKILL shall load the current ontology state by reading vocabulary files, validation report, topics spec, and quality history."
+    pattern: ubiquitous
+    priority: critical
+    verification: "All required files read; state summary available for gap analysis"
+    notes: "Step 1"
+
+  EO-006:
+    domain: gap_analysis
+    statement: "The SKILL shall identify thin topics by calculating priority scores based on tier importance and gap size."
+    pattern: ubiquitous
+    priority: critical
+    outputs:
+      - "Ranked list of thin topics with priority scores"
+    verification: "Topics ranked by (5 - tier) * (target_density - current_concepts)"
+    notes: "Step 2"
+
+  EO-007:
+    domain: gap_analysis
+    statement: "The SKILL shall propose N expansion areas ranked by priority score, reporting target topics, categories, KB evidence, and rationale for each."
+    pattern: ubiquitous
+    priority: critical
+    outputs:
+      - "N expansion areas with rationale"
+    verification: "Areas presented to user before proceeding"
+    notes: "Step 3"
+
+  EO-008:
+    domain: gap_analysis
+    statement: "WHEN `--dry-run` is passed, the SKILL shall present expansion areas and stop without writing to vocabulary."
+    pattern: optional
+    priority: medium
+    verification: "--dry-run produces plan output; no files modified"
+
+  # --- Web Research (Step 4) ---
+
+  EO-009:
+    domain: research
+    statement: "The SKILL shall launch parallel web search agents for each expansion area using the search prompt template with target topics, existing concepts, and hierarchy opportunities."
+    pattern: ubiquitous
+    priority: critical
+    verification: "Parallel agents launched; results collected per area"
+    notes: "Step 4"
+
+  EO-010:
+    domain: research
+    statement: "WHEN `--from-kb <path>` parameter is provided, the SKILL shall extract concepts from the specified knowledge base document instead of web search."
+    pattern: optional
+    source: supervisor_additions
+    priority: medium
+    inputs:
+      - "Path to KB document"
+    outputs:
+      - "Concepts extracted from document"
+    verification: "--from-kb reads document; concepts extracted without web search"
+
+  EO-011:
+    domain: research
+    statement: "WHEN `--skip-web-search` is passed, the SKILL shall perform KB-only gap analysis without web research."
+    pattern: optional
+    priority: low
+    verification: "No web search executed; analysis from local KB only"
+
+  # --- Concept Selection & Curation (Step 5) ---
+
+  EO-012:
+    domain: curation
+    statement: "The SKILL shall select top N concepts per area using weighted criteria: evidence strength (40%), topic grounding value (25%), interlinkage potential (20%), novelty (15%)."
+    pattern: ubiquitous
+    priority: high
+    verification: "Selection criteria applied; concepts ranked and split into domain vs bridging"
+    notes: "Step 5"
+
+  EO-013:
+    domain: curation
+    statement: "The SKILL shall check each candidate concept against existing vocabulary prefLabels and altLabels for deduplication."
+    pattern: ubiquitous
+    priority: critical
+    verification: "No duplicate concepts added; matches identified"
+    notes: "Step 5 deduplication"
+
+  EO-014:
+    domain: curation
+    statement: "The SKILL shall persist unused but valid concepts to the staging_file for future consideration."
+    pattern: ubiquitous
+    source: supervisor_additions
+    priority: medium
+    outputs:
+      - "EXPANSION_CANDIDATES.yaml updated with deferred concepts"
+    verification: "Staging file written; deferred concepts recoverable"
+
+  # --- Enhancement of Matched Concepts (Step 5b) ---
+
+  EO-015:
+    domain: enhancement
+    statement: "WHEN a candidate concept matches an existing vocabulary entry during deduplication AND `--skip-enhance` is NOT passed, the SKILL shall assess and apply additive enhancements to the existing entry."
+    pattern: conditional
+    priority: high
+    outputs:
+      - "Enhanced concepts table (ID, fields updated, new evidence)"
+    verification: "Matched concepts enhanced with new evidence; existing content preserved"
+    notes: "Step 5b (professional-core v1.1.0 addition)"
+
+  EO-016:
+    domain: enhancement
+    statement: "The SKILL shall only enhance existing concepts additively — appending to example and sources fields, updating definition only if materially changed."
+    pattern: ubiquitous
+    priority: critical
+    verification: "Existing field content preserved; enhancements appended"
+
+  # --- SKOS Entry Writing (Steps 6-7) ---
+
+  EO-017:
+    domain: writing
+    statement: "The SKILL shall assign concept IDs by determining target category and finding next available ID in that category."
+    pattern: ubiquitous
+    priority: high
+    verification: "IDs sequential within category; no gaps or collisions"
+    notes: "Step 6. PROCO ID auto-increment from quality_history."
+
+  EO-018:
+    domain: writing
+    statement: "The SKILL shall write complete SKOS entries with prefLabel, altLabel, definition, broader, narrower, related, example, topics, and sources fields."
+    pattern: ubiquitous
+    priority: critical
+    verification: "All SKOS fields present; entries parseable as valid YAML"
+    notes: "Step 7"
+
+  EO-019:
+    domain: writing
+    statement: "The SKILL shall verify all new prefLabels against PrefLabel quality rules (PL-01 through PL-05) before writing to vocabulary."
+    pattern: ubiquitous
+    priority: high
+    verification: "All prefLabels pass PL-01 through PL-05; >10% failure triggers review gate"
+    notes: "Step 7 PrefLabel spec (professional-core v1.2.0 addition)"
+
+  EO-020:
+    domain: writing
+    statement: "The SKILL shall include lifecycle frontmatter with status field on new concepts."
+    pattern: ubiquitous
+    source: supervisor_additions
+    priority: low
+    verification: "New concepts have status: active in frontmatter"
+
+  # --- Vocabulary Write & Index Update (Steps 8, 8b) ---
+
+  EO-021:
+    domain: writing
+    statement: "WHEN NOT `--dry-run`, the SKILL shall write SKOS entries to the vocabulary YAML, apply enhancements to matched entries, and update vocabulary metadata (concept_count, extension_projects, version_history)."
+    pattern: conditional
+    priority: critical
+    verification: "Vocabulary file updated; metadata consistent with changes"
+    notes: "Step 8"
+
+  EO-022:
+    domain: indexing
+    source: fleet_agent_v1_2_0
+    validation: PENDING_VALIDATION
+    statement: "WHEN vocabulary is updated, the SKILL shall update the vocabulary_index file to reflect new concepts and categories."
+    pattern: event-driven
+    trigger: vocabulary_write
+    priority: medium
+    verification: "Vocabulary index updated; new concepts listed"
+    notes: "Fleet agent Step 8b"
+
+  # --- Validation (Step 9) ---
+
+  EO-023:
+    domain: validation
+    statement: "WHEN vocabulary is updated, the SKILL shall run the validation_command from the config block and verify: quality score maintained or improved, 0 orphan concepts, all new concepts have sources, topic density improved."
+    pattern: event-driven
+    trigger: vocabulary_write
+    priority: critical
+    outputs:
+      - "Validation report"
+      - "Quality score before/after"
+      - "Orphan count"
+    verification: "Validation passes; quality score ≥ pre-expansion score"
+    notes: "Step 9"
+
+  # --- Orphan Detection ---
+
+  EO-024:
+    domain: validation
+    source: fleet_agent_v1_2_0
+    validation: PENDING_VALIDATION
+    statement: "The SKILL shall detect orphan concepts (concepts with no related links to existing ontology) inline during writing and flag them before committing."
+    pattern: ubiquitous
+    priority: high
+    verification: "Orphan concepts detected and reported; 0 orphans after resolution"
+
+  # --- Reporting (Steps 10, 10b) ---
+
+  EO-025:
+    domain: reporting
+    statement: "The SKILL shall produce an expansion report including: vocabulary version change, concept counts, areas expanded, enhanced concepts table, topic impact table, quality score before/after, interlinkage summary."
+    pattern: ubiquitous
+    priority: critical
+    outputs:
+      - "Expansion report in structured markdown"
+    verification: "Report contains all required sections"
+    notes: "Step 10"
+
+  EO-026:
+    domain: reporting
+    statement: "WHEN NOT `--dry-run`, the SKILL shall update the project registry (PROJECT_REGISTRY.yaml) with the expansion project entry and update metadata counters."
+    pattern: conditional
+    priority: medium
+    verification: "Registry entry created; metadata.next_available_id updated"
+    notes: "Step 10b (both lineages have this)"
+
+  EO-027:
+    domain: reporting
+    source: fleet_agent_v1_2_0
+    validation: PENDING_VALIDATION
+    statement: "The SKILL shall display a summary of key metrics at the end of execution including concepts added, enhanced, skipped, and quality delta."
+    pattern: ubiquitous
+    priority: medium
+    verification: "Summary line displayed with key counts"
+    notes: "Fleet agent Step 10b summary"
+
+  # --- Plan Mode ---
+
+  EO-028:
+    domain: planning
+    source: fleet_agent_v1_2_0
+    validation: PENDING_VALIDATION
+    statement: "WHEN `--plan` flag is provided, the SKILL shall output a structured expansion plan without executing."
+    pattern: optional
+    priority: low
+    verification: "--plan flag produces plan output; no vocabulary modifications"
+
+  EO-029:
+    domain: planning
+    source: fleet_agent_v1_2_0
+    validation: PENDING_VALIDATION
+    statement: "WHEN `--summary` flag is provided, the SKILL shall output only the summary metrics without full report."
+    pattern: optional
+    priority: low
+    verification: "--summary produces condensed output"
+
+# =============================================================================
+# TEST CASES
+# =============================================================================
+
+test_cases:
+  T-EO-001:
+    capability: "EO-001"
+    scenario: "Basic invocation with config block"
+    given: "Agent has ontology config block in SKILL.md frontmatter"
+    when: "User runs `/aget-expand-ontology`"
+    then: "Skill loads config, executes workflow, produces expansion report"
+    verification_method: "manual"
+
+  T-EO-002:
+    capability: "EO-002"
+    scenario: "No hardcoded paths"
+    given: "SKILL.md v2.0.0 deployed"
+    when: "grep for hardcoded vocabulary/tool paths"
+    then: "0 matches — all paths from config block"
+    verification_method: "automated"
+    command: "grep -ci 'INTELLIGENCE_VOCABULARY\\|visualize_ontology\\|validate_ontology' .claude/skills/aget-expand-ontology/SKILL.md"
+    expected: "0"
+
+  T-EO-003:
+    capability: "EO-004"
+    scenario: "Missing prerequisite file"
+    given: "Validation report does not exist"
+    when: "User runs `/aget-expand-ontology`"
+    then: "STOP with advisory: 'Run validation command first'"
+    verification_method: "manual"
+
+  T-EO-004:
+    capability: "EO-008"
+    scenario: "Dry-run mode"
+    given: "Agent with valid ontology"
+    when: "User runs `/aget-expand-ontology --dry-run`"
+    then: "Expansion areas presented; no files modified"
+    verification_method: "manual"
+
+  T-EO-005:
+    capability: "EO-010"
+    scenario: "Document-driven expansion"
+    given: "KB document with extractable concepts"
+    when: "User runs `/aget-expand-ontology --from-kb knowledge/REPORT.md`"
+    then: "Concepts extracted from document; no web search performed"
+    verification_method: "manual"
+
+  T-EO-006:
+    capability: "EO-013, EO-015"
+    scenario: "Duplicate detection and enhancement"
+    given: "Candidate concept matches existing entry with new evidence"
+    when: "Deduplication runs during Step 5"
+    then: "Match identified; existing concept enhanced (not duplicated)"
+    verification_method: "manual"
+
+  T-EO-007:
+    capability: "EO-023, EO-024"
+    scenario: "Validation catches orphan"
+    given: "New concept written without related link"
+    when: "Validation runs at Step 9"
+    then: "Orphan detected; flagged before commit"
+    verification_method: "manual"
+
+  T-EO-008:
+    capability: "EO-014"
+    scenario: "Unused concepts staged"
+    given: "Valid concepts not selected for expansion"
+    when: "Step 5 curation completes"
+    then: "Deferred concepts written to staging_file"
+    verification_method: "manual"
+
+  T-EO-009:
+    capability: "EO-026"
+    scenario: "Registry update"
+    given: "Expansion completed in execution mode"
+    when: "Step 10b runs"
+    then: "PROJECT_REGISTRY.yaml updated with new PROCO entry"
+    verification_method: "manual"
+
+# =============================================================================
+# CONSTRAINTS
+# =============================================================================
+
+constraints:
+  C-EO-001:
+    statement: "The SKILL shall NEVER fabricate sources — all sources entries MUST be real, verifiable references."
+    rationale: "Evidence integrity is foundational to ontology quality"
+    source: "C1 (both lineages)"
+
+  C-EO-002:
+    statement: "The SKILL shall NEVER create orphan concepts — all concepts MUST have >=1 related link to existing ontology."
+    rationale: "Orphans break interlinkage and topic grounding"
+    source: "C2 (both lineages)"
+
+  C-EO-003:
+    statement: "The SKILL shall NEVER remove or modify existing concepts — expansion is additive only."
+    rationale: "Prevents data loss; enhancements append, never replace"
+    source: "C3 (both lineages)"
+
+  C-EO-004:
+    statement: "The SKILL shall NEVER skip web research unless --skip-web-search or --from-kb explicitly passed."
+    rationale: "Evidence-backed expansion is core value proposition"
+    source: "C4 (both lineages)"
+
+  C-EO-005:
+    statement: "The SKILL shall NEVER write to vocabulary without running validation afterward."
+    rationale: "Prevents quality regressions"
+    source: "C5 (both lineages)"
+
+  C-EO-006:
+    statement: "The SKILL shall log expansion to quality_history."
+    rationale: "Audit trail for ontology evolution"
+    source: "C6 (both lineages)"
+
+  C-EO-007:
+    statement: "The SKILL shall achieve 60%+ concepts at evidence Tier 1-2."
+    rationale: "Quality threshold for evidence grounding"
+    source: "C7 (both lineages)"
+
+  C-EO-008:
+    statement: "The SKILL shall check for duplicates against existing prefLabels and altLabels before adding."
+    rationale: "Prevents vocabulary bloat and ID collisions"
+    source: "C8 (both lineages)"
+
+  C-EO-009:
+    statement: "The SKILL shall read validation report before proposing expansions."
+    rationale: "Gap analysis requires current state"
+    source: "C9 (both lineages)"
+
+  C-EO-010:
+    statement: "The SKILL shall present expansion areas to user before executing web research."
+    rationale: "Human-in-the-loop for expansion direction"
+    source: "C10 (both lineages)"
+
+  C-EO-011:
+    statement: "Enhancement is additive only — the SKILL shall NEVER remove existing example text or sources entries."
+    rationale: "Preserves provenance chain"
+    source: "C11 (both lineages)"
+
+  C-EO-012:
+    statement: "Enhanced concepts MUST retain all existing field content."
+    rationale: "Append-only enhancement pattern"
+    source: "C12 (professional-core)"
+
+  C-EO-013:
+    statement: "The SKILL shall verify all new prefLabels against PrefLabel quality rules (PL-01 through PL-05) before writing. >10% failure rate triggers review."
+    rationale: "Label quality standard"
+    source: "C13 (professional-core)"
+
+  C-EO-014:
+    statement: "The SKILL shall update PROJECT_REGISTRY after execution-mode expansion. If registry does not exist, WARN and skip."
+    rationale: "Project tracking continuity"
+    source: "C14 (professional-core)"
+
+  C-EO-015:
+    statement: "The SKILL shall NOT contain hardcoded vocabulary, validation tool, or index file paths. All paths MUST come from the ontology config block."
+    rationale: "Cross-agent portability — different agents use different tool paths"
+    source: "v2.0.0 merge requirement"
