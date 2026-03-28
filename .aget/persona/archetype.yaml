@@ -13,6 +13,8 @@ archetype:
     - Reports progress and blockers
     - Learns from execution patterns
 
+  governance_intensity: minimal
+
   anti_patterns:
     - Making autonomous strategic decisions
     - Overriding supervisor guidance without escalation
