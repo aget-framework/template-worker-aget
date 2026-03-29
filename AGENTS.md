@@ -140,6 +140,13 @@ Make CLI coding agents better collaborators through conversational command patte
 
 ---
 
+### Governance Capabilities
+
+| Attribute | Value |
+|-----------|-------|
+| Governance Intensity | Lightweight |
+
+
 ## Skill Routing
 
 | Task | Skill | When to Use |
