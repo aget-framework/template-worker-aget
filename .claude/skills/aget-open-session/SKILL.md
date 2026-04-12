@@ -28,15 +28,23 @@ Examples:
 
 Run wake-up infrastructure as a single Bash call:
 
-1. **Check** if `scripts/record_invocation.py` exists using Glob (not Bash)
-2. **If exists**, run both chained:
-   ```bash
-   python3 scripts/wake_up.py && python3 scripts/record_invocation.py aget-open-session
-   ```
-3. **If not**, run wake-up only:
-   ```bash
-   python3 scripts/wake_up.py
-   ```
+Run the wake-up script using the agent's canonical path:
+
+```bash
+# Try canonical paths in order (agents may have different locations)
+if test -f scripts/wake_up.py; then
+  python3 scripts/wake_up.py
+elif test -f .aget/patterns/session/wake_up.py; then
+  python3 .aget/patterns/session/wake_up.py
+else
+  echo "No wake_up.py found — run manual wake-up"
+fi
+```
+
+Optionally log invocation if telemetry script available:
+```bash
+test -f scripts/log_skill_invocation.py && python3 scripts/log_skill_invocation.py --skill aget-open-session --version 0.1.0 --outcome success --duration-seconds 0
+```
 
 This produces agent identity, version, git status, and health check.
 

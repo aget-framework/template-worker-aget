@@ -130,7 +130,8 @@ grep "gate.*G" .aget/logs/skill_invocations.jsonl | tail -5
 After producing the report, log the invocation:
 
 ```bash
-python3 scripts/log_skill_invocation.py \
+# Log if telemetry script available (optional — does not affect skill function)
+test -f scripts/log_skill_invocation.py && python3 scripts/log_skill_invocation.py \
     --skill aget-release-critique --version 0.2.0 \
     --outcome {success|partial|failed} \
     --duration-seconds {N} \

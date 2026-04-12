@@ -104,7 +104,8 @@ Cross-reference validator results with spec expectations. Any validator failure 
 After producing the report, log the invocation:
 
 ```bash
-python3 scripts/log_skill_invocation.py \
+# Log if telemetry script available (optional — does not affect skill function)
+test -f scripts/log_skill_invocation.py && python3 scripts/log_skill_invocation.py \
     --skill aget-release-audit-specs --version 0.2.0 \
     --outcome {success|partial|failed} \
     --duration-seconds {N} \

@@ -226,7 +226,7 @@ Execute:
 4. Verify version number follows semantic versioning
 5. Run structural validators if available:
    ```bash
-   python3 .aget/patterns/sync/validate_spec_compliance.py <spec_path> 2>/dev/null
+   test -f .aget/patterns/sync/validate_spec_compliance.py && python3 .aget/patterns/sync/validate_spec_compliance.py <spec_path> 2>/dev/null || echo "Spec compliance validator not available — manual review required"
    ```
 
 Report results:

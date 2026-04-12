@@ -7,7 +7,7 @@ spec: SKILL-019
 category: Creation
 ontology:
   vocabulary_glob: "ontology/ONTOLOGY_*.yaml"
-  validation_command: "python3 tools/validate_ontology.py --format=report --log-history"
+  validation_command: "test -f tools/validate_ontology.py && python3 tools/validate_ontology.py --format=report --log-history || echo 'Validation skipped (tools/validate_ontology.py not available)'"
   quality_history: "ontology/QUALITY_HISTORY.yaml"
   vocabulary_index: "ontology/VOCABULARY-INDEX.md"
   project_prefix: "FWRK"
@@ -61,7 +61,7 @@ The `ontology` config block in frontmatter defines all paths. **Agents MUST cust
 ```yaml
 ontology:
   vocabulary_glob: "ontology/ONTOLOGY_*.yaml"           # Glob for vocabulary files
-  validation_command: "python3 tools/validate_ontology.py --format=report --log-history"
+  validation_command: "test -f tools/validate_ontology.py && python3 tools/validate_ontology.py --format=report --log-history || echo 'Validation skipped (tools/validate_ontology.py not available)'"
   quality_history: "ontology/QUALITY_HISTORY.yaml"       # Expansion audit trail
   vocabulary_index: "ontology/VOCABULARY-INDEX.md"       # Optional index file
   project_prefix: "FWRK"                                # Expansion project ID prefix
