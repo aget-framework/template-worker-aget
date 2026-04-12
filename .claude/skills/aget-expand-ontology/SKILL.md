@@ -1,7 +1,7 @@
 ---
 name: aget-expand-ontology
 description: Expand SKOS ontology vocabularies with web-researched, evidence-backed concepts. Identifies thin topics, proposes expansion areas, researches best-practice concepts, creates bridging interlinkage, writes formal SKOS entries, and enriches matched existing entries.
-version: 2.0.0
+version: 2.1.0
 status: active
 spec: SKILL-019
 category: Creation
@@ -10,7 +10,7 @@ ontology:
   validation_command: "python3 tools/validate_ontology.py --format=report --log-history"
   quality_history: "ontology/QUALITY_HISTORY.yaml"
   vocabulary_index: "ontology/VOCABULARY-INDEX.md"
-  project_prefix: "ONTO"
+  project_prefix: "FWRK"
   staging_file: "ontology/EXPANSION_CANDIDATES.yaml"
 ---
 
@@ -44,6 +44,7 @@ Optional parameters after skill name:
 | `--skip-enhance` | false | Skip enhancement of matched concepts during deduplication |
 | `--plan` | false | Output structured expansion plan without executing |
 | `--summary` | false | Output only summary metrics |
+| `--provenance "desc"` | None | Strategic context that triggered this expansion (event, motivation, audience) |
 
 Examples:
 - `/aget-expand-ontology` — Auto-detect thinnest vocabulary, 3 areas, 7+3 concepts each
@@ -51,6 +52,7 @@ Examples:
 - `/aget-expand-ontology --from-kb knowledge/REPORT.md` — Document-driven expansion
 - `/aget-expand-ontology --dry-run` — Propose expansion without writing
 - `/aget-expand-ontology --concepts-per-area 5 --bridging-per-area 2` — Smaller expansion
+- `/aget-expand-ontology --provenance "Marcus 1:1 surfaced missing meta-concepts for team topology"` — Expansion with strategic context
 
 ## Configuration
 
@@ -62,7 +64,7 @@ ontology:
   validation_command: "python3 tools/validate_ontology.py --format=report --log-history"
   quality_history: "ontology/QUALITY_HISTORY.yaml"       # Expansion audit trail
   vocabulary_index: "ontology/VOCABULARY-INDEX.md"       # Optional index file
-  project_prefix: "ONTO"                                # Expansion project ID prefix
+  project_prefix: "FWRK"                                # Expansion project ID prefix
   staging_file: "ontology/EXPANSION_CANDIDATES.yaml"     # Deferred concepts staging
 ```
 
@@ -92,6 +94,28 @@ Read required files to understand current state:
 3. Read target vocabulary (smallest by concept count if multiple)
 4. Parse concept scheme, clusters/topics, and concept counts
 5. Read quality history from config `quality_history` path
+
+### Step 1b: Capture Expansion Provenance
+
+If `--provenance` was provided, store it for use in Steps 8 and 10.
+
+If `--provenance` was NOT provided, prompt:
+
+> **What triggered this expansion?**
+> Briefly describe the event, motivation, or audience (e.g., "Marcus 1:1 surfaced missing meta-concepts" or "pre-release vocabulary gap audit").
+> Press Enter to skip.
+
+If user provides a response, store as provenance. If skipped, provenance is `null` (no provenance recorded — expansion proceeds without strategic context).
+
+Provenance structure (used in Steps 8 and 10):
+```yaml
+provenance:
+  event: "{what happened}"
+  motivation: "{why it matters}"
+  audience: "{who benefits}"
+```
+
+If the user provides a single string, parse it as `event` and leave `motivation` and `audience` as null.
 
 ### Step 2: Gap Analysis
 
@@ -289,6 +313,18 @@ If NOT `--dry-run`:
 2. **Apply enhancements** to matched existing concepts (unless `--skip-enhance`)
 3. **Apply reciprocal link updates** to existing concepts
 4. **Update metadata**: concept count, extension projects, version history
+5. **Write provenance** (if captured in Step 1b): Add `provenance:` sub-field to the new `version_history` entry:
+   ```yaml
+   - version: "X.Y.Z"
+     date: "YYYY-MM-DD"
+     provenance:
+       event: "{from Step 1b}"
+       motivation: "{from Step 1b}"
+       audience: "{from Step 1b}"
+     changes:
+       - "..."
+   ```
+6. **Write provenance to quality_history** (if captured): Add `provenance:` field to the snapshot entry in the config `quality_history` file
 
 ### Step 8b: Update Index
 
@@ -311,6 +347,7 @@ Run validation command from config block and verify:
 **Vocabulary**: {name} v{before} -> v{after}
 **Concepts**: {before} -> {after} (+{delta})
 **Project**: {prefix}-{YYYY}-{NNN}
+**Provenance**: {event} (or "none captured")
 
 ### Areas Expanded
 
@@ -347,6 +384,20 @@ If NOT `--dry-run` and project registry exists:
 
 If registry does not exist, WARN and skip.
 
+### Step 10c: Expansion Retrospective
+
+After reporting results and updating registry, prompt:
+
+> **Expansion Retrospective** (optional)
+> - **Went well**: What worked in this expansion cycle?
+> - **Could improve**: What would you change next time?
+> - **Concepts**: Any concepts that surprised you or seem off?
+
+If user provides a response, include it in the session file under `## Retrospective`.
+If user declines (empty response or "skip"), proceed without recording.
+
+This step is **non-blocking** — the expansion is already complete and committed. The retrospective captures process learning for future cycles.
+
 ## Constraints
 
 - **C1**: NEVER fabricate sources — all sources MUST be real, verifiable references
@@ -366,6 +417,7 @@ If registry does not exist, WARN and skip.
 - **C15**: MUST verify 20-30% counter-perspective ratio before SKOS writing
 - **C16**: MUST NOT contain hardcoded vocabulary, validation tool, or index paths — all from config block
 - **C17**: MUST verify and maintain reciprocal SKOS links for all new concepts
+- **C18**: MUST prompt for expansion provenance when `--provenance` is not provided; provenance is optional but prompted (not silently skipped)
 
 ## Error Handling
 
@@ -381,9 +433,9 @@ If registry does not exist, WARN and skip.
 
 ## Related Skills
 
-- `/aget-capture-observation` — Capture raw observations before expansion
+- `/aget-record-observation` — Record raw observations before expansion
 - `/aget-record-lesson` — Record expansion learnings
-- `/aget-study-up` — Research topic context before expansion
+- `/aget-study-topic` — Research topic context before expansion
 - `/aget-analyze-ontology` — Analyze ontology health (complementary)
 
 ## Traceability
@@ -395,11 +447,13 @@ If registry does not exist, WARN and skip.
 | Lineage (pro-core) | professional-core-aget v1.5.0 (Steps 5a, 5b, 7a, PrefLabel spec, registry) |
 | Lineage (framework) | framework-AGET v1.0.0 (generalized structure, multi-vocabulary) |
 | Lineage (supervisor) | Config block, --from-kb, staging, PROCO auto-increment, lifecycle frontmatter |
-| L-docs | L545 (convergent evolution), L552 (spec-first merge), L580 (graduated autonomy), L584 (skill deficit) |
+| L-docs | L545 (convergent evolution), L552 (spec-first merge), L580 (graduated autonomy), L584 (skill deficit), L823 (meta-meta gap taxonomy) |
+| Enhancement | #388 (provenance capture), #561 (embedded retro) |
 
 ---
 
-*aget-expand-ontology v2.0.0*
+*aget-expand-ontology v2.1.0*
 *Category: Creation*
 *Merged: professional-core v1.5.0 + framework-AGET v1.0.0 + supervisor additions*
-*Spec: SKILL-019 (29 capabilities, 15 constraints)*
+*Spec: SKILL-019 (31 capabilities, 16 constraints)*
+*v2.1.0: +--provenance (EO-030, C18, #388) +Step 10c retro (EO-031, #561)*
