@@ -47,41 +47,45 @@ exit 0
 
     'critical': '''#!/bin/bash
 # AGET Pre-Push Hook - Critical Tests (Phase 2)
-# Blocks on critical test failures only
+# Blocks on the first failing test in the agent's OWN suite.
+#
+# v3.20 fix (C-I1 / #1506): previously ran a hardcoded test-ID list that did
+# NOT exist in every agent — that shipped a hook which errored on the missing
+# files and blocked ALL pushes. Now runs the agent's actual tests/ suite,
+# fail-fast, so the gate reflects real test state.
 
-echo "🔍 Running critical tests (5-10 seconds)..."
+echo "🔍 Running test gate (fail-fast)..."
 
 # Check for pytest
 if ! command -v pytest &> /dev/null; then
     pip3 install -q pytest pytest-cov
 fi
 
-# Define critical tests that MUST pass
-CRITICAL_TESTS="
-    tests/test_gate2_features.py::TestEndToEndWorkflow::test_full_workflow
-    tests/test_session_protocol.py::test_pattern_detection
-    tests/test_installer.py::test_installer_minimal_template
-"
+# No tests/ directory → nothing to gate (don't block).
+if [ ! -d tests ]; then
+    echo "ℹ️  No tests/ directory — skipping pre-push gate."
+    exit 0
+fi
 
-# Run only critical tests with timeout
-timeout 10 python3 -m pytest $CRITICAL_TESTS -q --tb=no 2>/dev/null
+# Run the agent's ACTUAL suite, fail-fast (stop at first failure), bounded.
+timeout 120 python3 -m pytest tests/ -q --maxfail=1 --tb=short
 
 RESULT=$?
 if [ $RESULT -eq 124 ]; then
-    echo "⚠️  Tests timed out (>10s). Proceeding anyway..."
+    echo "⚠️  Test gate timed out (>120s). Proceeding anyway..."
     exit 0
 elif [ $RESULT -ne 0 ]; then
-    echo "❌ Critical tests failed!"
+    echo "❌ Test gate failed (a test in tests/ is red)."
     echo ""
     echo "   Options:"
-    echo "   1. Fix tests:     python3 -m pytest $CRITICAL_TESTS -v"
+    echo "   1. See failure:   python3 -m pytest tests/ -q --maxfail=1"
     echo "   2. Skip hook:     git push --no-verify"
     echo "   3. Switch mode:   python3 scripts/install_hooks.py --advisory"
     echo ""
     exit 1
 fi
 
-echo "✅ Critical tests passed"
+echo "✅ Test gate passed"
 exit 0
 ''',
 
