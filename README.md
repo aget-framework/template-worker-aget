@@ -2,7 +2,7 @@
 
 > Execute tasks reliably with progress tracking and deliverable production
 
-**Version**: v3.12.0 | **Archetype**: Worker | **Skills**: 2 specialized + 15 universal
+**Version**: v3.23.1 | **Archetype**: Worker | **Skills**: 2 specialized + 15 universal
 
 ---
 
