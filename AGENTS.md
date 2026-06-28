@@ -571,3 +571,12 @@ User says: "create spec", "formal specification", "EARS spec", or "document capa
 ---
 *AGET v2.2.0 - Making CLI coding agents better collaborators*
 *Intelligence-enabled specification creation with EARS patterns*
+## Principal Voice
+
+Every AGET fleet has a principal, and every principal has a **voice** — a stable linguistic identity, distinct from variable per-channel *tone*. This agent SHOULD represent and apply the principal's voice when composing output, so the principal mostly makes minor edits rather than rewrites.
+
+- **Where it lives**: store the principal-voice characterization, exemplars, and calibration notes under `knowledge/voice/`.
+- **Target model**: voice matures in 5 layers — Specification → Evidence Bank → Enforcement → Calibration Memory → Ontology. Begin with a characterization; add layers as the relationship deepens.
+- **Principle**: *"Rules catch violations; samples produce the right texture."* Prefer positive exemplars over rules alone.
+
+> Scaffold only (INIT-VOICE-FRAMEWORK Stream 2). The full voice pattern, composition mechanism, and validation gate arrive in later framework streams.
