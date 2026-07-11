@@ -1,8 +1,8 @@
 {
-  "aget_version": "3.25.0",
+  "aget_version": "3.26.0",
   "manifest_version": "3.0",
   "created": "2025-09-21",
-  "updated": "2026-07-04",
+  "updated": "2026-07-11",
   "template": "worker",
   "agent_name": "template-worker-aget",
   "instance_type": "template",
