@@ -2,7 +2,7 @@
 
 > Execute tasks reliably with progress tracking and deliverable production
 
-**Version**: v3.34.0 | **Archetype**: Worker | **Skills**: full universal set + worker-specific (see `.claude/skills/`; conformance validator-enforced)
+**Version**: v3.34.0 | **Archetype**: Worker | **Skills**: 38 installed; 29 required universal
 
 ---
 
@@ -22,14 +22,15 @@ The Worker archetype is the **foundation of task execution** in AGET. While ever
 
 ## Skills
 
-Worker agents come with **2 archetype-specific skills** plus the universal AGET skills.
+Worker includes **3 release-execution skills** in addition to its required universal baseline and other installed skills. The template contains **38 installed skills** in total.
 
 ### Archetype Skills
 
 | Skill | Description |
 |-------|-------------|
-| **aget-execute-task** | Execute defined tasks with step-by-step progress tracking. Validates prerequisites, produces deliverables, handles blockers with human escalation. |
-| **aget-report-progress** | Report work status including completion percentage, blockers, and risks. Supports handoff documentation for session continuity. |
+| **aget-release-build** | Builder role for an authorized release workflow. |
+| **aget-release-audit-specs** | Specification-audit role for an authorized release workflow. |
+| **aget-release-critique** | Critic role for an authorized release workflow. |
 
 ### Universal Skills
 
@@ -80,8 +81,8 @@ python3 -m pytest tests/ -v
 
 ```bash
 # In Claude Code CLI
-/aget-execute-task       # Execute a defined task
-/aget-report-progress    # Report on current work status
+/aget-propose-actions    # Propose next actions
+/aget-describe-session   # Describe current session work
 ```
 
 ---
@@ -116,7 +117,7 @@ Skills are provided by the template. Agents and rules directories are scaffolded
 |-----------|-------|
 | **Framework** | [AGET v3.34.0](https://github.com/aget-framework/aget) |
 | **Archetype** | Worker |
-| **Skills** | 17 total (2 archetype + 15 universal) |
+| **Skills** | 38 installed (29 required universal + 9 additional); see `.claude/skills/` |
 | **Ontology** | 7 concepts, 2 clusters |
 | **License** | Apache 2.0 |
 
