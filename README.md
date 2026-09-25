@@ -2,7 +2,7 @@
 
 > Execute tasks reliably with progress tracking and deliverable production
 
-**Version**: v3.34.0 | **Archetype**: Worker | **Skills**: 38 installed; 29 required universal
+**Version**: v3.35.0 | **Archetype**: Worker | **Skills**: 38 installed; 29 required universal
 
 ---
 
@@ -115,7 +115,7 @@ Skills are provided by the template. Agents and rules directories are scaffolded
 
 | Attribute | Value |
 |-----------|-------|
-| **Framework** | [AGET v3.34.0](https://github.com/aget-framework/aget) |
+| **Framework** | [AGET v3.35.0](https://github.com/aget-framework/aget) |
 | **Archetype** | Worker |
 | **Skills** | 38 installed (29 required universal + 9 additional); see `.claude/skills/` |
 | **Ontology** | 7 concepts, 2 clusters |
@@ -143,4 +143,4 @@ Skills are provided by the template. Agents and rules directories are scaffolded
 
 **AGET Framework** | Apache 2.0 | [Issues](https://github.com/aget-framework/aget/issues)
 
-AGET version: 3.34.0
+AGET version: 3.35.0
