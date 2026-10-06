@@ -19,7 +19,7 @@ spec:
 
   traceability:
     skill_md: ".claude/skills/aget-expand-ontology/SKILL.md"
-    project_plan: "planning/PROJECT_PLAN_expand_ontology_skill_promotion_v1.0.md"
+    project_plan: "prior internal authoring plan"
     l_docs:
       - "L533: Spec-First Skill Development"
       - "L545: Convergent Independent Skill Evolution"

@@ -2,7 +2,7 @@
 
 **Version**: 1.0.0
 **Created**: 2026-03-23
-**Author**: private-supervisor-AGET
+**Author**: aget-framework
 **Extends**: ONTOLOGY_TIER_SPEC v1.0 (tier classification criteria)
 **Implements**: L600 (Ontologies Are AGET Artifacts — rubric pillar)
 **SOP**: SOP_ontology_management.md (Step 5: Verify Quality)
@@ -178,4 +178,4 @@ When `/aget-analyze-ontology` reports CONCEPT_SURPLUS (concept:requirement ratio
 
 *ONTOLOGY_QUALITY_RUBRIC_v1.0.md — "Score ontology quality, not just tier classification"*
 *Created: 2026-03-23*
-*Owner: private-supervisor-AGET*
+*Owner: aget-framework*

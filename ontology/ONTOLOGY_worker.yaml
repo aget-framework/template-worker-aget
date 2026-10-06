@@ -3,7 +3,7 @@
 #
 # Archetype: worker
 # Created: 2026-02-14
-# Author: private-aget-framework-AGET
+# Author: aget-framework
 # Format: SKOS-inspired YAML (aget-framework convention)
 # Concepts: 7
 # Project: ARC-001 (Archetype Customization v3.5)
@@ -14,7 +14,7 @@ metadata:
   name: worker-archetype-ontology
   version: 1.0.0
   created: 2026-02-14
-  author: private-aget-framework-AGET
+  author: aget-framework
   archetype: worker
   description: >
     Formal vocabulary for worker archetype agents. Defines concepts for
@@ -323,7 +323,7 @@ collections:
 provenance:
   project: ARC-001
   created: 2026-02-14
-  author: private-aget-framework-AGET
+  author: aget-framework
   methodology: >
     Derived from worker archetype WORKER_SPEC.md, L99 (every agent is a worker),
     and operational patterns for task execution and progress tracking.

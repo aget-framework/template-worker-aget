@@ -9,7 +9,7 @@
 
 **Version**: 1.0.0
 **Created**: 2026-03-23
-**Owner**: private-supervisor-AGET
+**Owner**: aget-framework
 **Category**: Governance
 **Related**: L600, L542, L481, L564, L525, ONTOLOGY_TIER_SPEC v1.0, SKILL-014 (aget-analyze-ontology), SKILL-019 (aget-expand-ontology), ONTOLOGY_DOMAIN_TEMPLATE.yaml, ONTOLOGY_QUALITY_RUBRIC_v1.0.md
 
@@ -270,4 +270,4 @@ Agent Creation / Session Work
 
 *SOP_ontology_management.md v1.0.0 — "Govern ontologies as first-class AGET artifacts"*
 *Created: 2026-03-23*
-*Owner: private-supervisor-AGET*
+*Owner: aget-framework*

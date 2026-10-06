@@ -408,8 +408,8 @@ This vocabulary defines terms specific to AGET Skills and their specifications.
 | Specs | SKILL-001 through SKILL-015 |
 | Validator | `.aget/tools/validate_skill_dependencies.py` |
 | SOP | `.aget/sops/SOP_skill_deployment.md` |
-| Project | PROJECT_PLAN_skill_specification_remediation_v1.0.md |
-| Project | PROJECT_PLAN_skill_deprecation_lifecycle_v1.0.md |
+| Project | prior internal authoring plan |
+| Project | prior internal authoring plan |
 
 ---
 
