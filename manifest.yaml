@@ -8,7 +8,7 @@ template:
   name: template-worker-aget
   archetype: Worker
   description: Foundation template for task execution agents
-  version: 3.36.0
+  version: 3.37.0
   created: "2025-12-27"
   author: aget-framework
   inherits_from: null  # Base template
